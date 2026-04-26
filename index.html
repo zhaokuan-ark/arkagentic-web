@@ -12,6 +12,7 @@
         .glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
         .logo-gray { filter: grayscale(100%) brightness(200%); opacity: 0.5; transition: all 0.3s ease; }
         .logo-gray:hover { filter: grayscale(0%) brightness(100%); opacity: 1; }
+        [lang="zh"] { display: none; }
     </style>
 </head>
 <body class="text-gray-100">
@@ -20,23 +21,34 @@
         <div class="text-2xl font-bold heading tracking-tighter">
             <span class="text-blue-500">Ark</span>Agentic
         </div>
-        <div class="space-x-6 text-sm text-gray-400">
-            <a href="#features" class="hover:text-white transition">Features</a>
-            <a href="#faq" class="hover:text-white transition">FAQ</a>
-            <a href="mailto:hello@arkagentic.com" class="px-4 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition">Contact Us</a>
+        <div class="flex items-center space-x-6">
+            <button id="langToggle" onclick="toggleLang()" class="text-[10px] font-bold border border-gray-700 px-2 py-1 rounded hover:bg-gray-800 transition tracking-widest text-gray-400 hover:text-white uppercase">
+                EN / CN
+            </button>
+            <div class="hidden md:flex space-x-6 text-sm text-gray-400">
+                <a href="#features" class="hover:text-white transition">Features</a>
+                <a href="#faq" class="hover:text-white transition">FAQ</a>
+            </div>
+            <a href="mailto:hello@arkagentic.com" class="px-4 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm">Contact Us</a>
         </div>
     </nav>
 
     <section class="max-w-6xl mx-auto px-6 py-24 text-center">
         <h1 class="text-5xl md:text-7xl font-bold heading mb-6 leading-tight">
-            Building Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-purple-500">Digital Workforce</span>
+            <span lang="en">Building Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-purple-500">Digital Workforce</span></span>
+            <span lang="zh">打造您的 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-purple-500">数字劳动力</span></span>
         </h1>
         <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-            Empowering enterprises with autonomous AI agents that don't just chat, but execute complex workflows with precision.
+            <span lang="en">Empowering enterprises with autonomous AI agents that don't just chat, but execute complex workflows with precision.</span>
+            <span lang="zh">为企业提供自主 AI 智能体，不仅是对话，更是精准执行复杂的业务流程。</span>
         </p>
         <div class="flex justify-center space-x-4">
-            <button class="px-8 py-4 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition">Get Started</button>
-            <button class="px-8 py-4 border border-gray-700 rounded-lg hover:bg-gray-800 transition">Watch Demo</button>
+            <button class="px-8 py-4 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition">
+                <span lang="en">Get Started</span><span lang="zh">立即开始</span>
+            </button>
+            <button class="px-8 py-4 border border-gray-700 rounded-lg hover:bg-gray-800 transition">
+                <span lang="en">Watch Demo</span><span lang="zh">观看演示</span>
+            </button>
         </div>
     </section>
 
@@ -54,39 +66,71 @@
     <section id="features" class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8 border-t border-gray-800">
         <div class="p-8 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition">
             <div class="text-blue-500 text-2xl mb-4">✦</div>
-            <h3 class="text-xl font-bold mb-2">Autonomous Execution</h3>
-            <p class="text-gray-400 text-sm">Agents that plan, reason, and complete tasks without constant prompting.</p>
+            <h3 class="text-xl font-bold mb-2">
+                <span lang="en">Autonomous Execution</span><span lang="zh">自主执行</span>
+            </h3>
+            <p class="text-gray-400 text-sm">
+                <span lang="en">Agents that plan, reason, and complete tasks without constant prompting.</span>
+                <span lang="zh">能够自主规划、推理并完成任务的智能体，无需持续引导。</span>
+            </p>
         </div>
         <div class="p-8 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-emerald-500/50 transition">
             <div class="text-emerald-500 text-2xl mb-4">✦</div>
-            <h3 class="text-xl font-bold mb-2">Enterprise Ready</h3>
-            <p class="text-gray-400 text-sm">Built-in security and scalability for complex corporate environments.</p>
+            <h3 class="text-xl font-bold mb-2">
+                <span lang="en">Enterprise Ready</span><span lang="zh">企业级标准</span>
+            </h3>
+            <p class="text-gray-400 text-sm">
+                <span lang="en">Built-in security and scalability for complex corporate environments.</span>
+                <span lang="zh">为复杂的企业环境量身打造，内置安全防护与灵活扩展能力。</span>
+            </p>
         </div>
         <div class="p-8 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-purple-500/50 transition">
             <div class="text-purple-500 text-2xl mb-4">✦</div>
-            <h3 class="text-xl font-bold mb-2">Multi-Model Support</h3>
-            <p class="text-gray-400 text-sm">Seamlessly switch between Claude, GPT, and local models via OpenClaw.</p>
+            <h3 class="text-xl font-bold mb-2">
+                <span lang="en">Multi-Model Support</span><span lang="zh">多模型支持</span>
+            </h3>
+            <p class="text-gray-400 text-sm">
+                <span lang="en">Seamlessly switch between Claude, GPT, and local models via OpenClaw.</span>
+                <span lang="zh">通过 OpenClaw 在 Claude、GPT 及本地模型间实现无缝切换。</span>
+            </p>
         </div>
     </section>
 
     <section id="faq" class="max-w-4xl mx-auto px-6 py-24 border-t border-gray-800">
-        <h2 class="text-4xl font-bold heading mb-12 text-center">Frequently Asked <span class="text-blue-400">Questions</span></h2>
-        <div class="space-y-6">
+        <h2 class="text-4xl font-bold heading mb-12 text-center">
+            <span lang="en">Frequently Asked <span class="text-blue-400">Questions</span></span>
+            <span lang="zh">常见问题 <span class="text-blue-400">解答</span></span>
+        </h2>
+        <div class="space-y-6 text-left">
             <div class="p-6 bg-gray-900/30 rounded-xl border border-gray-800">
-                <h3 class="text-emerald-400 font-bold mb-2">How can ArkAgentic improve my business efficiency?</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">We deploy custom AI Agents to automate repetitive administrative tasks. From extracting invoice data to syncing with Xero, we transform manual hours into automated seconds.</p>
+                <h3 class="text-emerald-400 font-bold mb-2">
+                    <span lang="en">How can ArkAgentic improve my business efficiency?</span>
+                    <span lang="zh">ArkAgentic 如何提升我的业务效率？</span>
+                </h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    <span lang="en">We deploy custom AI Agents to automate repetitive administrative tasks. From extracting invoice data to syncing with Xero, we transform manual hours into automated seconds.</span>
+                    <span lang="zh">我们部署定制化 AI 智能体来自动化重复的行政任务。从发票数据提取到 Xero 自动对账，我们将原本数小时的人工操作缩短至秒级。</span>
+                </p>
             </div>
             <div class="p-6 bg-gray-900/30 rounded-xl border border-gray-800">
-                <h3 class="text-blue-400 font-bold mb-2">Is my financial data secure?</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Security is our priority. ArkAgentic uses enterprise-grade encryption and operates within secure AWS environments. We utilize official APIs to ensure your data is never used for training public models.</p>
+                <h3 class="text-blue-400 font-bold mb-2">
+                    <span lang="en">Is my financial data secure?</span>
+                    <span lang="zh">我的财务数据安全吗？</span>
+                </h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    <span lang="en">Security is our priority. ArkAgentic uses enterprise-grade encryption and operates within secure AWS environments. We utilize official APIs to ensure your data is never used for training public models.</span>
+                    <span lang="zh">安全是我们的首要任务。ArkAgentic 采用企业级加密，并在安全的 AWS 环境中运行。我们通过官方 API 调用模型，确保您的数据永不被用于公共模型训练。</span>
+                </p>
             </div>
             <div class="p-6 bg-gray-900/30 rounded-xl border border-gray-800">
-                <h3 class="text-purple-400 font-bold mb-2">Which platforms can you integrate with?</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">We specialize in API-first integrations. Our agents work seamlessly with Xero, Shopify, Slack, and over 2,000+ apps via native connectors or OpenClaw middleware.</p>
-            </div>
-            <div class="p-6 bg-gray-900/30 rounded-xl border border-gray-800">
-                <h3 class="text-gray-200 font-bold mb-2">Will this replace my existing staff?</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Not at all. Think of our agents as "Digital Co-pilots." We handle the mundane data entry and processing, allowing your professional team to focus on high-value decision-making and strategy.</p>
+                <h3 class="text-purple-400 font-bold mb-2">
+                    <span lang="en">Which platforms can you integrate with?</span>
+                    <span lang="zh">支持哪些第三方平台集成？</span>
+                </h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    <span lang="en">We specialize in API-first integrations. Our agents work seamlessly with Xero, Shopify, Slack, and over 2,000+ apps via native connectors or OpenClaw middleware.</span>
+                    <span lang="zh">我们专注于 API 集成。我们的智能体可与 Xero, Shopify, Slack 等 2000 多款应用无缝连接。</span>
+                </p>
             </div>
         </div>
     </section>
@@ -96,5 +140,20 @@
         <p>ABN: 92 627 301 153 | Sydney, Australia</p>
     </footer>
 
+    <script>
+        function toggleLang() {
+            const enElements = document.querySelectorAll('[lang="en"]');
+            const zhElements = document.querySelectorAll('[lang="zh"]');
+            const isEnHidden = enElements[0].style.display === 'none';
+
+            if (isEnHidden) {
+                enElements.forEach(el => el.style.display = 'inline');
+                zhElements.forEach(el => el.style.display = 'none');
+            } else {
+                enElements.forEach(el => el.style.display = 'none');
+                zhElements.forEach(el => el.style.display = 'inline');
+            }
+        }
+    </script>
 </body>
 </html>
