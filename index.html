@@ -22,32 +22,21 @@
         }
         
         .heading { font-family: var(--font-heading); }
-        
-        /* Glassmorphism & UI Accents */
         .glow { box-shadow: 0 0 25px rgba(59, 130, 246, 0.3); }
         
-        /* Professional Logo Wall */
+        /* 统一 Logo 颜色为白色 */
         .logo-img { 
-            height: 28px; 
-            filter: grayscale(100%) brightness(300%); 
-            opacity: 0.4; 
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            height: 30px; 
+            filter: brightness(0) invert(1); /* 强制转为纯白 */
+            opacity: 0.6; 
+            transition: all 0.4s ease; 
         }
-        .logo-img:hover { 
-            filter: grayscale(0%) brightness(100%); 
-            opacity: 1; 
-            transform: translateY(-2px); 
-        }
+        .logo-img:hover { opacity: 1; transform: scale(1.05); }
 
-        /* FAQ Hover Effect */
-        .faq-item {
-            border-left: 2px solid #1f2937;
-            transition: all 0.3s ease;
-        }
-        .faq-item:hover {
-            border-left-color: #3b82f6;
-            background-color: rgba(31, 41, 55, 0.2);
-        }
+        /* FAQ Dropdown Style */
+        .faq-details[open] summary svg { transform: rotate(180deg); }
+        .faq-details summary::-webkit-details-marker { display: none; }
+        .faq-details { transition: all 0.3s ease; }
     </style>
 </head>
 
@@ -58,11 +47,11 @@
             <span class="text-blue-500">Ark</span>Agentic
         </div>
         <div class="flex items-center space-x-8">
-            <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium tracking-wide">
+            <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium">
                 <a href="#features" class="hover:text-white transition">Features</a>
                 <a href="#faq" class="hover:text-white transition">FAQ</a>
             </div>
-            <a href="mailto:hello@arkagentic.com" class="px-6 py-2.5 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-semibold tracking-tight">
+            <a href="mailto:hello@arkagentic.com" class="px-6 py-2.5 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-semibold">
                 Contact Us
             </a>
         </div>
@@ -76,22 +65,16 @@
             </span>
         </h1>
         <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-14 font-light leading-relaxed">
-            Empowering enterprises with autonomous AI agents that don't just chat, but execute complex workflows with precision.
+            Empowering enterprises with autonomous AI agents that execute complex workflows with precision.
         </p>
         <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
-            <button class="w-full md:w-auto px-12 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition shadow-xl">
-                Get Started
-            </button>
-            <button class="w-full md:w-auto px-12 py-4 border border-gray-800 rounded-xl hover:bg-gray-900 transition text-gray-300 font-medium">
-                Watch Demo
-            </button>
+            <button class="w-full md:w-auto px-12 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition">Get Started</button>
+            <button class="w-full md:w-auto px-12 py-4 border border-gray-800 rounded-xl hover:bg-gray-900 transition text-gray-300 font-medium">Watch Demo</button>
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-6 py-20 border-t border-gray-900/50">
-        <p class="text-center text-gray-600 text-[10px] font-bold tracking-[0.3em] mb-12 uppercase">
-            Powered by Industry Leading Technology
-        </p>
+    <section class="max-w-5xl mx-auto px-6 py-20 border-t border-gray-900/50 text-center">
+        <p class="text-gray-600 text-[10px] font-bold tracking-[0.3em] mb-12 uppercase">Powered by Industry Leading Technology</p>
         <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24">
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Anthropic_logo.svg" alt="Anthropic" class="logo-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
@@ -101,60 +84,66 @@
     </section>
 
     <section id="features" class="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-3 gap-10 border-t border-gray-900">
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:bg-gray-900/20 transition-all duration-500">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50">
             <div class="text-blue-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Autonomous Execution</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">
-                Agents that plan, reason, and complete tasks without constant prompting, reducing human intervention by up to 80%.
-            </p>
+            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Autonomous Execution</h3>
+            <p class="text-gray-400 text-sm leading-relaxed font-light">Agents that plan and complete tasks without constant prompting.</p>
         </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:bg-gray-900/20 transition-all duration-500">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50">
             <div class="text-emerald-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Enterprise Ready</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">
-                Built-in security and scalability for complex corporate environments with SOC2-compliant orchestration.
-            </p>
+            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Enterprise Ready</h3>
+            <p class="text-gray-400 text-sm leading-relaxed font-light">Built-in security and scalability for complex corporate environments.</p>
         </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:bg-gray-900/20 transition-all duration-500">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50">
             <div class="text-purple-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Multi-Model Support</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">
-                Seamlessly orchestrate between Claude, GPT-4o, and private local models via the OpenClaw framework.
-            </p>
+            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Multi-Model Support</h3>
+            <p class="text-gray-400 text-sm leading-relaxed font-light">Seamlessly orchestrate between Claude, GPT, and private models.</p>
         </div>
     </section>
 
-    <section id="faq" class="max-w-3xl mx-auto px-6 py-32 border-t border-gray-900">
-        <h2 class="text-4xl font-bold heading mb-16 text-center tracking-tight text-white">
-            Frequently Asked Questions
-        </h2>
+    <section id="faq" class="max-w-4xl mx-auto px-6 py-32 border-t border-gray-900">
+        <div class="text-center mb-16">
+            <span class="px-4 py-1.5 bg-gray-900 border border-gray-800 rounded-full text-[10px] font-bold tracking-widest text-blue-400 uppercase">FAQ</span>
+            <h2 class="text-4xl font-bold heading mt-6 text-white tracking-tight">Frequently Asked Questions</h2>
+            <p class="text-gray-500 mt-4 font-light">Find answers to common questions about our platform and services.</p>
+        </div>
+
         <div class="space-y-4">
-            <div class="faq-item p-8 rounded-r-xl">
-                <h3 class="text-white text-lg font-semibold mb-3">How can ArkAgentic improve my business efficiency?</h3>
-                <p class="text-gray-400 text-sm leading-relaxed font-light">
+            <details class="faq-details group border border-gray-800 rounded-2xl overflow-hidden bg-gray-900/10">
+                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition">
+                    <span class="font-semibold text-white">How can ArkAgentic improve my business efficiency?</span>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
                     We deploy custom AI Agents to automate repetitive administrative tasks. From extracting invoice data to syncing with enterprise systems, we transform manual hours into automated seconds.
-                </p>
-            </div>
-            <div class="faq-item p-8 rounded-r-xl">
-                <h3 class="text-white text-lg font-semibold mb-3">Is my business data secure?</h3>
-                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                </div>
+            </details>
+
+            <details class="faq-details group border border-gray-800 rounded-2xl overflow-hidden bg-gray-900/10">
+                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition">
+                    <span class="font-semibold text-white">Is my business data secure?</span>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
                     Security is our core principle. ArkAgentic uses enterprise-grade encryption and secure AWS environments. Your data is processed via official APIs and is never used for training public models.
-                </p>
-            </div>
-            <div class="faq-item p-8 rounded-r-xl">
-                <h3 class="text-white text-lg font-semibold mb-3">Can this integrate with our existing software?</h3>
-                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                </div>
+            </details>
+
+            <details class="faq-details group border border-gray-800 rounded-2xl overflow-hidden bg-gray-900/10">
+                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition">
+                    <span class="font-semibold text-white">Can this integrate with our existing software?</span>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
                     Absolutely. We specialize in API-first solutions. Our agents work across modern platforms like Slack, Shopify, and various CRM/Accounting software through secure connectors.
-                </p>
-            </div>
+                </div>
+            </details>
         </div>
     </section>
 
-    <footer class="max-w-6xl mx-auto px-6 py-20 border-t border-gray-900 text-center">
-        <div class="text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase">
-            <p class="mb-4">&copy; 2026 ArkAgentic. All rights reserved.</p>
-            <p>ABN: 92 627 301 153 | Sydney, Australia</p>
-        </div>
+    <footer class="max-w-6xl mx-auto px-6 py-20 border-t border-gray-900 text-center text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase">
+        <p class="mb-4">&copy; 2026 ArkAgentic. All rights reserved.</p>
+        <p>ABN: 92 627 301 153 | Sydney, Australia</p>
     </footer>
 
 </body>
