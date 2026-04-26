@@ -19,41 +19,23 @@
             background-color: #030712; 
             scroll-behavior: smooth; 
             -webkit-font-smoothing: antialiased; 
-            letter-spacing: 0.015em;
+            letter-spacing: 0.01em;
         }
         
         .heading { font-family: var(--font-heading); }
         .glow { box-shadow: 0 0 25px rgba(59, 130, 246, 0.3); }
-        
-        /* Brand Gradient */
-        .brand-gradient {
-            background: linear-gradient(90deg, #60a5fa, #34d399, #a855f7);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
 
         /* Professional Logo Wall Fixes */
-        .logo-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 4rem;
-        }
-        
         .logo-img { 
-            height: 26px; 
+            height: 24px; 
             filter: brightness(0) invert(1); 
             opacity: 0.5; 
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            transition: all 0.4s ease; 
             object-fit: contain;
         }
-        /* 特别微调 Google Cloud 的高度，因为它比较扁 */
-        .logo-img.gcp { height: 32px; }
+        .logo-img.gcp { height: 30px; } /* GCP 比例修正 */
         .logo-img:hover { opacity: 1; transform: translateY(-2px); }
 
-        /* FAQ Style */
         .faq-details summary::-webkit-details-marker { display: none; }
         .faq-details[open] summary svg { transform: rotate(180deg); }
     </style>
@@ -63,9 +45,10 @@
 
     <nav class="sticky top-0 z-50 w-full bg-black/40 backdrop-blur-md border-b border-gray-800/50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold heading tracking-tighter">
-                <span class="brand-gradient">Ark</span>Agentic
+            <div class="text-2xl font-bold heading tracking-tighter uppercase">
+                <span class="text-blue-500">Ark</span>Agentic
             </div>
+            
             <div class="flex items-center space-x-8">
                 <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium uppercase tracking-widest">
                     <a href="#features" class="hover:text-white transition">Features</a>
@@ -103,18 +86,18 @@
         <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-emerald-500/30 transition duration-500">
             <div class="text-emerald-500 text-3xl mb-8">✦</div>
             <h3 class="text-xl font-bold mb-4 heading tracking-tight">Enterprise Ready</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Bank-grade security and SOC2-compliant orchestration for complex and sensitive corporate environments.</p>
+            <p class="text-gray-400 text-sm leading-relaxed font-light">Bank-grade security and SOC2-compliant orchestration for complex corporate environments.</p>
         </div>
         <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-purple-500/30 transition duration-500">
             <div class="text-purple-500 text-3xl mb-8">✦</div>
             <h3 class="text-xl font-bold mb-4 heading tracking-tight">Multi-Model Support</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Seamlessly orchestrate between Claude 3.5, GPT-4o, and private local models via specialized connectors.</p>
+            <p class="text-gray-400 text-sm leading-relaxed font-light">Seamlessly orchestrate between Claude 3.5, GPT-4o, and private models via specialized connectors.</p>
         </div>
     </section>
 
     <section class="max-w-5xl mx-auto px-6 py-24 border-t border-gray-900/50 text-center">
         <p class="text-gray-600 text-[10px] font-bold tracking-[0.4em] mb-16 uppercase">Powered by Industry Leading Technology</p>
-        <div class="logo-container">
+        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24">
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Anthropic_logo.svg" alt="Anthropic" class="logo-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img">
@@ -129,32 +112,47 @@
         </div>
 
         <div class="space-y-4 text-left">
-            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
+            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10 transition-all duration-300">
                 <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
                     <span class="font-semibold text-white">How can ArkAgentic improve business efficiency?</span>
                     <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
-                    We deploy custom AI Agents to automate repetitive administrative tasks. From extracting invoice data to syncing with enterprise systems, we transform manual hours into automated seconds.
-                </div>
+                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">We automate repetitive administrative tasks, transforming manual hours into automated seconds.</div>
             </details>
             <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
                 <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
                     <span class="font-semibold text-white">Is my business data secure?</span>
                     <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
-                    Security is our core principle. ArkAgentic uses enterprise-grade encryption and secure AWS environments. Your data is never used for training public models.
-                </div>
+                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">Yes. We use enterprise-grade encryption and secure AWS environments. Your data is never used for training.</div>
             </details>
-             <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
+            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
+                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
+                    <span class="font-semibold text-white">Is this expensive for a small business?</span>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">Not at all. We focus on ROI. Most clients see a return on investment within the first 3 months.</div>
+            </details>
+            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
                 <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
                     <span class="font-semibold text-white">Do I need a technical team to manage these agents?</span>
                     <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
-                    No. We provide a managed service. Your staff interacts with AI through familiar tools like email or Slack, just like they would with a human assistant.
-                </div>
+                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">No. We provide a managed service. You interact with AI via simple tools like email or Slack.</div>
+            </details>
+            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
+                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
+                    <span class="font-semibold text-white">What if my workflow changes?</span>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">Our AI agents are adaptable and can be updated within days to match your new business processes.</div>
+            </details>
+            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
+                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
+                    <span class="font-semibold text-white">Can this integrate with our software?</span>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">Absolutely. We integrate with Shopify, Xero, Slack, and various CRMs via secure API connectors.</div>
             </details>
         </div>
     </section>
