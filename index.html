@@ -24,10 +24,18 @@
         .heading { font-family: var(--font-heading); }
         .glow { box-shadow: 0 0 25px rgba(59, 130, 246, 0.3); }
         
+        /* Unified Gradient Text for Brand consistency */
+        .brand-gradient {
+            background: linear-gradient(90deg, #60a5fa, #34d399, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
         /* 统一 Logo 颜色为白色 */
         .logo-img { 
             height: 30px; 
-            filter: brightness(0) invert(1); /* 强制转为纯白 */
+            filter: brightness(0) invert(1); 
             opacity: 0.6; 
             transition: all 0.4s ease; 
         }
@@ -42,18 +50,21 @@
 
 <body class="text-gray-100">
 
-    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
-        <div class="text-2xl font-bold heading tracking-tighter">
-            <span class="text-blue-500">Ark</span>Agentic
-        </div>
-        <div class="flex items-center space-x-8">
-            <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium">
-                <a href="#features" class="hover:text-white transition">Features</a>
-                <a href="#faq" class="hover:text-white transition">FAQ</a>
+    <nav class="sticky top-0 z-50 w-full bg-black/40 backdrop-blur-md border-b border-gray-800/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold heading tracking-tighter">
+                <span class="brand-gradient">Ark</span>Agentic
             </div>
-            <a href="mailto:hello@arkagentic.com" class="px-6 py-2.5 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-semibold">
-                Contact Us
-            </a>
+            
+            <div class="flex items-center space-x-8">
+                <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium">
+                    <a href="#features" class="hover:text-white transition">Features</a>
+                    <a href="#faq" class="hover:text-white transition">FAQ</a>
+                </div>
+                <a href="mailto:hello@arkagentic.com" class="px-6 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-semibold">
+                    Contact Us
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -84,19 +95,19 @@
     </section>
 
     <section id="features" class="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-3 gap-10 border-t border-gray-900">
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-blue-500/30 transition duration-500 text-left">
             <div class="text-blue-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Autonomous Execution</h3>
+            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Autonomous Execution</h3>
             <p class="text-gray-400 text-sm leading-relaxed font-light">Agents that plan and complete tasks without constant prompting.</p>
         </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-emerald-500/30 transition duration-500 text-left">
             <div class="text-emerald-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Enterprise Ready</h3>
+            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Enterprise Ready</h3>
             <p class="text-gray-400 text-sm leading-relaxed font-light">Built-in security and scalability for complex corporate environments.</p>
         </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-purple-500/30 transition duration-500 text-left">
             <div class="text-purple-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Multi-Model Support</h3>
+            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Multi-Model Support</h3>
             <p class="text-gray-400 text-sm leading-relaxed font-light">Seamlessly orchestrate between Claude, GPT, and private models.</p>
         </div>
     </section>
@@ -108,9 +119,9 @@
             <p class="text-gray-500 mt-4 font-light">Find answers to common questions about our platform and services.</p>
         </div>
 
-        <div class="space-y-4">
-            <details class="faq-details group border border-gray-800 rounded-2xl overflow-hidden bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition">
+        <div class="space-y-4 text-left">
+            <details class="faq-details group border border-gray-800 rounded-2xl overflow-hidden bg-gray-900/10 transition-all duration-300">
+                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
                     <span class="font-semibold text-white">How can ArkAgentic improve my business efficiency?</span>
                     <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
@@ -120,7 +131,7 @@
             </details>
 
             <details class="faq-details group border border-gray-800 rounded-2xl overflow-hidden bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition">
+                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
                     <span class="font-semibold text-white">Is my business data secure?</span>
                     <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
@@ -130,7 +141,7 @@
             </details>
 
             <details class="faq-details group border border-gray-800 rounded-2xl overflow-hidden bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition">
+                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
                     <span class="font-semibold text-white">Can this integrate with our existing software?</span>
                     <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
