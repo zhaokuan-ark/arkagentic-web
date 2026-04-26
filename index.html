@@ -7,9 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #030712; }
+        body { font-family: 'Inter', sans-serif; background-color: #030712; scroll-behavior: smooth; }
         .heading { font-family: 'Space Grotesk', sans-serif; }
         .glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+        .logo-gray { filter: grayscale(100%) brightness(200%); opacity: 0.5; transition: all 0.3s ease; }
+        .logo-gray:hover { filter: grayscale(0%) brightness(100%); opacity: 1; }
     </style>
 </head>
 <body class="text-gray-100">
@@ -20,13 +22,14 @@
         </div>
         <div class="space-x-6 text-sm text-gray-400">
             <a href="#features" class="hover:text-white transition">Features</a>
+            <a href="#faq" class="hover:text-white transition">FAQ</a>
             <a href="mailto:hello@arkagentic.com" class="px-4 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition">Contact Us</a>
         </div>
     </nav>
 
     <section class="max-w-6xl mx-auto px-6 py-24 text-center">
         <h1 class="text-5xl md:text-7xl font-bold heading mb-6 leading-tight">
-            Building Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Digital Workforce</span>
+            Building Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-purple-500">Digital Workforce</span>
         </h1>
         <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
             Empowering enterprises with autonomous AI agents that don't just chat, but execute complex workflows with precision.
@@ -37,21 +40,54 @@
         </div>
     </section>
 
+    <section class="max-w-6xl mx-auto px-6 py-12 border-t border-gray-900">
+        <p class="text-center text-gray-500 text-sm font-semibold tracking-widest mb-8 uppercase">Built with Industry Leading Technology</p>
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+            <span class="logo-gray text-xl font-bold tracking-tighter">ANTHROPIC</span>
+            <span class="logo-gray text-xl font-bold tracking-tighter">OPENAI</span>
+            <span class="logo-gray text-xl font-bold tracking-tighter">AWS</span>
+            <span class="logo-gray text-xl font-bold tracking-tighter">XERO API</span>
+            <span class="logo-gray text-xl font-bold tracking-tighter">OPENCLAW</span>
+        </div>
+    </section>
+
     <section id="features" class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8 border-t border-gray-800">
-        <div class="p-8 bg-gray-900/50 rounded-2xl border border-gray-800">
+        <div class="p-8 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition">
             <div class="text-blue-500 text-2xl mb-4">✦</div>
             <h3 class="text-xl font-bold mb-2">Autonomous Execution</h3>
-            <p class="text-gray-400">Agents that plan, reason, and complete tasks without constant prompting.</p>
+            <p class="text-gray-400 text-sm">Agents that plan, reason, and complete tasks without constant prompting.</p>
         </div>
-        <div class="p-8 bg-gray-900/50 rounded-2xl border border-gray-800">
+        <div class="p-8 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-emerald-500/50 transition">
             <div class="text-emerald-500 text-2xl mb-4">✦</div>
             <h3 class="text-xl font-bold mb-2">Enterprise Ready</h3>
-            <p class="text-gray-400">Built-in security and scalability for complex corporate environments.</p>
+            <p class="text-gray-400 text-sm">Built-in security and scalability for complex corporate environments.</p>
         </div>
-        <div class="p-8 bg-gray-900/50 rounded-2xl border border-gray-800">
+        <div class="p-8 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-purple-500/50 transition">
             <div class="text-purple-500 text-2xl mb-4">✦</div>
             <h3 class="text-xl font-bold mb-2">Multi-Model Support</h3>
-            <p class="text-gray-400">Seamlessly switch between Claude, GPT, and local models via OpenClaw.</p>
+            <p class="text-gray-400 text-sm">Seamlessly switch between Claude, GPT, and local models via OpenClaw.</p>
+        </div>
+    </section>
+
+    <section id="faq" class="max-w-4xl mx-auto px-6 py-24 border-t border-gray-800">
+        <h2 class="text-4xl font-bold heading mb-12 text-center">Frequently Asked <span class="text-blue-400">Questions</span></h2>
+        <div class="space-y-6">
+            <div class="p-6 bg-gray-900/30 rounded-xl border border-gray-800">
+                <h3 class="text-emerald-400 font-bold mb-2">How can ArkAgentic improve my business efficiency?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">We deploy custom AI Agents to automate repetitive administrative tasks. From extracting invoice data to syncing with Xero, we transform manual hours into automated seconds.</p>
+            </div>
+            <div class="p-6 bg-gray-900/30 rounded-xl border border-gray-800">
+                <h3 class="text-blue-400 font-bold mb-2">Is my financial data secure?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Security is our priority. ArkAgentic uses enterprise-grade encryption and operates within secure AWS environments. We utilize official APIs to ensure your data is never used for training public models.</p>
+            </div>
+            <div class="p-6 bg-gray-900/30 rounded-xl border border-gray-800">
+                <h3 class="text-purple-400 font-bold mb-2">Which platforms can you integrate with?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">We specialize in API-first integrations. Our agents work seamlessly with Xero, Shopify, Slack, and over 2,000+ apps via native connectors or OpenClaw middleware.</p>
+            </div>
+            <div class="p-6 bg-gray-900/30 rounded-xl border border-gray-800">
+                <h3 class="text-gray-200 font-bold mb-2">Will this replace my existing staff?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Not at all. Think of our agents as "Digital Co-pilots." We handle the mundane data entry and processing, allowing your professional team to focus on high-value decision-making and strategy.</p>
+            </div>
         </div>
     </section>
 
