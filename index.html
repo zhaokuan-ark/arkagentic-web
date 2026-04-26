@@ -10,7 +10,6 @@
     
     <style>
         :root { 
-            /* 全局更换为 Roboto */
             --font-main: 'Roboto', sans-serif; 
             --font-heading: 'Space Grotesk', sans-serif; 
         }
@@ -20,10 +19,11 @@
             background-color: #030712; 
             scroll-behavior: smooth; 
             -webkit-font-smoothing: antialiased; 
+            letter-spacing: 0.015em;
         }
         
         .heading { font-family: var(--font-heading); }
-        .glow { box-shadow: 0 0-25px rgba(59, 130, 246, 0.3); }
+        .glow { box-shadow: 0 0 25px rgba(59, 130, 246, 0.3); }
         
         /* Brand Gradient */
         .brand-gradient {
@@ -33,16 +33,27 @@
             color: transparent;
         }
 
-        /* White Logos Filter */
-        .logo-img { 
-            height: 30px; 
-            filter: brightness(0) invert(1); 
-            opacity: 0.6; 
-            transition: all 0.4s ease; 
+        /* Professional Logo Wall Fixes */
+        .logo-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
         }
-        .logo-img:hover { opacity: 1; transform: scale(1.05); }
+        
+        .logo-img { 
+            height: 26px; 
+            filter: brightness(0) invert(1); 
+            opacity: 0.5; 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            object-fit: contain;
+        }
+        /* 特别微调 Google Cloud 的高度，因为它比较扁 */
+        .logo-img.gcp { height: 32px; }
+        .logo-img:hover { opacity: 1; transform: translateY(-2px); }
 
-        /* FAQ Dropdown Style */
+        /* FAQ Style */
         .faq-details summary::-webkit-details-marker { display: none; }
         .faq-details[open] summary svg { transform: rotate(180deg); }
     </style>
@@ -56,11 +67,11 @@
                 <span class="brand-gradient">Ark</span>Agentic
             </div>
             <div class="flex items-center space-x-8">
-                <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium">
+                <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium uppercase tracking-widest">
                     <a href="#features" class="hover:text-white transition">Features</a>
                     <a href="#faq" class="hover:text-white transition">FAQ</a>
                 </div>
-                <a href="mailto:hello@arkagentic.com" class="px-6 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-semibold">
+                <a href="mailto:hello@arkagentic.com" class="px-6 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-bold">
                     Contact Us
                 </a>
             </div>
@@ -78,36 +89,36 @@
             Empowering enterprises with autonomous AI agents that execute complex workflows with precision.
         </p>
         <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
-            <button class="w-full md:w-auto px-12 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition shadow-xl shadow-white/5">Get Started</button>
+            <button class="w-full md:w-auto px-12 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition">Get Started</button>
             <button class="w-full md:w-auto px-12 py-4 border border-gray-800 rounded-xl hover:bg-gray-900 transition text-gray-300 font-medium">Watch Demo</button>
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-6 py-20 border-t border-gray-900/50 text-center">
-        <p class="text-gray-600 text-[10px] font-bold tracking-[0.3em] mb-12 uppercase">Powered by Industry Leading Technology</p>
-        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Anthropic_logo.svg" alt="Anthropic" class="logo-img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="Google Cloud" class="logo-img">
+    <section id="features" class="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-3 gap-10 border-t border-gray-900">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-blue-500/30 transition duration-500">
+            <div class="text-blue-500 text-3xl mb-8">✦</div>
+            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Autonomous Execution</h3>
+            <p class="text-gray-400 text-sm leading-relaxed font-light">Agents that plan and complete tasks without constant prompting, operating 24/7 with zero downtime.</p>
+        </div>
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-emerald-500/30 transition duration-500">
+            <div class="text-emerald-500 text-3xl mb-8">✦</div>
+            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Enterprise Ready</h3>
+            <p class="text-gray-400 text-sm leading-relaxed font-light">Bank-grade security and SOC2-compliant orchestration for complex and sensitive corporate environments.</p>
+        </div>
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-purple-500/30 transition duration-500">
+            <div class="text-purple-500 text-3xl mb-8">✦</div>
+            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Multi-Model Support</h3>
+            <p class="text-gray-400 text-sm leading-relaxed font-light">Seamlessly orchestrate between Claude 3.5, GPT-4o, and private local models via specialized connectors.</p>
         </div>
     </section>
 
-    <section id="features" class="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-3 gap-10 border-t border-gray-900">
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-blue-500/30 transition duration-500 text-left">
-            <div class="text-blue-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Autonomous Execution</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Agents that plan and complete tasks without constant prompting.</p>
-        </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-emerald-500/30 transition duration-500 text-left">
-            <div class="text-emerald-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Enterprise Ready</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Built-in security and scalability for complex corporate environments.</p>
-        </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-purple-500/30 transition duration-500 text-left">
-            <div class="text-purple-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight">Multi-Model Support</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Seamlessly orchestrate between Claude, GPT, and private models.</p>
+    <section class="max-w-5xl mx-auto px-6 py-24 border-t border-gray-900/50 text-center">
+        <p class="text-gray-600 text-[10px] font-bold tracking-[0.4em] mb-16 uppercase">Powered by Industry Leading Technology</p>
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Anthropic_logo.svg" alt="Anthropic" class="logo-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="Google Cloud" class="logo-img gcp">
         </div>
     </section>
 
@@ -118,7 +129,7 @@
         </div>
 
         <div class="space-y-4 text-left">
-            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10 transition-all duration-300">
+            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
                 <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
                     <span class="font-semibold text-white">How can ArkAgentic improve business efficiency?</span>
                     <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -127,54 +138,22 @@
                     We deploy custom AI Agents to automate repetitive administrative tasks. From extracting invoice data to syncing with enterprise systems, we transform manual hours into automated seconds.
                 </div>
             </details>
-
             <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
                 <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
                     <span class="font-semibold text-white">Is my business data secure?</span>
                     <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
                 <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
-                    Security is our core principle. ArkAgentic uses enterprise-grade encryption and secure AWS environments. Your data is processed via official APIs and is never used for training public models.
+                    Security is our core principle. ArkAgentic uses enterprise-grade encryption and secure AWS environments. Your data is never used for training public models.
                 </div>
             </details>
-
-            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">Is this expensive for a small business?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
-                    Not at all. We focus on ROI. By replacing manual administrative work with AI agents, most clients see a full return on investment within the first 3 months.
-                </div>
-            </details>
-
-            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
+             <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
                 <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
                     <span class="font-semibold text-white">Do I need a technical team to manage these agents?</span>
                     <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
                 <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
                     No. We provide a managed service. Your staff interacts with AI through familiar tools like email or Slack, just like they would with a human assistant.
-                </div>
-            </details>
-
-            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">What if my workflow changes in the future?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
-                    Our agents are highly adaptable. Unlike traditional software, they can be re-trained within days to match your new business processes.
-                </div>
-            </details>
-
-            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">Can this integrate with our existing software?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">
-                    Absolutely. We specialize in API-first solutions. Our agents work across platforms like Shopify, Xero, Slack, and various CRM systems through secure connectors.
                 </div>
             </details>
         </div>
