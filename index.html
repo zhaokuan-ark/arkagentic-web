@@ -14,19 +14,17 @@
             --font-heading: 'Space Grotesk', sans-serif; 
         }
         
-        /* 背景改为高级深炭灰，增加微弱渐变 */
         body { 
             font-family: var(--font-main); 
             background: radial-gradient(circle at 50% 0%, #1f2937 0%, #111827 100%);
             background-attachment: fixed;
             scroll-behavior: smooth; 
             -webkit-font-smoothing: antialiased; 
-            color: #f3f4f6; /* 全局字体颜色调亮 */
+            color: #f3f4f6;
         }
 
         .heading { font-family: var(--font-heading); }
         
-        /* 导航栏毛玻璃 */
         .glass-nav {
             background-color: rgba(17, 24, 39, 0.6); 
             backdrop-filter: blur(15px);
@@ -36,21 +34,22 @@
 
         .glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.25); }
         
-        .logo-img { height: 24px; filter: brightness(0) invert(1); opacity: 0.7; transition: all 0.4s ease; object-fit: contain; }
+        /* 调大 Logo 尺寸并优化文字排列 */
+        .logo-container { display: flex; items-center; gap: 0.75rem; opacity: 0.8; transition: all 0.4s ease; }
+        .logo-container:hover { opacity: 1; transform: translateY(-2px); }
+        .logo-img { height: 32px; filter: brightness(0) invert(1); object-fit: contain; }
+        .logo-text { font-family: var(--font-heading); font-weight: 600; font-size: 1.25rem; color: white; }
 
-        /* FAQ 样式优化 */
         .faq-details summary::-webkit-details-marker { display: none; }
         .faq-details[open] summary svg { transform: rotate(180deg); }
-        .faq-answer { color: #e5e7eb; line-height: 1.6; } /* 答案颜色显著调亮 */
+        .faq-answer { color: #e5e7eb; line-height: 1.6; }
 
-        /* 表单输入框调亮 */
         .form-input { 
             width: 100%; padding: 1rem; 
             background-color: rgba(255, 255, 255, 0.05); 
             border: 1px solid rgba(255, 255, 255, 0.2); 
             border-radius: 0.75rem; color: white; transition: all 0.3s; 
         }
-        .form-input::placeholder { color: #9ca3af; } /* 占位符也调亮一点 */
         .form-input:focus { outline: none; border-color: #3b82f6; background-color: rgba(255, 255, 255, 0.1); }
 
         .text-gradient {
@@ -93,36 +92,31 @@
         </div>
     </section>
 
-    <section id="features" class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8 border-t border-white/10">
-        <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:border-blue-500/50 transition-all">
-            <div class="text-blue-500 text-2xl mb-6">✦</div>
-            <h3 class="text-xl font-bold mb-3 heading text-white">Autonomous Execution</h3>
-            <p class="text-gray-300 text-sm font-light leading-relaxed">Agents that plan and complete tasks without constant prompting, operating 24/7.</p>
-        </div>
-        <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:border-emerald-500/50 transition-all">
-            <div class="text-emerald-400 text-2xl mb-6">✦</div>
-            <h3 class="text-xl font-bold mb-3 heading text-white">Enterprise Ready</h3>
-            <p class="text-gray-300 text-sm font-light leading-relaxed">Bank-grade security and SOC2-compliant orchestration for corporate environments.</p>
-        </div>
-        <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:border-purple-500/50 transition-all">
-            <div class="text-purple-400 text-2xl mb-6">✦</div>
-            <h3 class="text-xl font-bold mb-3 heading text-white">Multi-Model Support</h3>
-            <p class="text-gray-300 text-sm font-light leading-relaxed">Seamlessly orchestrate between Claude 3.5, GPT-4o, and private models.</p>
-        </div>
-    </section>
-
     <section class="max-w-5xl mx-auto px-6 py-16 text-center">
-        <p class="text-gray-500 text-[10px] font-bold tracking-[0.4em] mb-10 uppercase">Powered by Industry Leaders</p>
-        <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16">
-            <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/claude.svg" alt="Claude" class="logo-img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="logo-img">
+        <p class="text-gray-500 text-[10px] font-bold tracking-[0.4em] mb-10 uppercase">Orchestrating the Best Models</p>
+        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+            <div class="logo-container">
+                <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/claude.svg" alt="Claude" class="logo-img">
+                <span class="logo-text">Claude</span>
+            </div>
+            <div class="logo-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
+                <span class="logo-text">OpenAI</span>
+            </div>
+            <div class="logo-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img !h-10">
+            </div>
+            <div class="logo-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="logo-img">
+            </div>
         </div>
     </section>
 
     <section id="faq" class="max-w-3xl mx-auto px-6 py-20 border-t border-white/10">
-        <h2 class="text-3xl font-bold heading text-center mb-12 text-white">Common Questions</h2>
+        <div class="text-center mb-12">
+            <span class="px-4 py-1.5 bg-blue-600/20 border border-blue-500/30 rounded-full text-[10px] font-bold text-blue-400 uppercase">FAQ</span>
+            <h2 class="text-3xl font-bold heading mt-4 text-white">Frequently Asked Questions</h2>
+        </div>
         <div class="space-y-4">
             <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
                 <summary class="flex justify-between items-center p-5 cursor-pointer list-none text-white font-semibold">
