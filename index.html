@@ -36,16 +36,15 @@
         
         .logo-container { display: flex; align-items: center; justify-content: center; opacity: 0.8; transition: all 0.4s ease; }
         .logo-container:hover { opacity: 1; transform: translateY(-2px); }
-        /* 统一控制合作伙伴图标大小，确保视觉平衡 */
         .logo-img { height: 28px; filter: brightness(0) invert(1); object-fit: contain; }
-        .logo-img-gcp { height: 22px; } /* 针对 GCP 调整更小的尺寸 */
+        .logo-img-gcp { height: 22px; }
         
         .faq-details summary::-webkit-details-marker { display: none; }
         .faq-details[open] summary svg { transform: rotate(180deg); }
-        .faq-answer { color: #e5e7eb; line-height: 1.6; }
+        .faq-answer { color: #d1d5db; line-height: 1.7; font-weight: 300; }
 
         .form-input { 
-            font-family: var(--font-main); /* 确保字体一致 */
+            font-family: var(--font-main);
             width: 100%; padding: 1rem; 
             background-color: rgba(255, 255, 255, 0.05); 
             border: 1px solid rgba(255, 255, 255, 0.2); 
@@ -69,14 +68,14 @@
             <div class="flex items-center space-x-8">
                 <div class="hidden md:flex space-x-8 text-sm text-gray-300 font-medium">
                     <a href="#features" class="hover:text-white transition">Features</a>
-                    <a href="#faq" class="hover:text-white transition">FAQ</a>
+                    <a href="#faq" class="hover:text-white transition">Faq</a>
                 </div>
                 <a href="#contact" class="px-6 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-bold">Contact Us</a>
             </div>
         </div>
     </nav>
 
-    <section class="max-w-6xl mx-auto px-6 py-20 text-center">
+    <section class="max-w-6xl mx-auto px-6 py-24 text-center">
         <h1 class="text-5xl md:text-7xl font-bold heading mb-6 tracking-tight leading-tight text-gradient">
             Building Your <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-purple-500">Digital Workforce</span>
         </h1>
@@ -112,25 +111,104 @@
         </div>
     </section>
 
+    <section id="features" class="max-w-6xl mx-auto px-6 py-24 border-t border-white/10">
+        <div class="text-center mb-16">
+            <span class="px-4 py-1.5 bg-blue-600/20 border border-blue-500/30 rounded-full text-[10px] font-bold text-blue-400 uppercase">Capabilities</span>
+            <h2 class="text-4xl font-bold heading mt-4 text-white">Your AI-Powered Digital Workforce</h2>
+            <p class="text-gray-400 mt-4 max-w-2xl mx-auto font-light">We don't just build bots; we orchestrate sophisticated AI agents designed to handle the heavy lifting of your business operations.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-all duration-300 group">
+                <div class="w-12 h-12 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold heading text-white mb-4">Autonomous Workflows</h3>
+                <p class="text-gray-400 leading-relaxed font-light">Deploy agents that can autonomously navigate multi-step processes. From data extraction to complex decision-making, our Claude-powered agents execute workflows with minimal supervision.</p>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-all duration-300 group">
+                <div class="w-12 h-12 bg-emerald-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold heading text-white mb-4">Enterprise Security</h3>
+                <p class="text-gray-400 leading-relaxed font-light">Built on Amazon Bedrock, your data remains strictly within your private cloud. We ensure that your proprietary information is never used for public model training, maintaining 100% data sovereignty.</p>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-all duration-300 group">
+                <div class="w-12 h-12 bg-purple-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1h-3a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4h-1a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1h-3"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold heading text-white mb-4">Seamless Integration</h3>
+                <p class="text-gray-400 leading-relaxed font-light">Our digital workforce plays well with your existing tech stack. Whether it's CRM, ERP, or communication tools like Slack, our agents connect disparate systems to create a unified, automated ecosystem.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="faq" class="max-w-3xl mx-auto px-6 py-20 border-t border-white/10">
         <div class="text-center mb-12">
-            <span class="px-4 py-1.5 bg-blue-600/20 border border-blue-500/30 rounded-full text-[10px] font-bold text-blue-400 uppercase">Faq</span>
-            <h2 class="text-3xl font-bold heading mt-4 text-white">Frequently Asked Questions</h2>
+            <h2 class="text-3xl font-bold heading text-white">Frequently Asked Questions</h2>
         </div>
-        <div class="space-y-4">
+        
+        <div class="space-y-6">
             <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
-                <summary class="flex justify-between items-center p-5 cursor-pointer list-none text-white font-semibold">
-                    How can ArkAgentic improve business efficiency?
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    What exactly is a "Digital Workforce" and how is it different from a chatbot?
                     <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-5 pb-5 faq-answer text-base">We automate repetitive administrative tasks, transforming manual hours into automated seconds.</div>
+                <div class="px-6 pb-6 faq-answer text-base">
+                    Unlike traditional chatbots that only respond to queries, our Digital Workforce consists of <strong>Autonomous AI Agents</strong>. Powered by Claude's advanced reasoning, these agents don't just talk—they execute. They can plan multi-step tasks, access your existing software tools (via APIs), and make logical decisions to complete entire business processes without constant human intervention.
+                </div>
             </details>
+
             <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
-                <summary class="flex justify-between items-center p-5 cursor-pointer list-none text-white font-semibold">
-                    Is my business data secure?
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    Why does ArkAgentic prioritize Claude for enterprise automation?
                     <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-5 pb-5 faq-answer text-base">Yes. We use enterprise-grade encryption and secure AWS environments. Your data is never used for training.</div>
+                <div class="px-6 pb-6 faq-answer text-base">
+                    We leverage <strong>Claude</strong> because of its superior performance in complex reasoning and high degree of safety. For enterprises, accuracy is non-negotiable. Claude follows complex business instructions more faithfully than other models, making it the ideal "brain" for agents that handle sensitive corporate data and mission-critical workflows.
+                </div>
+            </details>
+
+            <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    How secure is our proprietary data when using your AI agents?
+                    <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 faq-answer text-base">
+                    Security is our foundational priority. ArkAgentic deploys solutions via <strong>Amazon Bedrock</strong>, ensuring your data never leaves your secure AWS environment. Importantly, your business data is <strong>never</strong> used to train public models, maintaining full compliance with your internal IT policies.
+                </div>
+            </details>
+
+            <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    Does implementing AI agents require us to change our existing software?
+                    <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 faq-answer text-base">
+                    No. Our goal is to <strong>augment</strong> your current stack. We build our Digital Workforce to integrate seamlessly with the tools you already use—whether it's Xero, Salesforce, or Slack. Our agents act as a "connective tissue" between your applications, navigating them with 24/7 availability.
+                </div>
+            </details>
+
+            <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    What is the typical timeline and ROI for an ArkAgentic deployment?
+                    <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 faq-answer text-base">
+                    Most clients move to a live pilot within <strong>2 to 4 weeks</strong>. By reclaiming hundreds of hours per month from manual entry and administrative tasks, our solutions typically pay for themselves within the first quarter of operation.
+                </div>
+            </details>
+
+            <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    What kind of ongoing support do you provide after the agents are live?
+                    <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="px-6 pb-6 faq-answer text-base">
+                    We provide a fully managed service. ArkAgentic acts as your external AI operations partner, continuously monitoring and fine-tuning your agents to ensure peak performance as your business processes evolve.
+                </div>
             </details>
         </div>
     </section>
