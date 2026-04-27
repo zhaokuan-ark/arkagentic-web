@@ -9,53 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        :root { 
-            --font-main: 'Roboto', sans-serif; 
-            --font-heading: 'Space Grotesk', sans-serif; 
-        }
-        
-        body { 
-            font-family: var(--font-main); 
-            background-color: #030712; 
-            scroll-behavior: smooth; /* 平滑滚动 */
-            -webkit-font-smoothing: antialiased; 
-            letter-spacing: 0.01em;
-        }
-        
+        :root { --font-main: 'Roboto', sans-serif; --font-heading: 'Space Grotesk', sans-serif; }
+        body { font-family: var(--font-main); background-color: #030712; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
         .heading { font-family: var(--font-heading); }
         .glow { box-shadow: 0 0 25px rgba(59, 130, 246, 0.3); }
-
-        /* Professional Logo Wall Fixes */
-        .logo-img { 
-            height: 24px; /* 统一基础高度 */
-            filter: brightness(0) invert(1); 
-            opacity: 0.5; 
-            transition: all 0.4s ease; 
-            object-fit: contain;
-        }
-        /* ✦ 修复：专门缩小 Google Cloud，使其视觉大小一致 */
-        .logo-img.gcp-logo { height: 22px; } 
-        .logo-img:hover { opacity: 1; transform: translateY(-2px); }
-
+        .logo-img { height: 24px; filter: brightness(0) invert(1); opacity: 0.6; transition: all 0.4s ease; object-fit: contain; }
+        .logo-img.gcp-logo { height: 22px; }
         .faq-details summary::-webkit-details-marker { display: none; }
         .faq-details[open] summary svg { transform: rotate(180deg); }
-        
-        /* 表单输入框样式 */
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            background-color: rgba(17, 24, 39, 0.4);
-            border: 1px solid #1f2937;
-            border-radius: 0.75rem;
-            color: white;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            background-color: rgba(17, 24, 39, 0.6);
-        }
+        .form-input { width: 100%; padding: 1rem; background-color: rgba(17, 24, 39, 0.6); border: 1px solid #1f2937; border-radius: 0.75rem; color: white; transition: all 0.3s; }
+        .form-input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
     </style>
 </head>
 
@@ -63,327 +26,145 @@
 
     <nav class="sticky top-0 z-50 w-full bg-black/40 backdrop-blur-md border-b border-gray-800/50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold heading tracking-tighter">
-                <span class="text-blue-500">Ark</span>Agentic
-            </div>
-            
+            <div class="text-2xl font-bold heading tracking-tighter"><span class="text-blue-500">Ark</span>Agentic</div>
             <div class="flex items-center space-x-8">
-                <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium tracking-wide">
+                <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium">
                     <a href="#features" class="hover:text-white transition">Features</a>
                     <a href="#faq" class="hover:text-white transition">FAQ</a>
                 </div>
-                <a href="#contact" class="px-6 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-bold">
-                    Contact Us
-                </a>
+                <a href="#contact" class="px-6 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-bold">Contact Us</a>
             </div>
         </div>
     </nav>
 
     <section class="max-w-6xl mx-auto px-6 py-32 text-center">
-        <h1 class="text-6xl md:text-8xl font-bold heading mb-8 leading-[1.05] tracking-tight">
-            Building Your <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-purple-500">
-                Digital Workforce
-            </span>
-        </h1>
-        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-14 font-light leading-relaxed">
-            Empowering enterprises with autonomous AI agents that execute complex workflows with precision.
-        </p>
+        <h1 class="text-6xl md:text-8xl font-bold heading mb-8 tracking-tight">Building Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-purple-500">Digital Workforce</span></h1>
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-14 font-light">Empowering enterprises with autonomous AI agents that execute complex workflows with precision.</p>
+        
         <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
-            <a href="#contact" class="w-full md:w-auto px-12 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition text-center shadow-xl shadow-white/5">
-                Request a Demo
-            </a>
-            <a href="#contact" class="w-full md:w-auto px-12 py-4 border border-gray-800 rounded-xl hover:bg-gray-900 transition text-gray-300 font-medium text-center">
-                Request a Demo
+            <a href="#contact" class="w-full md:w-auto px-12 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition text-center shadow-lg">Request a Demo</a>
+            
+            <a href="https://www.youtube.com/@ArkAgentic" target="_blank" class="w-full md:w-auto px-12 py-4 border border-gray-800 rounded-xl hover:bg-gray-900 transition text-gray-300 font-medium text-center flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.377.505 9.377.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                Watch Demo
             </a>
         </div>
     </section>
 
     <section id="features" class="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-3 gap-10 border-t border-gray-900">
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-blue-500/30 transition duration-500 text-left">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-blue-500/30 transition">
             <div class="text-blue-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Autonomous Execution</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Agents that plan and complete tasks without constant prompting.</p>
+            <h3 class="text-xl font-bold mb-4 heading">Autonomous Execution</h3>
+            <p class="text-gray-400 text-sm font-light leading-relaxed">Agents that plan and complete tasks without constant prompting, operating 24/7.</p>
         </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-emerald-500/30 transition duration-500 text-left">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-emerald-500/30 transition">
             <div class="text-emerald-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Enterprise Ready</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Built-in security and scalability for complex corporate environments.</p>
+            <h3 class="text-xl font-bold mb-4 heading">Enterprise Ready</h3>
+            <p class="text-gray-400 text-sm font-light leading-relaxed">Bank-grade security and SOC2-compliant orchestration for corporate environments.</p>
         </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-purple-500/30 transition duration-500 text-left">
+        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-purple-500/30 transition">
             <div class="text-purple-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Multi-Model Support</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Seamlessly orchestrate between Claude, GPT, and private models.</p>
+            <h3 class="text-xl font-bold mb-4 heading">Multi-Model Support</h3>
+            <p class="text-gray-400 text-sm font-light leading-relaxed">Seamlessly orchestrate between Claude 3.5, GPT-4o, and private models.</p>
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-6 py-24 border-t border-gray-900/50 text-center">
-        <p class="text-gray-600 text-[10px] font-bold tracking-[0.4em] mb-16 uppercase">Powered by Industry Leading Technology</p>
-        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24">
-            <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/claude.svg" alt="Anthropic Claude" class="logo-img">
+    <section class="max-w-5xl mx-auto px-6 py-20 text-center">
+        <p class="text-gray-600 text-[10px] font-bold tracking-[0.4em] mb-12 uppercase">Powered by Industry Leaders</p>
+        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+            <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/claude.svg" alt="Claude" class="logo-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="Google Cloud" class="logo-img gcp-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="logo-img gcp-logo">
         </div>
     </section>
 
     <section id="faq" class="max-w-4xl mx-auto px-6 py-32 border-t border-gray-900">
         <div class="text-center mb-16">
-            <span class="px-4 py-1.5 bg-gray-900 border border-gray-800 rounded-full text-[10px] font-bold tracking-widest text-blue-400 uppercase">FAQ</span>
-            <h2 class="text-4xl font-bold heading mt-6 text-white tracking-tight">Frequently Asked Questions</h2>
+            <span class="px-4 py-1.5 bg-gray-900 border border-gray-800 rounded-full text-[10px] font-bold text-blue-400 uppercase">FAQ</span>
+            <h2 class="text-4xl font-bold heading mt-6 text-white">Common Questions</h2>
         </div>
-
-        <div class="space-y-4 text-left">
-            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10 transition-all duration-300">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">How can ArkAgentic improve business efficiency?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        <div class="space-y-4">
+            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    How can ArkAgentic improve business efficiency?
+                    <svg class="w-5 h-5 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">We automate repetitive administrative tasks, transforming manual hours into automated seconds.收到，Charles！这就是我们要做的精益求精。你今早看到的这些细节问题，咱们这就一个一个把它解决掉，让网页达到“像素级”的完美，并把转化逻辑（Leads Generation）跑通。
-
-### 🎨 深度优化与功能新增：
-
-1.  **Logo 墙像素级调优**：
-    * **修复 Claude Logo**：之前的代码直接引用了图片链接，可能因为缓存或跨域问题导致显示为 ▪️。我为你找了一个非常稳定的、**纯净矢量路径（SVG）的 Claude 字母 Logo**。它在深色背景下会显示为纯白色，非常清晰。
-    * **Google Cloud Logo 缩小**：我专门为 Google Cloud 添加了一个 `gcp-logo` 类名，将其高度从 `30px` 降低到了 `22px`。通过细微的调整，现在它看起来和旁边的 OpenAI 和 AWS 放在一起时视觉重心是平衡的。
-2.  **Hero 按钮逻辑重塑**：
-    * **文案修改**：两个按钮都统一修改为了 **Request a Demo**。
-    * **锚点跳转**：点击这两个按钮（包括导航栏的 Contact Us）现在都会**平滑滚动跳转**到页面最下方的 Contact 咨询表单区域。
-3.  **FAQ 下方新增 Contact 表单 Section**：
-    * **新 Section**：在 FAQ 和 Footer 之间，新增了一个全英文的 **"Request Your Custom AI Demo"** 表单区域。
-    * **收集信息**：包含四个输入框：Full Name、Business Email（收集企业邮箱）、Company Name、以及 Business Workflow (Optional，供客户简单描述需求)。
-    * **视觉一致**：表单设计采用了和 FAQ 一样的 Glassmorphism 暗色卡片风格，带有蓝色发光（Glow）按钮，专业感十足。
-
----
-
-### 🚀 优化后的完整 End-to-End 代码
-
-你可以直接全选覆盖：
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArkAgentic | Autonomous AI Agents for Enterprise</title>
-    
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-    <link href="[https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap](https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap)" rel="stylesheet">
-    
-    <style>
-        :root { 
-            --font-main: 'Roboto', sans-serif; 
-            --font-heading: 'Space Grotesk', sans-serif; 
-        }
-        
-        body { 
-            font-family: var(--font-main); 
-            background-color: #030712; 
-            scroll-behavior: smooth; /* 平滑滚动 */
-            -webkit-font-smoothing: antialiased; 
-            letter-spacing: 0.01em;
-        }
-        
-        .heading { font-family: var(--font-heading); }
-        .glow { box-shadow: 0 0 25px rgba(59, 130, 246, 0.3); }
-
-        /* Professional Logo Wall Fixes */
-        .logo-img { 
-            height: 24px; /* 统一基础高度 */
-            filter: brightness(0) invert(1); 
-            opacity: 0.6; 
-            transition: all 0.4s ease; 
-            object-fit: contain;
-        }
-        /* ✦ 修复：专门缩小 Google Cloud，使其视觉大小一致 */
-        .logo-img.gcp-logo { height: 22px; } 
-        .logo-img:hover { opacity: 1; transform: translateY(-2px); }
-
-        .faq-details summary::-webkit-details-marker { display: none; }
-        .faq-details[open] summary svg { transform: rotate(180deg); }
-        
-        /* 表单输入框样式 */
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            background-color: rgba(17, 24, 39, 0.4);
-            border: 1px solid #1f2937;
-            border-radius: 0.75rem;
-            color: white;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            background-color: rgba(17, 24, 39, 0.6);
-        }
-    </style>
-</head>
-
-<body class="text-gray-100">
-
-    <nav class="sticky top-0 z-50 w-full bg-black/40 backdrop-blur-md border-b border-gray-800/50">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold heading tracking-tighter">
-                <span class="text-blue-500">Ark</span>Agentic
-            </div>
-            
-            <div class="flex items-center space-x-8">
-                <div class="hidden md:flex space-x-8 text-sm text-gray-400 font-medium tracking-wide">
-                    <a href="#features" class="hover:text-white transition">Features</a>
-                    <a href="#faq" class="hover:text-white transition">FAQ</a>
-                </div>
-                <a href="#contact" class="px-6 py-2 bg-blue-600 text-white rounded-full glow hover:bg-blue-500 transition text-sm font-bold">
-                    Contact Us
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <section class="max-w-6xl mx-auto px-6 py-32 text-center">
-        <h1 class="text-6xl md:text-8xl font-bold heading mb-8 leading-[1.05] tracking-tight">
-            Building Your <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-purple-500">
-                Digital Workforce
-            </span>
-        </h1>
-        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-14 font-light leading-relaxed">
-            Empowering enterprises with autonomous AI agents that execute complex workflows with precision.
-        </p>
-        <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
-            <a href="#contact" class="w-full md:w-auto px-12 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition text-center shadow-xl shadow-white/5">
-                Request a Demo
-            </a>
-            <a href="#contact" class="w-full md:w-auto px-12 py-4 border border-gray-800 rounded-xl hover:bg-gray-900 transition text-gray-300 font-medium text-center">
-                Request a Demo
-            </a>
-        </div>
-    </section>
-
-    <section id="features" class="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-3 gap-10 border-t border-gray-900">
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-blue-500/30 transition duration-500 text-left">
-            <div class="text-blue-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Autonomous Execution</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Agents that plan and complete tasks without constant prompting.</p>
-        </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-emerald-500/30 transition duration-500 text-left">
-            <div class="text-emerald-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Enterprise Ready</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Built-in security and scalability for complex corporate environments.</p>
-        </div>
-        <div class="p-10 bg-gray-900/10 rounded-3xl border border-gray-800/50 hover:border-purple-500/30 transition duration-500 text-left">
-            <div class="text-purple-500 text-3xl mb-8">✦</div>
-            <h3 class="text-xl font-bold mb-4 heading tracking-tight text-white">Multi-Model Support</h3>
-            <p class="text-gray-400 text-sm leading-relaxed font-light">Seamlessly orchestrate between Claude, GPT, and private models.</p>
-        </div>
-    </section>
-
-    <section class="max-w-5xl mx-auto px-6 py-24 border-t border-gray-900/50 text-center">
-        <p class="text-gray-600 text-[10px] font-bold tracking-[0.4em] mb-16 uppercase">Powered by Industry Leading Technology</p>
-        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24">
-            <img src="[https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/claude.svg](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/claude.svg)" alt="Anthropic Claude" class="logo-img">
-            <img src="[https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg](https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg)" alt="OpenAI" class="logo-img">
-            <img src="[https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg](https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg)" alt="AWS" class="logo-img">
-            <img src="[https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg](https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg)" alt="Google Cloud" class="logo-img gcp-logo">
-        </div>
-    </section>
-
-    <section id="faq" class="max-w-4xl mx-auto px-6 py-32 border-t border-gray-900">
-        <div class="text-center mb-16">
-            <span class="px-4 py-1.5 bg-gray-900 border border-gray-800 rounded-full text-[10px] font-bold tracking-widest text-blue-400 uppercase">FAQ</span>
-            <h2 class="text-4xl font-bold heading mt-6 text-white tracking-tight">Frequently Asked Questions</h2>
-        </div>
-
-        <div class="space-y-4 text-left">
-            <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10 transition-all duration-300">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">How can ArkAgentic improve business efficiency?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">We automate repetitive administrative tasks, transforming manual hours into automated seconds.</div>
+                <div class="px-6 pb-6 text-gray-400 text-sm font-light">We automate repetitive administrative tasks, transforming manual hours into automated seconds.</div>
             </details>
             <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">Is my business data secure?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    Is my business data secure?
+                    <svg class="w-5 h-5 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">Yes. We use enterprise-grade encryption and secure AWS environments. Your data is never used for training.</div>
+                <div class="px-6 pb-6 text-gray-400 text-sm font-light">Yes. We use enterprise-grade encryption and secure AWS environments. Your data is never used for training.</div>
             </details>
             <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">Is this expensive for a small business?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    Is this expensive for a small business?
+                    <svg class="w-5 h-5 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">Not at all. We focus on ROI. Most clients see a return on investment within the first 3 months.</div>
+                <div class="px-6 pb-6 text-gray-400 text-sm font-light">Not at all. Most clients see a full return on investment (ROI) within the first 3 months.</div>
             </details>
             <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">Do I need a technical team to manage these agents?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    Do I need a technical team to manage agents?
+                    <svg class="w-5 h-5 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">No. We provide a managed service. You interact with AI via simple tools like email or Slack.</div>
+                <div class="px-6 pb-6 text-gray-400 text-sm font-light">No. We provide a managed service. You interact with AI via simple tools like email or Slack.</div>
             </details>
             <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">What if my workflow changes?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    What if my workflow changes?
+                    <svg class="w-5 h-5 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">Our AI agents are adaptable and can be updated within days to match your new business processes.</div>
+                <div class="px-6 pb-6 text-gray-400 text-sm font-light">Our AI agents are adaptable and can be updated within days to match your new processes.</div>
             </details>
             <details class="faq-details group border border-gray-800 rounded-2xl bg-gray-900/10">
-                <summary class="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-900/30 transition list-none">
-                    <span class="font-semibold text-white">Can this integrate with our software?</span>
-                    <svg class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-semibold">
+                    Can this integrate with our software?
+                    <svg class="w-5 h-5 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
-                <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed font-light">Absolutely. We integrate with Shopify, Xero, Slack, and various CRMs via secure API connectors.</div>
+                <div class="px-6 pb-6 text-gray-400 text-sm font-light">Absolutely. We integrate with Shopify, Xero, Slack, and various CRMs via secure APIs.</div>
             </details>
         </div>
     </section>
 
     <section id="contact" class="max-w-4xl mx-auto px-6 py-32 border-t border-gray-900">
-        <div class="text-center mb-16">
-            <span class="px-4 py-1.5 bg-gray-900 border border-gray-800 rounded-full text-[10px] font-bold tracking-widest text-emerald-400 uppercase">Get Started</span>
-            <h2 class="text-4xl font-bold heading mt-6 text-white tracking-tight">Request Your Custom AI Demo</h2>
-            <p class="text-gray-500 mt-4 font-light">Tell us who you are, and we'll show you how AI can transform your business.</p>
-        </div>
-
-        <div class="p-8 md:p-12 bg-gray-900/20 rounded-3xl border border-gray-800 glow max-w-2xl mx-auto">
-            <form action="mailto:hello@arkagentic.com" method="post" enctype="text/plain" class="space-y-6">
+        <div class="bg-gray-900/20 border border-gray-800 p-8 md:p-12 rounded-3xl glow">
+            <h2 class="text-3xl font-bold heading text-white mb-4">Request a Demo</h2>
+            <p class="text-gray-400 mb-8 font-light">Leave your details below and we'll reach out to discuss your custom AI solution.</p>
+            
+            <form action="mailto:hello@arkagentic.com" method="post" enctype="text/plain" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2 heading uppercase tracking-wide">Full Name</label>
-                    <input type="text" name="name" placeholder="John Doe" required class="form-input">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Full Name</label>
+                    <input type="text" name="name" required class="form-input" placeholder="Your Name">
                 </div>
-                
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2 heading uppercase tracking-wide">Business Email</label>
-                    <input type="email" name="email" placeholder="john.doe@company.com" required class="form-input">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Business Email</label>
+                    <input type="email" name="email" required class="form-input" placeholder="name@company.com">
                 </div>
-                
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2 heading uppercase tracking-wide">Company Name</label>
-                    <input type="text" name="company" placeholder="Example Technologies Inc." required class="form-input">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Phone Number</label>
+                    <input type="tel" name="phone" required class="form-input" placeholder="+61 400 000 000">
                 </div>
-
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2 heading uppercase tracking-wide">Business Workflow / Need (Optional)</label>
-                    <textarea name="workflow" rows="3" placeholder="I want to automate invoice data entry into Xero..." class="form-input"></textarea>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Company Name</label>
+                    <input type="text" name="company" required class="form-input" placeholder="Your Business">
                 </div>
-
-                <div>
-                    <button type="submit" class="w-full py-4 bg-blue-600 text-white rounded-xl glow hover:bg-blue-500 transition text-base font-bold heading">
-                        Submit Demo Request
-                    </button>
-                    <p class="text-center text-xs text-gray-600 mt-4 tracking-wide font-light">We will get back to you within 24 business hours.</p>
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Business Background / Workflow</label>
+                    <textarea name="background" rows="4" class="form-input" placeholder="Briefly describe your needs..."></textarea>
+                </div>
+                <div class="md:col-span-2">
+                    <button type="submit" class="w-full py-4 bg-blue-600 text-white font-bold rounded-xl glow hover:bg-blue-500 transition">Submit Request</button>
                 </div>
             </form>
         </div>
     </section>
 
-    <footer class="max-w-6xl mx-auto px-6 py-20 border-t border-gray-900 text-center text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase">
-        <p class="mb-4">&copy; 2026 ArkAgentic. All rights reserved.</p>
-        <p>ABN: 92 627 301 153 | Sydney, Australia</p>
+    <footer class="py-20 text-center border-t border-gray-900 text-[10px] text-gray-600 tracking-[0.3em] uppercase">
+        <p>&copy; 2026 ArkAgentic. ABN: 92 627 301 153</p>
     </footer>
 
 </body>
