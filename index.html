@@ -34,17 +34,18 @@
 
         .glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.25); }
         
-        /* 调大 Logo 尺寸并优化文字排列 */
-        .logo-container { display: flex; items-center; gap: 0.75rem; opacity: 0.8; transition: all 0.4s ease; }
+        .logo-container { display: flex; align-items: center; justify-content: center; opacity: 0.8; transition: all 0.4s ease; }
         .logo-container:hover { opacity: 1; transform: translateY(-2px); }
-        .logo-img { height: 32px; filter: brightness(0) invert(1); object-fit: contain; }
-        .logo-text { font-family: var(--font-heading); font-weight: 600; font-size: 1.25rem; color: white; }
-
+        /* 统一控制合作伙伴图标大小，确保视觉平衡 */
+        .logo-img { height: 28px; filter: brightness(0) invert(1); object-fit: contain; }
+        .logo-img-gcp { height: 22px; } /* 针对 GCP 调整更小的尺寸 */
+        
         .faq-details summary::-webkit-details-marker { display: none; }
         .faq-details[open] summary svg { transform: rotate(180deg); }
         .faq-answer { color: #e5e7eb; line-height: 1.6; }
 
         .form-input { 
+            font-family: var(--font-main); /* 确保字体一致 */
             width: 100%; padding: 1rem; 
             background-color: rgba(255, 255, 255, 0.05); 
             border: 1px solid rgba(255, 255, 255, 0.2); 
@@ -97,24 +98,23 @@
         <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
             <div class="logo-container">
                 <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/claude.svg" alt="Claude" class="logo-img">
-                <span class="logo-text">Claude</span>
+                <span class="ml-2 font-semibold text-white text-lg font-['Space_Grotesk']">Claude</span>
             </div>
             <div class="logo-container">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
-                <span class="logo-text">OpenAI</span>
             </div>
             <div class="logo-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img !h-10">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img !h-8">
             </div>
             <div class="logo-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="logo-img">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="logo-img logo-img-gcp">
             </div>
         </div>
     </section>
 
     <section id="faq" class="max-w-3xl mx-auto px-6 py-20 border-t border-white/10">
         <div class="text-center mb-12">
-            <span class="px-4 py-1.5 bg-blue-600/20 border border-blue-500/30 rounded-full text-[10px] font-bold text-blue-400 uppercase">FAQ</span>
+            <span class="px-4 py-1.5 bg-blue-600/20 border border-blue-500/30 rounded-full text-[10px] font-bold text-blue-400 uppercase">Faq</span>
             <h2 class="text-3xl font-bold heading mt-4 text-white">Frequently Asked Questions</h2>
         </div>
         <div class="space-y-4">
@@ -132,34 +132,6 @@
                 </summary>
                 <div class="px-5 pb-5 faq-answer text-base">Yes. We use enterprise-grade encryption and secure AWS environments. Your data is never used for training.</div>
             </details>
-            <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
-                <summary class="flex justify-between items-center p-5 cursor-pointer list-none text-white font-semibold">
-                    Is this expensive for a small business?
-                    <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="px-5 pb-5 faq-answer text-base">Not at all. Most clients see a full return on investment (ROI) within the first 3 months.</div>
-            </details>
-            <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
-                <summary class="flex justify-between items-center p-5 cursor-pointer list-none text-white font-semibold">
-                    Do I need a technical team to manage agents?
-                    <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="px-5 pb-5 faq-answer text-base">No. We provide a managed service. You interact with AI via simple tools like email or Slack.</div>
-            </details>
-            <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
-                <summary class="flex justify-between items-center p-5 cursor-pointer list-none text-white font-semibold">
-                    What if my workflow changes?
-                    <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="px-5 pb-5 faq-answer text-base">Our AI agents are adaptable and can be updated within days to match your new processes.</div>
-            </details>
-            <details class="faq-details group border border-white/10 rounded-2xl bg-white/5">
-                <summary class="flex justify-between items-center p-5 cursor-pointer list-none text-white font-semibold">
-                    Can this integrate with our software?
-                    <svg class="w-5 h-5 text-blue-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="px-5 pb-5 faq-answer text-base">Absolutely. We integrate with Shopify, Xero, Slack, and various CRMs via secure APIs.</div>
-            </details>
         </div>
     </section>
 
@@ -168,36 +140,36 @@
             <h2 class="text-3xl font-bold heading text-white mb-4">Request a Demo</h2>
             <p class="text-gray-300 mb-8 font-light text-base">Leave your details below and we'll reach out to discuss your custom AI solution.</p>
             
-            <form action="mailto:hello@arkagentic.com" method="post" enctype="text/plain" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form action="mailto:charles.zhang@arkagentic.com" method="post" enctype="text/plain" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Full Name</label>
-                    <input type="text" name="name" required class="form-input" placeholder="Your Name">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Full name</label>
+                    <input type="text" name="Name" required class="form-input" placeholder="Your name">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Business Email</label>
-                    <input type="email" name="email" required class="form-input" placeholder="name@company.com">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Business email</label>
+                    <input type="email" name="Email" required class="form-input" placeholder="name@company.com">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Phone Number</label>
-                    <input type="tel" name="phone" required class="form-input" placeholder="+61 400 000 000">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Phone number</label>
+                    <input type="tel" name="Phone" required class="form-input" placeholder="+61 400 000 000">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Company Name</label>
-                    <input type="text" name="company" required class="form-input" placeholder="Your Business">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Company name</label>
+                    <input type="text" name="Company" required class="form-input" placeholder="Your business">
                 </div>
                 <div class="md:col-span-2">
-                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Business Background</label>
-                    <textarea name="background" rows="4" class="form-input" placeholder="Describe your needs..."></textarea>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Business background</label>
+                    <textarea name="Background" rows="4" class="form-input" placeholder="Describe your needs..."></textarea>
                 </div>
                 <div class="md:col-span-2">
-                    <button type="submit" class="w-full py-4 bg-blue-600 text-white font-bold rounded-xl glow hover:bg-blue-500 transition-all text-lg">Submit Request</button>
+                    <button type="submit" class="w-full py-4 bg-blue-600 text-white font-bold rounded-xl glow hover:bg-blue-500 transition-all text-lg font-['Roboto']">Submit Request</button>
                 </div>
             </form>
         </div>
     </section>
 
-    <footer class="py-12 text-center border-t border-white/10 text-[10px] text-gray-500 tracking-[0.3em] uppercase">
-        <p>&copy; 2026 ArkAgentic. ABN: 92 627 301 153</p>
+    <footer class="py-12 text-center border-t border-white/10 text-[10px] text-gray-500 tracking-[0.3em]">
+        <p>&copy; 2026 ArkAgentic. Abn: 92 627 301 153</p>
     </footer>
 
 </body>
