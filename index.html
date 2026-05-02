@@ -34,14 +34,14 @@
 
         .glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.25); }
         
-        /* Logo Container Styling */
+        /* Logo Styling - Fixed for stability */
         .logo-container { display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: all 0.4s ease; }
         .logo-container:hover { opacity: 1; transform: translateY(-2px); }
         
-        /* Consistent Monochrome Filter for Logos */
-        .logo-img { height: 26px; filter: brightness(0) invert(1); object-fit: contain; }
-        .logo-img-aws { height: 32px; margin-top: 8px; filter: brightness(0) invert(1); }
-        .logo-img-gcp { height: 18px; opacity: 0.9; filter: brightness(0) invert(1); }
+        /* Force icons to be monochrome white */
+        .logo-img { height: 24px; filter: brightness(0) invert(1); object-fit: contain; }
+        .logo-img-aws { height: 32px; filter: brightness(0) invert(1); }
+        .logo-img-gcp { height: 20px; filter: brightness(0) invert(1); }
         
         .faq-details summary::-webkit-details-marker { display: none; }
         .faq-details[open] { background-color: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3); }
@@ -102,24 +102,24 @@
         </div>
     </section>
 
-    <!-- Logo Section - Unified Monochrome Style -->
+    <!-- Logo Section - Fixed Icons -->
     <section class="max-w-5xl mx-auto px-6 py-12 text-center">
         <p class="text-gray-500 text-[11px] font-bold tracking-[0.5em] mb-12 uppercase opacity-60">Orchestrating the Best Models</p>
         <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16">
             <!-- Claude -->
             <div class="logo-container">
-                <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/claude.svg" alt="Claude" class="logo-img">
-                <span class="ml-3 font-semibold text-white text-xl font-['Space_Grotesk']">Claude</span>
+                <img src="https://cdn.simpleicons.org/anthropic/white" alt="Claude" class="logo-img">
+                <span class="ml-2 font-semibold text-white text-xl font-['Space_Grotesk']">Claude</span>
             </div>
             <!-- Microsoft -->
             <div class="logo-container">
-                <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/microsoft.svg" alt="Microsoft" class="logo-img">
-                <span class="ml-3 font-semibold text-white text-xl font-['Space_Grotesk']">Microsoft</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" class="logo-img">
+                <span class="ml-2 font-semibold text-white text-xl font-['Space_Grotesk']">Microsoft</span>
             </div>
             <!-- OpenAI -->
             <div class="logo-container">
-                <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/openai.svg" alt="OpenAI" class="logo-img">
-                <span class="ml-3 font-semibold text-white text-xl font-['Space_Grotesk']">OpenAI</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
+                <span class="ml-2 font-semibold text-white text-xl font-['Space_Grotesk']">OpenAI</span>
             </div>
             <!-- AWS -->
             <div class="logo-container">
@@ -132,7 +132,7 @@
         </div>
     </section>
 
-    <!-- FAQ Section - All Caps -->
+    <!-- FAQ Section -->
     <section id="faq" class="max-w-3xl mx-auto px-6 py-20 border-t border-white/10">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold heading text-white uppercase tracking-wider">FAQ</h2>
@@ -161,18 +161,18 @@
         </div>
     </section>
 
-    <!-- Contact Section - Web3Forms Integrated -->
+    <!-- Contact Section -->
     <section id="contact" class="max-w-4xl mx-auto px-6 py-20">
         <div class="bg-white/5 border border-white/10 p-10 rounded-3xl glow">
             <h2 class="text-3xl font-bold heading text-white mb-4">Request a Demo</h2>
             <p class="text-gray-400 mb-8 font-light text-base">Leave your details below and we'll reach out directly to your inbox.</p>
             
-            <!-- Web3Forms Integration -->
             <form action="https://api.web3forms.com/submit" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Set your Access Key here -->
                 <input type="hidden" name="access_key" value="d2eef3e2-c7df-4f6d-9807-923b5928d0f3">
                 <input type="hidden" name="subject" value="ArkAgentic: New Lead from Website">
                 <input type="hidden" name="from_name" value="ArkAgentic Official Site">
+                <!-- Redirects back to homepage after submission -->
+                <input type="hidden" name="redirect" value="https://www.arkagentic.com/">
 
                 <div>
                     <label class="block text-sm font-medium text-gray-400 mb-2">Full name</label>
