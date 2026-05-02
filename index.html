@@ -34,14 +34,14 @@
 
         .glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.25); }
         
-        /* Logo Styling - Fixed for stability */
-        .logo-container { display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: all 0.4s ease; }
+        /* Unified Logo Styling */
+        .logo-container { display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: all 0.4s ease; }
         .logo-container:hover { opacity: 1; transform: translateY(-2px); }
         
-        /* Force icons to be monochrome white */
-        .logo-img { height: 24px; filter: brightness(0) invert(1); object-fit: contain; }
-        .logo-img-aws { height: 32px; filter: brightness(0) invert(1); }
-        .logo-img-gcp { height: 20px; filter: brightness(0) invert(1); }
+        /* Filter to make everything clean white */
+        .logo-img { height: 28px; filter: brightness(0) invert(1); object-fit: contain; }
+        .logo-img-aws { height: 34px; }
+        .logo-img-gcp { height: 22px; }
         
         .faq-details summary::-webkit-details-marker { display: none; }
         .faq-details[open] { background-color: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.3); }
@@ -63,7 +63,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .feature-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .feature-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.05); }
         .feature-card:hover { border-color: rgba(59, 130, 246, 0.4); background-color: rgba(255, 255, 255, 0.07); transform: translateY(-5px); }
     </style>
 </head>
@@ -102,24 +102,21 @@
         </div>
     </section>
 
-    <!-- Logo Section - Fixed Icons -->
+    <!-- Logo Section - Pure Icons Only -->
     <section class="max-w-5xl mx-auto px-6 py-12 text-center">
         <p class="text-gray-500 text-[11px] font-bold tracking-[0.5em] mb-12 uppercase opacity-60">Orchestrating the Best Models</p>
-        <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16">
-            <!-- Claude -->
+        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+            <!-- Claude (Back to original SVG style) -->
             <div class="logo-container">
-                <img src="https://cdn.simpleicons.org/anthropic/white" alt="Claude" class="logo-img">
-                <span class="ml-2 font-semibold text-white text-xl font-['Space_Grotesk']">Claude</span>
+                <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/claude.svg" alt="Claude" class="logo-img">
             </div>
             <!-- Microsoft -->
             <div class="logo-container">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" class="logo-img">
-                <span class="ml-2 font-semibold text-white text-xl font-['Space_Grotesk']">Microsoft</span>
             </div>
             <!-- OpenAI -->
             <div class="logo-container">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" alt="OpenAI" class="logo-img">
-                <span class="ml-2 font-semibold text-white text-xl font-['Space_Grotesk']">OpenAI</span>
             </div>
             <!-- AWS -->
             <div class="logo-container">
@@ -128,6 +125,33 @@
             <!-- Google Cloud -->
             <div class="logo-container">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="logo-img logo-img-gcp">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="max-w-6xl mx-auto px-6 py-24">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="feature-card p-8 rounded-3xl bg-white/5">
+                <div class="w-12 h-12 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4 heading">Autonomous Execution</h3>
+                <p class="text-gray-400 font-light leading-relaxed">Agents that don't just suggest, but execute complex tasks across your existing software stack.</p>
+            </div>
+            <div class="feature-card p-8 rounded-3xl bg-white/5">
+                <div class="w-12 h-12 bg-emerald-600/20 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4 heading">Enterprise Grade</h3>
+                <p class="text-gray-400 font-light leading-relaxed">Built with security and reliability at the core, ensuring safe integration with corporate data.</p>
+            </div>
+            <div class="feature-card p-8 rounded-3xl bg-white/5">
+                <div class="w-12 h-12 bg-purple-600/20 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4 heading">Scalable Workforce</h3>
+                <p class="text-gray-400 font-light leading-relaxed">Instantly deploy dozens of specialized agents to handle peak workloads without overhead.</p>
             </div>
         </div>
     </section>
@@ -171,7 +195,6 @@
                 <input type="hidden" name="access_key" value="d2eef3e2-c7df-4f6d-9807-923b5928d0f3">
                 <input type="hidden" name="subject" value="ArkAgentic: New Lead from Website">
                 <input type="hidden" name="from_name" value="ArkAgentic Official Site">
-                <!-- Redirects back to homepage after submission -->
                 <input type="hidden" name="redirect" value="https://www.arkagentic.com/">
 
                 <div>
