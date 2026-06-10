@@ -1,0 +1,15 @@
+<svg width="1800" height="520" viewBox="0 0 1800 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1800" height="520" rx="44" fill="#020617"/>
+  <rect x="30" y="30" width="1740" height="460" rx="34" fill="#0B1220" stroke="#1E293B" stroke-width="2"/>
+  <text x="120" y="255" fill="url(#arkGrad)" font-size="100" font-family="Space Grotesk, Inter, Arial, sans-serif" font-weight="400" letter-spacing="-2.1">Ark</text>
+  <text x="288" y="255" fill="white" font-size="100" font-family="Space Grotesk, Inter, Arial, sans-serif" font-weight="400" letter-spacing="-2.1">Agentic</text>
+  <text x="120" y="330" fill="#94A3B8" font-size="34" font-family="Inter, Arial, sans-serif">Direction 18B · Slimmest premium test</text>
+  <text x="120" y="415" fill="#E2E8F0" font-size="38" font-family="Inter, Arial, sans-serif">A lighter and more elegant test with clearly reduced visual weight, useful for checking how far we can go before losing authority.</text>
+  <defs>
+    <linearGradient id="arkGrad" x1="120" y1="180" x2="360" y2="265" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#93C5FD"/>
+      <stop offset="0.55" stop-color="#A5F3FC"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+</svg>
