@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useAuthSession } from "@/components/auth-session-provider";
-
-const currentAppUrl = process.env.NEXT_PUBLIC_INVOICE_EXTRACTOR_URL || "http://localhost:3011";
+import { invoiceExtractorUrl } from "@/lib/app-links";
 
 export default function InvoiceExtractorAppPage() {
   const { isConfigured, isLoading, user } = useAuthSession();
@@ -31,12 +30,21 @@ export default function InvoiceExtractorAppPage() {
               Until entitlement and token handoff are wired, this button opens the current running product URL.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href={user ? currentAppUrl : "/signin?next=/apps/invoice-extractor"}
-                className="inline-flex rounded-xl bg-white px-5 py-3 font-semibold text-slate-950 transition hover:bg-slate-200"
-              >
-                {user ? "Open current app" : "Sign in first"}
-              </Link>
+              {user ? (
+                <a
+                  href={invoiceExtractorUrl}
+                  className="inline-flex rounded-xl bg-white px-5 py-3 font-semibold text-slate-950 transition hover:bg-slate-200"
+                >
+                  Open current app
+                </a>
+              ) : (
+                <Link
+                  href="/signin?next=/apps/invoice-extractor"
+                  className="inline-flex rounded-xl bg-white px-5 py-3 font-semibold text-slate-950 transition hover:bg-slate-200"
+                >
+                  Sign in first
+                </Link>
+              )}
               {!user ? (
                 <Link
                   href="/signup?next=/apps/invoice-extractor"

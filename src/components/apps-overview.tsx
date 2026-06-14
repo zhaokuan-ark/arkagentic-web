@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useAuthSession } from "@/components/auth-session-provider";
+import { invoiceExtractorUrl } from "@/lib/app-links";
 
 export function AppsOverview() {
   const { isConfigured, isDemoMode, isLoading, user } = useAuthSession();
 
-  const launchHref = user ? "/apps/invoice-extractor" : "/signin?next=/apps/invoice-extractor";
+  const launchHref = user ? invoiceExtractorUrl : "/signin?next=/apps";
 
   return (
     <div className="grid gap-6">
@@ -26,15 +27,24 @@ export function AppsOverview() {
                 : "Configure Supabase or enable demo auth to unlock app launching."}
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href={launchHref}
-            className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white transition hover:bg-blue-500"
-          >
-            {user ? "Open app" : "Sign in to open app"}
-          </Link>
+          {user ? (
+            <a
+              href={launchHref}
+              className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white transition hover:bg-blue-500"
+            >
+              Open app
+            </a>
+          ) : (
+            <Link
+              href={launchHref}
+              className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white transition hover:bg-blue-500"
+            >
+              Sign in to open app
+            </Link>
+          )}
           {!user ? (
             <Link
-              href="/signup?next=/apps/invoice-extractor"
+              href="/signup?next=/apps"
               className="rounded-xl border border-white/15 px-5 py-3 text-center font-medium text-white transition hover:bg-white/5"
             >
               Create account
