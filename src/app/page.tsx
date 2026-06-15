@@ -280,7 +280,7 @@ export default function HomePage() {
 
                 <div className="flex justify-center pt-2">
                   <Link
-                    href="/apps/invoice-extractor"
+                    href="/apps"
                     className="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
                   >
                     Start free 7-day trial
