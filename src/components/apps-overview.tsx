@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { useAuthSession } from "@/components/auth-session-provider";
 import { invoiceExtractorUrl } from "@/lib/app-links";
@@ -80,21 +79,13 @@ export function AppsOverview() {
               {isLaunching ? "Launching..." : "Launch app"}
             </button>
           ) : (
-            <Link
+            <a
               href="/signin?next=/apps"
               className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white transition hover:bg-blue-500"
             >
               Sign in to launch
-            </Link>
+            </a>
           )}
-          {!user ? (
-            <Link
-              href="/signup?next=/apps"
-              className="rounded-xl border border-white/15 px-5 py-3 text-center font-medium text-white transition hover:bg-white/5"
-            >
-              Create account
-            </Link>
-          ) : null}
         </div>
       </div>
     </div>
