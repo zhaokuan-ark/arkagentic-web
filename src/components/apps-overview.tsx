@@ -88,6 +88,24 @@ export function AppsOverview() {
           )}
         </div>
       </div>
+
+      <div className="rounded-3xl border border-white/8 bg-white/[0.025] p-8 opacity-70 grayscale-[20%]">
+        <p className="text-sm uppercase tracking-[0.3em] text-slate-400/70">Xero Invoice Upload Tool</p>
+        <h2 className="mt-3 font-heading text-3xl font-bold text-slate-200/85">Send invoice data to Xero</h2>
+        <p className="mt-4 max-w-3xl text-slate-400/80">
+          Prepare reviewed invoice outputs for Xero, map supplier and tax details, and upload approved bills into your accounting workflow.
+        </p>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <button
+            type="button"
+            disabled
+            className="cursor-not-allowed rounded-xl bg-slate-800/60 px-5 py-3 text-center font-semibold text-slate-400 ring-1 ring-white/5"
+          >
+            Under Development ..
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
