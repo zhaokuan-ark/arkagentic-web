@@ -20,6 +20,29 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Signup protection
+
+Public registration stays open, but signup can be protected with Cloudflare Turnstile and email-confirmation gating.
+
+1. Create a Cloudflare Turnstile widget for the production domain.
+2. Set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` in Amplify / local env.
+3. In Supabase Auth CAPTCHA settings, enable Turnstile and set the matching Turnstile secret key.
+4. Keep Supabase email confirmation enabled so newly created accounts cannot launch apps until `email_confirmed_at` is set.
+
+Stale unverified account cleanup is dry-run by default:
+
+```bash
+npm run auth:cleanup-unverified
+```
+
+To delete unverified users older than the configured age, run from a trusted server/CI environment with `SUPABASE_URL` or `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` set:
+
+```bash
+npm run auth:cleanup-unverified -- --apply --max-age-hours=48 --limit=100
+```
+
+Schedule that command daily (or more often during active bot abuse). Never expose the service-role key to the browser.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

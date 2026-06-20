@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "auth:cleanup-unverified": "node scripts/cleanup-unverified-users.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.1",

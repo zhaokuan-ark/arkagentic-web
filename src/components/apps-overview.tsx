@@ -30,12 +30,21 @@ function submitInvoiceHandoff(accessToken: string) {
 }
 
 export function AppsOverview() {
-  const { isLoading, session, user } = useAuthSession();
+  const { isDemoMode, isLoading, session, user } = useAuthSession();
   const [launchError, setLaunchError] = useState<string | null>(null);
   const [isLaunching, setIsLaunching] = useState(false);
 
+  const isEmailConfirmed = Boolean(user?.email_confirmed_at || user?.confirmed_at);
+  const canLaunchInvoiceExtractor = Boolean(user && (isDemoMode || isEmailConfirmed));
+
   async function handleLaunch() {
     setLaunchError(null);
+
+    if (user && !isDemoMode && !isEmailConfirmed) {
+      setLaunchError("Please confirm your email before launching Invoice Extractor. Check your inbox for the confirmation link.");
+      return;
+    }
+
     setIsLaunching(true);
     try {
       let accessToken = session?.access_token;
@@ -68,15 +77,21 @@ export function AppsOverview() {
 
         {launchError ? <p className="mt-6 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-100">{launchError}</p> : null}
 
+        {user && !isDemoMode && !isEmailConfirmed ? (
+          <p className="mt-6 rounded-xl border border-amber-300/25 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
+            Your account is created, but your email is not confirmed yet. Confirm your email before connecting cloud drives or launching apps.
+          </p>
+        ) : null}
+
         <div className="mt-6 flex flex-wrap gap-3">
           {user ? (
             <button
               type="button"
               onClick={handleLaunch}
-              disabled={isLaunching || isLoading}
+              disabled={!canLaunchInvoiceExtractor || isLaunching || isLoading}
               className="rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isLaunching ? "Launching..." : "Launch app"}
+              {!canLaunchInvoiceExtractor ? "Confirm email to launch" : isLaunching ? "Launching..." : "Launch app"}
             </button>
           ) : (
             <a

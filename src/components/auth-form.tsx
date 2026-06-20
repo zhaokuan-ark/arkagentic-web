@@ -21,6 +21,27 @@ type AuthFormProps = {
   initialMessage?: string;
 };
 
+type TurnstileApi = {
+  render: (
+    container: HTMLElement,
+    options: {
+      sitekey: string;
+      theme?: "light" | "dark" | "auto";
+      callback?: (token: string) => void;
+      "expired-callback"?: () => void;
+      "error-callback"?: () => void;
+    },
+  ) => string;
+  reset: (widgetId?: string) => void;
+  remove?: (widgetId: string) => void;
+};
+
+declare global {
+  interface Window {
+    turnstile?: TurnstileApi;
+  }
+}
+
 const signupReasons = [
   { value: "saas", label: "Use ArkAgentic products" },
   { value: "custom", label: "Discuss a custom AI system" },
@@ -33,6 +54,7 @@ const fieldClassName =
 const fieldErrorClassName = "border-red-400/60 bg-red-500/5 focus:border-red-400";
 const requiredMark = <span className="ml-1 text-sky-300">*</span>;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 function getFriendlyAuthError(message: string) {
   const normalized = message.toLowerCase();
@@ -131,7 +153,10 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
   const [status, setStatus] = useState<string>(initialMessage || "");
   const [formError, setFormError] = useState<string>(initialError || "");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [turnstileToken, setTurnstileToken] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const turnstileContainerRef = useRef<HTMLDivElement | null>(null);
+  const turnstileWidgetIdRef = useRef<string | null>(null);
   const signupRedirectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isSignup = mode === "signup";
@@ -156,6 +181,62 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!isSignup || !turnstileSiteKey) return;
+
+    const siteKey = turnstileSiteKey;
+    let cancelled = false;
+    let pollTimer: ReturnType<typeof setInterval> | null = null;
+
+    function renderTurnstile() {
+      if (cancelled || !turnstileContainerRef.current || !window.turnstile || turnstileWidgetIdRef.current) return;
+
+      turnstileWidgetIdRef.current = window.turnstile.render(turnstileContainerRef.current, {
+        sitekey: siteKey,
+        theme: "dark",
+        callback: (token) => {
+          setTurnstileToken(token);
+          setFormError((current) => (current === "Please complete the human verification before creating your account." ? "" : current));
+        },
+        "expired-callback": () => setTurnstileToken(""),
+        "error-callback": () => setTurnstileToken(""),
+      });
+    }
+
+    if (!document.getElementById("cloudflare-turnstile-script")) {
+      const script = document.createElement("script");
+      script.id = "cloudflare-turnstile-script";
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.onload = renderTurnstile;
+      document.head.appendChild(script);
+    }
+
+    renderTurnstile();
+
+    if (!window.turnstile) {
+      pollTimer = setInterval(renderTurnstile, 250);
+    }
+
+    return () => {
+      cancelled = true;
+      if (pollTimer) clearInterval(pollTimer);
+      if (turnstileWidgetIdRef.current && window.turnstile?.remove) {
+        window.turnstile.remove(turnstileWidgetIdRef.current);
+      }
+      turnstileWidgetIdRef.current = null;
+      setTurnstileToken("");
+    };
+  }, [isSignup]);
+
+  function resetTurnstile() {
+    setTurnstileToken("");
+    if (turnstileWidgetIdRef.current) {
+      window.turnstile?.reset(turnstileWidgetIdRef.current);
+    }
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -196,10 +277,17 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
     setIsSubmitting(true);
 
     if (mode === "signup") {
+      if (turnstileSiteKey && !turnstileToken) {
+        setFormError("Please complete the human verification before creating your account.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const { error: signUpError } = await supabase.auth.signUp({
         email: email.trim().toLowerCase(),
         password,
         options: {
+          captchaToken: turnstileToken || undefined,
           emailRedirectTo: `${window.location.origin}/signin?message=${encodeURIComponent("Your email has been confirmed. Please sign in.")}&next=${encodeURIComponent(nextPath)}`,
           data: {
             full_name: fullName.trim(),
@@ -212,6 +300,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
       if (signUpError) {
         const friendly = getFriendlyAuthError(signUpError.message);
         setFormError(friendly);
+        resetTurnstile();
 
         if (friendly.includes("email")) {
           setFieldErrors((current) => ({ ...current, email: friendly }));
@@ -227,6 +316,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
       setStatus(`${successMessage} Redirecting you to sign in...`);
       setPassword("");
       setConfirmPassword("");
+      resetTurnstile();
       setIsSubmitting(false);
 
       if (signupRedirectTimerRef.current) {
@@ -411,6 +501,21 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
               </div>
               <FieldError message={fieldErrors.signupReason} />
             </div>
+
+            {turnstileSiteKey ? (
+              <div>
+                <label className="mb-2 block text-sm font-normal text-slate-300">
+                  Human verification
+                  {requiredMark}
+                </label>
+                <div className="rounded-xl border border-white/10 bg-slate-950/40 p-3">
+                  <div ref={turnstileContainerRef} />
+                </div>
+                <p className="mt-2 text-xs leading-5 text-slate-500">
+                  This keeps public signup open while blocking automated registrations.
+                </p>
+              </div>
+            ) : null}
           </div>
         ) : (
           <div className="space-y-4">
