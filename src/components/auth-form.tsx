@@ -328,7 +328,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         password,
         options: {
           captchaToken: turnstileToken || undefined,
-          emailRedirectTo: `${window.location.origin}/signin?message=${encodeURIComponent("Your email has been confirmed. Please sign in.")}&next=${encodeURIComponent(nextPath)}`,
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
           data: {
             full_name: normalizedFullName,
             phone: normalizedPhone || undefined,
