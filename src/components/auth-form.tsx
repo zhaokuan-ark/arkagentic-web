@@ -217,7 +217,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
   }, []);
 
   useEffect(() => {
-    if (!isSignup || !turnstileSiteKey) return;
+    if (!turnstileSiteKey) return;
 
     const siteKey = turnstileSiteKey;
     let cancelled = false;
@@ -371,6 +371,9 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
     const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
       email: email.trim().toLowerCase(),
       password,
+      options: {
+        captchaToken: turnstileToken || undefined,
+      },
     });
 
     if (signInError) {
@@ -380,6 +383,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         email: friendly.includes("email") ? friendly : undefined,
         password: friendly.includes("password") || friendly.includes("incorrect") ? friendly : undefined,
       });
+      resetTurnstile();
       setIsSubmitting(false);
       return;
     }
@@ -617,6 +621,15 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
               />
               <FieldError message={fieldErrors.password} />
             </div>
+
+            {turnstileSiteKey ? (
+              <div>
+                <div ref={turnstileContainerRef} />
+                <p className="text-xs leading-5 text-slate-600">
+                  Protected by Cloudflare Turnstile. Human checks appear only when needed.
+                </p>
+              </div>
+            ) : null}
           </div>
         )}
 
