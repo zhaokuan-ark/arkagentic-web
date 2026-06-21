@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
+import { getSafeNextPath } from "@/lib/safe-next-path";
 
 export function AuthCallbackClient() {
   const router = useRouter();
@@ -14,7 +15,7 @@ export function AuthCallbackClient() {
 
   useEffect(() => {
     async function resolveAuth() {
-      const next = searchParams.get("next") || "/apps";
+      const next = getSafeNextPath(searchParams.get("next"));
 
       if (!supabase) {
         setError("Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY first.");

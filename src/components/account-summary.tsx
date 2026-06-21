@@ -38,6 +38,8 @@ export function AccountSummary() {
     );
   }
 
+  const isEmailConfirmed = Boolean(user.email_confirmed_at || user.confirmed_at || isDemoMode);
+
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-6">
@@ -47,6 +49,14 @@ export function AccountSummary() {
         <p className="mt-2 text-slate-400">
           Auth mode: {isDemoMode ? "Local demo auth" : "Supabase auth"}
         </p>
+        <p className={isEmailConfirmed ? "mt-2 text-emerald-300" : "mt-2 text-amber-300"}>
+          Email status: {isEmailConfirmed ? "Confirmed" : "Waiting for confirmation"}
+        </p>
+        {!isEmailConfirmed ? (
+          <p className="mt-3 rounded-xl border border-amber-300/25 bg-amber-400/10 p-3 text-sm text-amber-100">
+            Confirm your email before launching apps, connecting cloud drives, or using paid-product features.
+          </p>
+        ) : null}
         <p className="mt-2 text-slate-400">Session expires: {session?.expires_at ? new Date(session.expires_at * 1000).toLocaleString() : isDemoMode ? "Local demo session" : "Unknown"}</p>
       </div>
       <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-6">

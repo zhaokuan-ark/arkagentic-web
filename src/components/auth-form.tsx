@@ -55,7 +55,19 @@ const fieldClassName =
 const fieldErrorClassName = "border-red-400/60 bg-red-500/5 focus:border-red-400";
 const requiredMark = <span className="ml-1 text-sky-300">*</span>;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phonePattern = /^[+()\d\s.-]*$/;
+const maxLengths = {
+  fullName: 80,
+  email: 254,
+  phone: 32,
+  password: 128,
+} as const;
+const allowedSignupReasons = new Set<SignupReason>(signupReasons.map((reason) => reason.value));
 const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+function normalizeWhitespace(value: string) {
+  return value.trim().replace(/\s+/g, " ");
+}
 
 function getFriendlyAuthError(message: string) {
   const normalized = message.toLowerCase();
@@ -97,28 +109,49 @@ function validateAuthForm(input: {
   fullName: string;
   email: string;
   signupReason: SignupReason;
+  phone: string;
   password: string;
   confirmPassword: string;
 }) {
   const errors: FieldErrors = {};
   const isSignup = input.mode === "signup";
 
-  if (isSignup && !input.fullName.trim()) {
+  const normalizedFullName = normalizeWhitespace(input.fullName);
+  const normalizedEmail = input.email.trim().toLowerCase();
+
+  if (isSignup && !normalizedFullName) {
     errors.fullName = "Please enter your full name.";
+  } else if (isSignup && normalizedFullName.length > maxLengths.fullName) {
+    errors.fullName = `Full name must be ${maxLengths.fullName} characters or fewer.`;
   }
 
-  if (!input.email.trim()) {
+  if (!normalizedEmail) {
     errors.email = "Please enter your email.";
-  } else if (!emailPattern.test(input.email.trim())) {
+  } else if (normalizedEmail.length > maxLengths.email) {
+    errors.email = "Email address is too long.";
+  } else if (!emailPattern.test(normalizedEmail)) {
     errors.email = "Please enter a valid email address.";
   }
 
   if (isSignup && !input.signupReason) {
     errors.signupReason = "Please select what brings you to ArkAgentic.";
+  } else if (isSignup && !allowedSignupReasons.has(input.signupReason)) {
+    errors.signupReason = "Please choose a valid signup reason.";
+  }
+
+  if (isSignup && input.phone.trim()) {
+    const normalizedPhone = normalizeWhitespace(input.phone);
+    if (normalizedPhone.length > maxLengths.phone) {
+      errors.phone = `Phone number must be ${maxLengths.phone} characters or fewer.`;
+    } else if (!phonePattern.test(normalizedPhone)) {
+      errors.phone = "Please use numbers, spaces, +, -, or brackets only.";
+    }
   }
 
   if (!input.password.trim()) {
     errors.password = "Please enter your password.";
+  } else if (input.password.length > maxLengths.password) {
+    errors.password = `Password must be ${maxLengths.password} characters or fewer.`;
   } else if (isSignup && !isStrongPassword(input.password)) {
     errors.password = "Use at least 8 characters, one uppercase letter, one lowercase letter, and one number.";
   }
@@ -250,6 +283,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
       fullName,
       email,
       signupReason,
+      phone,
       password,
       confirmPassword,
     });
@@ -285,15 +319,19 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         return;
       }
 
+      const normalizedEmail = email.trim().toLowerCase();
+      const normalizedFullName = normalizeWhitespace(fullName);
+      const normalizedPhone = normalizeWhitespace(phone);
+
       const { error: signUpError } = await supabase.auth.signUp({
-        email: email.trim().toLowerCase(),
+        email: normalizedEmail,
         password,
         options: {
           captchaToken: turnstileToken || undefined,
           emailRedirectTo: `${window.location.origin}/signin?message=${encodeURIComponent("Your email has been confirmed. Please sign in.")}&next=${encodeURIComponent(nextPath)}`,
           data: {
-            full_name: fullName.trim(),
-            phone: phone.trim(),
+            full_name: normalizedFullName,
+            phone: normalizedPhone || undefined,
             signup_reason: signupReason,
           },
         },
@@ -312,7 +350,6 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         return;
       }
 
-      const normalizedEmail = email.trim().toLowerCase();
       const successMessage = `Your account has been created. Please check ${normalizedEmail} and click the confirmation link in your email before signing in.`;
 
       setStatus(`${successMessage} Redirecting you to sign in...`);
@@ -331,7 +368,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
       return;
     }
 
-    const { error: signInError } = await supabase.auth.signInWithPassword({
+    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
       email: email.trim().toLowerCase(),
       password,
     });
@@ -343,6 +380,15 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         email: friendly.includes("email") ? friendly : undefined,
         password: friendly.includes("password") || friendly.includes("incorrect") ? friendly : undefined,
       });
+      setIsSubmitting(false);
+      return;
+    }
+
+    const signedInUser = signInData.user;
+    const isEmailConfirmed = Boolean(signedInUser?.email_confirmed_at || signedInUser?.confirmed_at);
+    if (signedInUser && !isEmailConfirmed) {
+      await supabase.auth.signOut();
+      setFormError("Please confirm your email before signing in. Check your inbox for the confirmation link.");
       setIsSubmitting(false);
       return;
     }
@@ -375,6 +421,8 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
                 }}
                 placeholder="Your full name"
                 className={inputClass(Boolean(fieldErrors.fullName))}
+                autoComplete="name"
+                maxLength={maxLengths.fullName}
                 required
                 aria-invalid={Boolean(fieldErrors.fullName)}
               />
@@ -397,6 +445,8 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
                 }}
                 placeholder="name@company.com"
                 className={inputClass(Boolean(fieldErrors.email))}
+                autoComplete="email"
+                maxLength={maxLengths.email}
                 required
                 aria-invalid={Boolean(fieldErrors.email)}
               />
@@ -410,9 +460,16 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
               <input
                 type="tel"
                 value={phone}
-                onChange={(event) => setPhone(event.target.value)}
+                onChange={(event) => {
+                  setPhone(event.target.value);
+                  if (fieldErrors.phone) {
+                    setFieldErrors((current) => ({ ...current, phone: undefined }));
+                  }
+                }}
                 placeholder="0400 000 000"
                 className={inputClass(Boolean(fieldErrors.phone))}
+                autoComplete="tel"
+                maxLength={maxLengths.phone}
                 aria-invalid={Boolean(fieldErrors.phone)}
               />
               <FieldError message={fieldErrors.phone} />
@@ -434,6 +491,8 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
                 }}
                 placeholder="Create a password"
                 className={inputClass(Boolean(fieldErrors.password))}
+                autoComplete="new-password"
+                maxLength={maxLengths.password}
                 required
                 aria-invalid={Boolean(fieldErrors.password)}
               />
@@ -461,6 +520,8 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
                 }}
                 placeholder="Enter your password again"
                 className={inputClass(Boolean(fieldErrors.confirmPassword))}
+                autoComplete="new-password"
+                maxLength={maxLengths.password}
                 required
                 aria-invalid={Boolean(fieldErrors.confirmPassword)}
               />
@@ -528,6 +589,8 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
                 }}
                 placeholder="name@company.com"
                 className={inputClass(Boolean(fieldErrors.email))}
+                autoComplete="email"
+                maxLength={maxLengths.email}
                 required
                 aria-invalid={Boolean(fieldErrors.email)}
               />
@@ -547,6 +610,8 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
                 }}
                 placeholder="Enter your password"
                 className={inputClass(Boolean(fieldErrors.password))}
+                autoComplete="current-password"
+                maxLength={maxLengths.password}
                 required
                 aria-invalid={Boolean(fieldErrors.password)}
               />

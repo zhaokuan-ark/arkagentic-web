@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { AuthForm } from "@/components/auth-form";
+import { getSafeNextPath } from "@/lib/safe-next-path";
 
 type AuthPageShellProps = {
   mode: "signin" | "signup";
@@ -12,7 +13,7 @@ export async function AuthPageShell({ mode, searchParams }: AuthPageShellProps) 
   const errorParam = resolved.error;
   const messageParam = resolved.message;
 
-  const nextPath = typeof nextParam === "string" ? nextParam : "/apps";
+  const nextPath = getSafeNextPath(typeof nextParam === "string" ? nextParam : undefined);
   const initialError = typeof errorParam === "string" ? errorParam : undefined;
   const initialMessage = typeof messageParam === "string" ? messageParam : undefined;
 
