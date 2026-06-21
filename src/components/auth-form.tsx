@@ -27,6 +27,7 @@ type TurnstileApi = {
     options: {
       sitekey: string;
       theme?: "light" | "dark" | "auto";
+      appearance?: "always" | "execute" | "interaction-only";
       callback?: (token: string) => void;
       "expired-callback"?: () => void;
       "error-callback"?: () => void;
@@ -195,6 +196,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
       turnstileWidgetIdRef.current = window.turnstile.render(turnstileContainerRef.current, {
         sitekey: siteKey,
         theme: "dark",
+        appearance: "interaction-only",
         callback: (token) => {
           setTurnstileToken(token);
           setFormError((current) => (current === "Please complete the human verification before creating your account." ? "" : current));
@@ -504,15 +506,9 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
 
             {turnstileSiteKey ? (
               <div>
-                <label className="mb-2 block text-sm font-normal text-slate-300">
-                  Human verification
-                  {requiredMark}
-                </label>
-                <div className="rounded-xl border border-white/10 bg-slate-950/40 p-3">
-                  <div ref={turnstileContainerRef} />
-                </div>
-                <p className="mt-2 text-xs leading-5 text-slate-500">
-                  This keeps public signup open while blocking automated registrations.
+                <div ref={turnstileContainerRef} />
+                <p className="text-xs leading-5 text-slate-600">
+                  Protected by Cloudflare Turnstile. Human checks appear only when needed.
                 </p>
               </div>
             ) : null}
