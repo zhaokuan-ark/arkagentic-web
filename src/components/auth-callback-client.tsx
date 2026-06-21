@@ -31,7 +31,33 @@ export function AuthCallbackClient() {
       const hasCode = searchParams.has("code");
       const hasTokenHash = searchParams.has("token_hash");
 
-      if (hasCode || hasHashToken || hasTokenHash) {
+      if (hasHashToken && !hasCode && !hasTokenHash) {
+        // Implicit flow — Supabase client auto-processes the hash token on init.
+        // Parse the type from the hash fragment directly.
+        const hashParams = new URLSearchParams(hash.slice(1));
+        const type = hashParams.get("type") ?? searchParams.get("type");
+
+        if (type === "signup" || type === "email_confirmation") {
+          // Email confirmation: sign out so the user logs in explicitly.
+          await supabase.auth.signOut();
+          setState("success");
+          setMessage("Your email has been confirmed. Please sign in to continue.");
+          setTimeout(() => {
+            router.replace(`/signin?message=${encodeURIComponent("Your email has been confirmed. Please sign in.")}&next=${encodeURIComponent(next)}`);
+          }, 1500);
+          return;
+        }
+
+        // Magic link or other implicit session — already live.
+        const { data: sessionData } = await supabase.auth.getSession();
+        if (sessionData.session) {
+          setState("success");
+          setMessage("Sign-in complete. Redirecting to your ArkAgentic workspace...");
+          setTimeout(() => router.replace(next), 800);
+          return;
+        }
+      } else if (hasCode || hasTokenHash) {
+        // PKCE or OTP flow — exchange the code for a session.
         const { data, error: sessionError } = await supabase.auth.exchangeCodeForSession(window.location.href);
         if (sessionError) {
           setState("error");
@@ -39,8 +65,7 @@ export function AuthCallbackClient() {
           return;
         }
 
-        // Email confirmation: user just confirmed — sign them out so they can
-        // sign in explicitly with their password (avoids auto-session confusion)
+        // Email confirmation via PKCE: sign out so the user logs in explicitly.
         const type = searchParams.get("type");
         if (type === "signup" || type === "email_confirmation") {
           await supabase.auth.signOut();
@@ -52,7 +77,7 @@ export function AuthCallbackClient() {
           return;
         }
 
-        // Magic link or other — session is live, go to next
+        // Magic link or other — session is live, go to next.
         if (data.session) {
           setState("success");
           setMessage("Sign-in complete. Redirecting to your ArkAgentic workspace...");
