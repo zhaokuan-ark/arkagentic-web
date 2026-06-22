@@ -124,12 +124,14 @@ export const translations = {
           ],
         },
       ],
+      ctaTrial: "Start free trial",
+      ctaContact: "Get in touch",
     },
     roadmap: {
       eyebrow: "Product roadmap",
       heading: "The first product is live. More focused tools can follow.",
       subheading:
-        "We can use the homepage to build anticipation, show what is already available, and signal that ArkAgentic is becoming a broader toolkit for small businesses, teams, and operators.",
+        "Invoice Extractor is live now. We're building more focused tools for the workflows that cost small businesses the most time — document handling, inbox triage, and sales admin.",
       products: [
         {
           name: "Invoice Extractor",
@@ -153,37 +155,37 @@ export const translations = {
     },
     faq: {
       eyebrow: "FAQ",
-      heading: "Answers for buyers and operators",
+      heading: "Common questions",
       items: [
         {
-          question: 'What exactly is a "Digital Workforce"?',
+          question: "How does Invoice Extractor connect to my OneDrive?",
           answer:
-            "Unlike traditional chatbots, our Digital Workforce consists of Autonomous AI Agents that can plan and execute multi-step business processes across your software tools.",
+            "You connect through Microsoft's official OAuth screen — we never see your password or get access to anything outside the folder you choose. You can disconnect at any time from the account settings page.",
         },
         {
-          question: "Are you only offering one product?",
+          question: "What does the 7-day free trial include?",
           answer:
-            "No. Invoice Extractor is the first live product, but the broader direction is a growing suite of focused AI tools plus custom-built workflow systems for clients with unique needs.",
+            "Full access to all extraction features — no credit card required to start. After 7 days, you can continue with a paid subscription. Trial accounts are one per person.",
+        },
+        {
+          question: "What file formats are supported?",
+          answer:
+            "PDF invoices and common image formats including PNG, JPG, and TIFF. The system reads each file, extracts structured fields, and flags anything that may need manual review before it goes into Xero.",
+        },
+        {
+          question: "Where do the results go?",
+          answer:
+            "Results are written back to the OneDrive output folder you chose — an Excel workbook ready for Xero review, plus a full CSV with per-invoice field detail. Nothing is stored on our servers beyond what's needed to run the job.",
         },
         {
           question: "Can you build something custom for my business?",
           answer:
-            "Yes. Alongside our SaaS tools, we also design and implement tailored AI workflows and internal systems for businesses that need something specific.",
+            "Yes. Alongside the SaaS products, we also design and build tailored AI workflows and internal tools for businesses that need something specific — contact us to discuss your requirements.",
         },
         {
           question: "Is my data secure?",
           answer:
-            "Yes. We use enterprise-grade encryption and ensure that your data is never used to train public models.",
-        },
-        {
-          question: "Can it integrate with my existing CRM/ERP?",
-          answer:
-            "Absolutely. Our agents are designed to work with standard APIs and web interfaces that your team already uses.",
-        },
-        {
-          question: "How long does deployment take?",
-          answer:
-            "For ready-made products you can start immediately. For custom workflow projects, timelines depend on complexity, but we aim to move fast with clear implementation stages.",
+            "Yes. Data in transit is encrypted, OneDrive access is scoped to the folders you select, and your documents are never used to train any AI models.",
         },
       ],
     },
@@ -340,6 +342,8 @@ export const translations = {
           ],
         },
       ],
+      ctaTrial: "开始免费试用",
+      ctaContact: "联系我们",
     },
     roadmap: {
       eyebrow: "产品路线图",
@@ -369,37 +373,37 @@ export const translations = {
     },
     faq: {
       eyebrow: "常见问题",
-      heading: "为客户和运营者解答",
+      heading: "常见问题解答",
       items: [
         {
-          question: "「数字化员工团队」到底是什么？",
+          question: "发票提取器如何连接我的 OneDrive？",
           answer:
-            "与传统聊天机器人不同，我们的数字化员工团队由自主 AI 智能体构成，能够跨越你现有的软件工具，规划并执行多步骤的复杂业务流程。",
+            "通过微软官方的 OAuth 授权页面连接，我们不会获取你的密码，也不会访问你所选文件夹以外的任何内容。你可以随时在账户设置中断开授权。",
         },
         {
-          question: "你们目前只有一款产品吗？",
+          question: "7 天免费试用包含哪些功能？",
           answer:
-            "不是。发票提取器是第一款上线产品，我们的方向是持续打造一系列专注的 AI 工具，同时也为有特殊需求的客户提供定制化工作流系统。",
+            "免费试用期间可使用全部提取功能，无需绑定信用卡。到期后可选择订阅继续使用。每人限用一次试用。",
+        },
+        {
+          question: "支持哪些文件格式？",
+          answer:
+            "支持 PDF 发票及常见图片格式，包括 PNG、JPG 和 TIFF。系统会读取每份文件，提取结构化字段，并将需要人工核查的票据标注出来，方便导入 Xero 前审核。",
+        },
+        {
+          question: "提取结果会存在哪里？",
+          answer:
+            "结果会写回你在 OneDrive 中指定的输出文件夹，包含一份可直接用于 Xero 的 Excel 工作簿，以及一份包含每张发票明细的完整 CSV。我们不会在服务器上长期保留你的文档内容。",
         },
         {
           question: "可以为我的业务定制开发吗？",
           answer:
-            "可以。除 SaaS 产品外，我们还为有特定需求的企业设计并实现定制化 AI 工作流和内部系统。",
+            "可以。我们在 SaaS 产品之外，也为有特定需求的企业设计和构建定制化 AI 工作流与内部工具。欢迎联系我们了解详情。",
         },
         {
           question: "我的数据安全吗？",
           answer:
-            "安全。我们采用企业级加密，并确保你的数据不会被用于训练任何公开模型。",
-        },
-        {
-          question: "能与现有的 CRM/ERP 集成吗？",
-          answer:
-            "完全可以。我们的智能体设计用于与你团队已在使用的标准 API 和 Web 界面协同工作。",
-        },
-        {
-          question: "部署需要多长时间？",
-          answer:
-            "现成产品可立即上手；定制工作流项目的周期取决于复杂度，但我们会以清晰的实施阶段快速推进。",
+            "安全。数据传输全程加密，OneDrive 访问仅限于你所选的文件夹，你的文档不会被用于训练任何 AI 模型。",
         },
       ],
     },
@@ -492,6 +496,8 @@ export type Translations = {
     heading: string;
     subheading: string;
     plans: readonly { name: string; price: string; description: string; features: readonly string[] }[];
+    ctaTrial: string;
+    ctaContact: string;
   };
   roadmap: {
     eyebrow: string;

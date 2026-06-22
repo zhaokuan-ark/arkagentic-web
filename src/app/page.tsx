@@ -260,6 +260,23 @@ export default function HomePage() {
                   <li key={feature}>• {feature}</li>
                 ))}
               </ul>
+              <div className="mt-8">
+                {i === 0 ? (
+                  <a
+                    href="/signup"
+                    className="inline-flex w-full items-center justify-center rounded-2xl bg-blue-600 px-6 py-3 text-base font-bold text-white transition hover:bg-blue-500"
+                  >
+                    {t.pricing.ctaTrial}
+                  </a>
+                ) : (
+                  <a
+                    href="#contact"
+                    className="inline-flex w-full items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-base font-semibold text-white transition hover:border-white/25 hover:bg-white/10"
+                  >
+                    {t.pricing.ctaContact}
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
