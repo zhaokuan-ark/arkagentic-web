@@ -23,7 +23,7 @@ export const translations = {
       heading1: "Building your",
       heading2: "digital workforce",
       description:
-        "ArkAgentic is growing in two directions at once: focused SaaS products your team can launch immediately, and custom AI systems designed around the exact workflows your business needs.",
+        "ArkAgentic is growing in two directions - SaaS/AaaS products your team can launch immediately, and custom AI product design and integration that can be developed specifically for your business needs.",
       cta1: "Explore products",
       cta2: "Custom build enquiry",
       cta3: "Watch demo",
@@ -242,7 +242,7 @@ export const translations = {
       heading1: "打造你的",
       heading2: "数字化员工团队",
       description:
-        "ArkAgentic 正同步推进两个方向：可立即上手的 SaaS 产品，以及针对企业特定业务流程量身定制的 AI 系统。",
+        "ArkAgentic 正同步推进两个方向：可立即上手的 SaaS/AaaS 产品，以及专为你的业务需求量身定制开发的 AI 产品设计与集成服务。",
       cta1: "探索产品",
       cta2: "定制开发咨询",
       cta3: "观看演示",
