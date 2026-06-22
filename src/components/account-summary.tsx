@@ -3,19 +3,11 @@
 import Link from "next/link";
 import { useAuthSession } from "@/components/auth-session-provider";
 import { useLanguage } from "@/components/language-provider";
+import { useSubscription, openBillingPortal } from "@/hooks/useSubscription";
+import { getSupabaseBrowserClient } from "@/lib/supabase";
+import { useState } from "react";
 
-// Placeholder subscription data — will be wired to Stripe/DB later
-const SUBSCRIPTION_PLACEHOLDER = {
-  plan: "Invoice Extractor",
-  status: "trial" as "active" | "trial" | "inactive",
-  trialEndsAt: null as string | null, // e.g. "2026-07-01"
-  billingAmount: "$19",
-  billingCycle: "/ month",
-  nextBillingDate: null as string | null,
-  paymentMethod: null as string | null, // e.g. "Visa •••• 4242"
-};
-
-function StatusBadge({ status }: { status: "active" | "trial" | "inactive" }) {
+function StatusBadge({ status }: { status: string | null }) {
   if (status === "active") {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
@@ -24,11 +16,27 @@ function StatusBadge({ status }: { status: "active" | "trial" | "inactive" }) {
       </span>
     );
   }
-  if (status === "trial") {
+  if (status === "trialing") {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-300">
         <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
         Free trial
+      </span>
+    );
+  }
+  if (status === "past_due") {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-red-400/20 bg-red-500/10 px-3 py-1 text-xs font-medium text-red-300">
+        <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
+        Payment failed
+      </span>
+    );
+  }
+  if (status === "canceled") {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-400">
+        <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
+        Canceled
       </span>
     );
   }
@@ -40,11 +48,46 @@ function StatusBadge({ status }: { status: "active" | "trial" | "inactive" }) {
   );
 }
 
+function formatDate(iso: string | null): string {
+  if (!iso) return "—";
+  return new Date(iso).toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" });
+}
+
 export function AccountSummary() {
-  const { isConfigured, isDemoMode, isLoading, user } = useAuthSession();
+  const { isConfigured, isDemoMode, isLoading, session, user } = useAuthSession();
   const { lang } = useLanguage();
+  const {
+    loading: subLoading,
+    status,
+    hasAccess,
+    trialDaysLeft,
+    currentPeriodEnd,
+    cancelAtPeriodEnd,
+  } = useSubscription();
+
+  const [portalLoading, setPortalLoading] = useState(false);
+  const [portalError, setPortalError] = useState<string | null>(null);
 
   const zh = lang === "zh";
+
+  async function handleManageBilling() {
+    setPortalError(null);
+    setPortalLoading(true);
+    try {
+      let token = session?.access_token;
+      if (!token) {
+        const sb = getSupabaseBrowserClient();
+        if (!sb) throw new Error("Auth not available");
+        const { data } = await sb.auth.getSession();
+        token = data.session?.access_token;
+      }
+      if (!token) throw new Error("Please sign in again.");
+      await openBillingPortal(token);
+    } catch (err) {
+      setPortalError((err as Error).message);
+      setPortalLoading(false);
+    }
+  }
 
   if (!isConfigured && !isDemoMode) {
     return (
@@ -78,7 +121,6 @@ export function AccountSummary() {
     );
   }
 
-  const sub = SUBSCRIPTION_PLACEHOLDER;
   const initials = user.email ? user.email[0].toUpperCase() : "?";
 
   return (
@@ -102,80 +144,99 @@ export function AccountSummary() {
           {zh ? "订阅与账单" : "Subscription & billing"}
         </p>
 
-        <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          {/* Plan */}
-          <div>
-            <p className="text-xs text-slate-500">{zh ? "当前套餐" : "Current plan"}</p>
-            <p className="mt-1.5 text-base font-semibold text-white">{sub.plan}</p>
-            <div className="mt-2">
-              <StatusBadge status={sub.status} />
+        {subLoading ? (
+          <p className="mt-4 text-sm text-slate-500">{zh ? "加载中…" : "Loading…"}</p>
+        ) : (
+          <>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              {/* Plan */}
+              <div>
+                <p className="text-xs text-slate-500">{zh ? "当前套餐" : "Current plan"}</p>
+                <p className="mt-1.5 text-base font-semibold text-white">Invoice Extractor</p>
+                <div className="mt-2"><StatusBadge status={status} /></div>
+              </div>
+
+              {/* Price */}
+              <div>
+                <p className="text-xs text-slate-500">{zh ? "价格" : "Price"}</p>
+                <p className="mt-1.5 font-semibold text-white">
+                  {hasAccess ? (
+                    <><span className="text-2xl">$19</span><span className="text-sm text-slate-400"> AUD / month</span></>
+                  ) : (
+                    <span className="text-slate-400">—</span>
+                  )}
+                </p>
+              </div>
+
+              {/* Trial / renewal info */}
+              <div>
+                <p className="text-xs text-slate-500">
+                  {status === "trialing" ? (zh ? "试用到期" : "Trial ends") : (zh ? "下次续费" : "Next billing date")}
+                </p>
+                <p className="mt-1.5 text-sm text-slate-300">
+                  {status === "trialing"
+                    ? (trialDaysLeft !== null ? `${trialDaysLeft} day${trialDaysLeft === 1 ? "" : "s"} remaining` : formatDate(currentPeriodEnd))
+                    : status === "active"
+                    ? (cancelAtPeriodEnd
+                        ? `Cancels ${formatDate(currentPeriodEnd)}`
+                        : formatDate(currentPeriodEnd))
+                    : <span className="italic text-slate-500">{zh ? "—" : "—"}</span>
+                  }
+                </p>
+              </div>
+
+              {/* Status note */}
+              <div>
+                <p className="text-xs text-slate-500">{zh ? "状态说明" : "Status"}</p>
+                <p className="mt-1.5 text-sm text-slate-300">
+                  {status === "trialing" && zh ? "试用期内不扣款" : null}
+                  {status === "trialing" && !zh ? "No charge during trial" : null}
+                  {status === "active" && !cancelAtPeriodEnd && (zh ? "订阅活跃" : "Subscription active")}
+                  {status === "active" && cancelAtPeriodEnd && (zh ? "已设置取消" : "Cancellation scheduled")}
+                  {status === "past_due" && (zh ? "付款失败，请更新付款方式" : "Payment failed — please update payment method")}
+                  {(!status || status === "canceled") && (zh ? "无有效订阅" : "No active subscription")}
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Price */}
-          <div>
-            <p className="text-xs text-slate-500">{zh ? "价格" : "Price"}</p>
-            <p className="mt-1.5 text-base font-semibold text-white">
-              {sub.status === "inactive" ? (
-                <span className="text-slate-400">{zh ? "—" : "—"}</span>
+            {/* Billing action */}
+            {portalError && (
+              <p className="mt-4 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-100">{portalError}</p>
+            )}
+            <div className="mt-6 flex flex-wrap gap-3">
+              {hasAccess ? (
+                <button
+                  type="button"
+                  onClick={handleManageBilling}
+                  disabled={portalLoading}
+                  className="rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10 disabled:opacity-60"
+                >
+                  {portalLoading ? (zh ? "跳转中…" : "Redirecting…") : (zh ? "管理账单" : "Manage billing")}
+                </button>
               ) : (
-                <>
-                  <span className="text-2xl">{sub.billingAmount}</span>
-                  <span className="text-sm text-slate-400">{sub.billingCycle}</span>
-                </>
+                <Link
+                  href="/apps"
+                  className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500"
+                >
+                  {zh ? "开始免费试用" : "Start free trial"}
+                </Link>
               )}
-            </p>
-          </div>
-
-          {/* Next billing date */}
-          <div>
-            <p className="text-xs text-slate-500">{zh ? "下次扣款日期" : "Next billing date"}</p>
-            <p className="mt-1.5 text-sm text-slate-300">
-              {sub.nextBillingDate ?? (
-                <span className="text-slate-500 italic">{zh ? "试用期内暂不扣款" : "Not applicable during trial"}</span>
-              )}
-            </p>
-          </div>
-
-          {/* Payment method */}
-          <div>
-            <p className="text-xs text-slate-500">{zh ? "付款方式" : "Payment method"}</p>
-            <p className="mt-1.5 text-sm text-slate-300">
-              {sub.paymentMethod ?? (
-                <span className="text-slate-500 italic">{zh ? "尚未添加" : "Not added yet"}</span>
-              )}
-            </p>
-          </div>
-        </div>
-
-        {/* CTA when no active subscription */}
-        {sub.status !== "active" && (
-          <div className="mt-6 rounded-xl border border-blue-400/15 bg-blue-500/[0.07] p-4">
-            <p className="text-sm text-slate-300">
-              {zh
-                ? "订阅后即可使用 Invoice Extractor 的全部功能。"
-                : "Subscribe to unlock full access to Invoice Extractor and all future ArkAgentic products."}
-            </p>
-            <Link
-              href="/pricing"
-              className="mt-3 inline-flex items-center rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500"
-            >
-              {zh ? "查看套餐" : "View plans"}
-            </Link>
-          </div>
+              <Link
+                href="/apps"
+                className="rounded-xl border border-white/15 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-white/25 hover:bg-white/5"
+              >
+                {zh ? "前往应用" : "Go to apps"}
+              </Link>
+            </div>
+          </>
         )}
       </div>
 
-      {/* Danger zone / sign out */}
-      <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-6">
-        <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{zh ? "账户操作" : "Account"}</p>
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Link
-            href="/apps"
-            className="rounded-xl border border-white/15 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-white/25 hover:bg-white/5"
-          >
-            {zh ? "前往应用" : "Go to apps"}
-          </Link>
+      {/* Legal links */}
+      <div className="rounded-2xl border border-white/10 bg-slate-950/40 px-6 py-4">
+        <div className="flex flex-wrap gap-4 text-xs text-slate-500">
+          <Link href="/terms" className="hover:text-slate-300 transition-colors">{zh ? "服务条款" : "Terms of Service"}</Link>
+          <Link href="/privacy" className="hover:text-slate-300 transition-colors">{zh ? "隐私政策" : "Privacy Policy"}</Link>
         </div>
       </div>
     </div>

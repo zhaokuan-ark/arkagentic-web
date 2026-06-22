@@ -50,6 +50,13 @@ function FooterWithLang() {
       <div className="space-y-3 px-6">
         <p>&copy; 2026 ArkAgentic. ABN: 92 627 301 153</p>
         <p>11 Hassall Street, Parramatta NSW 2150</p>
+        <div className="flex items-center justify-center gap-6 pt-1">
+          <a href="/terms" className="hover:text-slate-300 transition-colors">Terms of Service</a>
+          <span className="opacity-30">&middot;</span>
+          <a href="/privacy" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
+          <span className="opacity-30">&middot;</span>
+          <a href="mailto:support@arkagentic.com" className="hover:text-slate-300 transition-colors">Support</a>
+        </div>
       </div>
     </footer>
   );
