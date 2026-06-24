@@ -44,15 +44,24 @@ export async function POST(request: NextRequest) {
       }, { status: 409 });
     }
 
-    // Check trial eligibility (IP fingerprint)
+    // Parse body — noTrial=true skips the fingerprint check and creates a direct subscription
+    let noTrial = false;
+    try {
+      const body = await request.json();
+      noTrial = body?.noTrial === true;
+    } catch { /* body may be empty */ }
+
+    // Check trial eligibility (IP fingerprint) — skip when noTrial
     const clientIp = getClientIp(request);
-    const eligibility = await checkTrialEligibility(user.id, clientIp);
-    if (!eligibility.eligible) {
-      return NextResponse.json({
-        error: "A free trial has already been used from this location. Please subscribe directly.",
-        code: eligibility.reason,
-        checkoutUrl: `${APP_URL}/pricing`,
-      }, { status: 403 });
+    if (!noTrial) {
+      const eligibility = await checkTrialEligibility(user.id, clientIp);
+      if (!eligibility.eligible) {
+        return NextResponse.json({
+          error: "A free trial has already been used from this location. Please subscribe directly.",
+          code: eligibility.reason,
+          noTrial: true,
+        }, { status: 403 });
+      }
     }
 
     // Get or create Stripe customer
@@ -66,17 +75,18 @@ export async function POST(request: NextRequest) {
       await saveStripeCustomerId(user.id, stripeCustomerId);
     }
 
-    // Create Stripe Checkout session with 7-day trial
+    // Create Stripe Checkout session — with or without trial
+    const subscriptionData = noTrial
+      ? { metadata: { supabase_user_id: user.id } }
+      : { trial_period_days: 7, metadata: { supabase_user_id: user.id } };
+
     const session = await stripe.checkout.sessions.create({
       customer: stripeCustomerId,
       mode: "subscription",
       payment_method_types: ["card"],
       line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
-      subscription_data: {
-        trial_period_days: 7,
-        metadata: { supabase_user_id: user.id },
-      },
-      success_url: `${APP_URL}/apps?subscription=success`,
+      subscription_data: subscriptionData,
+      success_url: `${APP_URL}/apps?subscription=${noTrial ? "success" : "trial"}`,
       cancel_url: `${APP_URL}/pricing?subscription=canceled`,
       allow_promotion_codes: true,
       billing_address_collection: "auto",
@@ -84,8 +94,8 @@ export async function POST(request: NextRequest) {
       metadata: { supabase_user_id: user.id },
     });
 
-    // Record fingerprint (do this after session creation succeeds)
-    await recordTrialFingerprint(user.id, clientIp);
+    // Record fingerprint only for trial checkouts
+    if (!noTrial) await recordTrialFingerprint(user.id, clientIp);
 
     return NextResponse.json({ url: session.url });
   } catch (err) {

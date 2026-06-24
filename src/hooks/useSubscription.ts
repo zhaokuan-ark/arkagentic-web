@@ -66,10 +66,11 @@ export function useSubscription(): SubscriptionState & { refresh: () => void } {
 }
 
 // Helper: start a checkout session and redirect to Stripe
-export async function startCheckout(accessToken: string): Promise<void> {
+export async function startCheckout(accessToken: string, options?: { noTrial?: boolean }): Promise<void> {
   const res = await fetch("/api/billing/create-checkout", {
     method: "POST",
     headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ noTrial: options?.noTrial ?? false }),
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || "Failed to start checkout");

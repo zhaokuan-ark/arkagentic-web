@@ -7,12 +7,12 @@ import { useSubscription, openBillingPortal } from "@/hooks/useSubscription";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import { useState } from "react";
 
-function StatusBadge({ status }: { status: string | null }) {
+function StatusBadge({ status, zh }: { status: string | null; zh: boolean }) {
   if (status === "active") {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
         <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-        Active
+        {zh ? "订阅活跃" : "Active"}
       </span>
     );
   }
@@ -20,7 +20,7 @@ function StatusBadge({ status }: { status: string | null }) {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-300">
         <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-        Free trial
+        {zh ? "免费试用" : "Free trial"}
       </span>
     );
   }
@@ -28,7 +28,7 @@ function StatusBadge({ status }: { status: string | null }) {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full border border-red-400/20 bg-red-500/10 px-3 py-1 text-xs font-medium text-red-300">
         <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
-        Payment failed
+        {zh ? "付款失败" : "Payment failed"}
       </span>
     );
   }
@@ -36,14 +36,14 @@ function StatusBadge({ status }: { status: string | null }) {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-400">
         <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
-        Canceled
+        {zh ? "已取消" : "Canceled"}
       </span>
     );
   }
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-400">
       <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
-      No active plan
+      {zh ? "无有效订阅" : "No active plan"}
     </span>
   );
 }
@@ -153,7 +153,7 @@ export function AccountSummary() {
               <div>
                 <p className="text-xs text-slate-500">{zh ? "当前套餐" : "Current plan"}</p>
                 <p className="mt-1.5 text-base font-semibold text-white">Invoice Extractor</p>
-                <div className="mt-2"><StatusBadge status={status} /></div>
+                <div className="mt-2"><StatusBadge status={status} zh={zh} /></div>
               </div>
 
               {/* Price */}
@@ -175,7 +175,9 @@ export function AccountSummary() {
                 </p>
                 <p className="mt-1.5 text-sm text-slate-300">
                   {status === "trialing"
-                    ? (trialDaysLeft !== null ? `${trialDaysLeft} day${trialDaysLeft === 1 ? "" : "s"} remaining` : formatDate(currentPeriodEnd))
+                    ? (trialDaysLeft !== null
+                        ? (zh ? `剩余 ${trialDaysLeft} 天` : `${trialDaysLeft} day${trialDaysLeft === 1 ? "" : "s"} remaining`)
+                        : formatDate(currentPeriodEnd))
                     : status === "active"
                     ? (cancelAtPeriodEnd
                         ? `Cancels ${formatDate(currentPeriodEnd)}`

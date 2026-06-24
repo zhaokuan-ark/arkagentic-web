@@ -1,7 +1,7 @@
 -- Migration: Phase 2 billing tables
 -- Run in Supabase SQL Editor or via supabase db push
 
--- ─── subscriptions ───────────────────────────────────────────────────────────
+-- ─── subscriptions ────────────────────────────────────────────────────────────
 -- Tracks active Stripe subscriptions per user.
 -- Status values: trialing | active | past_due | canceled | unpaid
 CREATE TABLE IF NOT EXISTS subscriptions (
@@ -47,6 +47,7 @@ CREATE POLICY "Users can read own subscription"
   USING (auth.uid() = user_id);
 
 -- Service role has full access (for webhook handler)
+GRANT ALL ON public.subscriptions TO service_role;
 
 
 -- ─── trial_fingerprints ───────────────────────────────────────────────────────
@@ -69,7 +70,10 @@ CREATE INDEX IF NOT EXISTS idx_trial_fingerprints_user_id
 
 -- RLS: no user-level read needed; service role manages this table
 ALTER TABLE trial_fingerprints ENABLE ROW LEVEL SECURITY;
--- (No user-facing policies — only service role access via webhook/API)
+-- (No user-facing policies -- only service role access via webhook/API)
+
+-- Service role has full access
+GRANT ALL ON public.trial_fingerprints TO service_role;
 
 
 -- ─── stripe_customers ─────────────────────────────────────────────────────────
@@ -85,3 +89,6 @@ ALTER TABLE stripe_customers ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Users can read own stripe customer"
   ON stripe_customers FOR SELECT
   USING (auth.uid() = user_id);
+
+-- Service role has full access
+GRANT ALL ON public.stripe_customers TO service_role;

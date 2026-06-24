@@ -220,6 +220,37 @@ export const translations = {
       copy: "© 2026 ArkAgentic. ABN: 92 627 301 153",
       address: "11 Hassall Street, Parramatta NSW 2150",
     },
+    apps: {
+      heading: "All apps",
+      invoiceExtractor: {
+        eyebrow: "Invoice Extractor",
+        title: "Extract invoices faster",
+        description: "Connect your cloud drive, choose an invoice folder, and turn invoices into structured outputs ready for review and export.",
+        startTrial: "Start free trial",
+        trialHint: "7 days free — then AUD $19/month, cancel anytime",
+        subscribe: "Subscribe — AUD $19/month",
+        launch: "Launch app",
+        launching: "Launching...",
+        starting: "Starting...",
+        redirecting: "Redirecting...",
+        opening: "Opening...",
+        loading: "Loading...",
+        manageBilling: "Manage billing",
+        signInToLaunch: "Sign in to launch",
+        confirmEmail: "Confirm email to launch",
+        updatePayment: "Update payment method",
+        paymentPaused: "Your subscription is paused due to a failed payment",
+        trialEndsToday: "Trial ends today",
+        trialEndsDays: "Trial ends in {n} days",
+        trialEndsDay: "Trial ends in 1 day",
+      },
+      xero: {
+        eyebrow: "Xero Invoice Upload Tool",
+        title: "Send invoice data to Xero",
+        description: "Prepare reviewed invoice outputs for Xero, map supplier and tax details, and upload approved bills into your accounting workflow.",
+        underDev: "Under Development",
+      },
+    },
   },
 
   zh: {
@@ -437,6 +468,37 @@ export const translations = {
       copy: "© 2026 ArkAgentic. ABN: 92 627 301 153",
       address: "11 Hassall Street, Parramatta NSW 2150",
     },
+    apps: {
+      heading: "全部应用",
+      invoiceExtractor: {
+        eyebrow: "发票提取器",
+        title: "更快速地提取发票",
+        description: "连接你的云端网盘，选择发票文件夹，将发票转化为可审核和导出的结构化数据。",
+        startTrial: "开始免费试用",
+        trialHint: "7 天免费 — 之后每月 AUD $19，随时取消",
+        subscribe: "订阅 — 每月 AUD $19",
+        launch: "进入应用",
+        launching: "正在启动...",
+        starting: "正在开始...",
+        redirecting: "正在跳转...",
+        opening: "正在打开...",
+        loading: "加载中...",
+        manageBilling: "管理账单",
+        signInToLaunch: "登录后启动",
+        confirmEmail: "请先确认邮箱",
+        updatePayment: "更新付款方式",
+        paymentPaused: "由于付款失败，您的订阅已暂停",
+        trialEndsToday: "试用今日到期",
+        trialEndsDays: "试用还剩 {n} 天",
+        trialEndsDay: "试用还剩 1 天",
+      },
+      xero: {
+        eyebrow: "Xero 发票上传工具",
+        title: "将发票数据发送至 Xero",
+        description: "将审核后的发票导出至 Xero，完成供应商与税务信息映射，并将已审批账单上传至你的会计工作流。",
+        underDev: "开发中",
+      },
+    },
   },
 } as const;
 
@@ -531,4 +593,19 @@ export type Translations = {
     };
   };
   footer: { copy: string; address: string };
+  apps: {
+    heading: string;
+    invoiceExtractor: {
+      eyebrow: string; title: string; description: string;
+      startTrial: string; trialHint: string; subscribe: string;
+      launch: string; launching: string; starting: string;
+      redirecting: string; opening: string; loading: string;
+      manageBilling: string; signInToLaunch: string; confirmEmail: string;
+      updatePayment: string; paymentPaused: string;
+      trialEndsToday: string; trialEndsDays: string; trialEndsDay: string;
+    };
+    xero: {
+      eyebrow: string; title: string; description: string; underDev: string;
+    };
+  };
 };
