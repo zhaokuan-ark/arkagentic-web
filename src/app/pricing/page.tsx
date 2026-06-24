@@ -50,7 +50,7 @@ export default function PricingPage() {
       cardClassName: "border-white/10 bg-white/5",
       eyebrowClassName: "text-blue-200/80",
       cta: p.ctaTrial,
-      ctaClassName: "bg-sky-500 hover:bg-sky-400 text-white",
+      ctaClassName: "bg-blue-600 hover:bg-blue-500 text-white",
       hasCheckout: true,
     },
     {
