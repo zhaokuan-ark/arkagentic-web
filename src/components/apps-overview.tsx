@@ -33,36 +33,6 @@ function submitInvoiceHandoff(accessToken: string) {
 
 // ─── Subscription badge ───────────────────────────────────────────────────────
 
-function SubscriptionBadge({ status, trialDaysLeft }: { status: string | null; trialDaysLeft: number | null }) {
-  const { lang } = useLanguage();
-  const zh = lang === "zh";
-  if (status === "active") {
-    return (
-      <span className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-200">
-        {zh ? "订阅活跃" : "Active"}
-      </span>
-    );
-  }
-  if (status === "trialing") {
-    const label = trialDaysLeft !== null && trialDaysLeft > 0
-      ? (zh ? `试用 — 剩余 ${trialDaysLeft} 天` : `Trial — ${trialDaysLeft} day${trialDaysLeft === 1 ? "" : "s"} left`)
-      : (zh ? "试用中" : "Trial");
-    return (
-      <span className="rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-200">
-        {label}
-      </span>
-    );
-  }
-  if (status === "past_due") {
-    return (
-      <span className="rounded-full border border-red-400/20 bg-red-500/10 px-3 py-1 text-xs font-medium text-red-200">
-        {zh ? "付款失败" : "Payment failed"}
-      </span>
-    );
-  }
-  return null;
-}
-
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function AppsOverview() {
@@ -230,16 +200,7 @@ export function AppsOverview() {
               >
                 {isLaunching ? ie.launching : ie.launch}
               </button>
-              {!isDemoMode && (
-                <button
-                  type="button"
-                  onClick={handleManageBilling}
-                  disabled={actionLoading}
-                  className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/10"
-                >
-                  {ie.manageBilling}
-                </button>
-              )}
+
               {status === "trialing" && trialDaysLeft !== null && trialDaysLeft <= 2 && (
                 <span className="text-sm text-amber-300">
                   {trialDaysLeft === 0 ? ie.trialEndsToday
