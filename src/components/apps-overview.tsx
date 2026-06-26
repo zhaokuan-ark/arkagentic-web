@@ -141,9 +141,7 @@ export function AppsOverview() {
       <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <p className="text-sm uppercase tracking-[0.3em] text-emerald-200/80">{ie.eyebrow}</p>
-          {user && !isDemoMode && (
-            <SubscriptionBadge status={status} trialDaysLeft={trialDaysLeft} />
-          )}
+
         </div>
         <h2 className="mt-3 font-heading text-3xl font-bold text-white">{ie.title}</h2>
         <p className="mt-4 max-w-3xl text-slate-300">{ie.description}</p>
