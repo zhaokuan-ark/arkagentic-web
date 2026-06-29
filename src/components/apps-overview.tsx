@@ -79,7 +79,7 @@ export function AppsOverview() {
     setIsLaunching(true);
     try {
       const token = await getAccessToken();
-      submitInvoiceHandoff(token, lang);
+      submitInvoiceHandoff(token);
     } catch (error) {
       setIsLaunching(false);
       setLaunchError(error instanceof Error ? error.message : "Unable to launch Invoice Extractor.");
