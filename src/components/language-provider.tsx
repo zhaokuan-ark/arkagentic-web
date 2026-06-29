@@ -20,12 +20,22 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem("arkagentic-lang") as Language | null;
-    if (stored === "zh" || stored === "en") setLangState(stored);
+    if (stored === "zh" || stored === "en") { setLangState(stored); return; }
+    // Fallback: read shared cookie written by app.arkagentic.com
+    try {
+      const m = document.cookie.match(/(?:^|;\s*)arklang=([^;]+)/);
+      const cookieLang = m ? m[1].trim() : null;
+      if (cookieLang === "zh" || cookieLang === "en") setLangState(cookieLang as Language);
+    } catch (_) {}
   }, []);
 
   function setLang(l: Language) {
     setLangState(l);
     localStorage.setItem("arkagentic-lang", l);
+    // Also write shared cookie so app.arkagentic.com picks it up
+    try {
+      document.cookie = `arklang=${l}; domain=.arkagentic.com; path=/; max-age=31536000; SameSite=Lax`;
+    } catch (_) {}
   }
 
   return (

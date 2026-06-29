@@ -15,7 +15,7 @@ function buildInvoiceHandoffUrl() {
   return target.toString();
 }
 
-function submitInvoiceHandoff(accessToken: string) {
+function submitInvoiceHandoff(accessToken: string, lang?: string) {
   const form = document.createElement("form");
   form.method = "POST";
   form.action = buildInvoiceHandoffUrl();
@@ -26,6 +26,14 @@ function submitInvoiceHandoff(accessToken: string) {
   tokenInput.name = "accessToken";
   tokenInput.value = accessToken;
   form.appendChild(tokenInput);
+
+  if (lang) {
+    const langInput = document.createElement("input");
+    langInput.type = "hidden";
+    langInput.name = "lang";
+    langInput.value = lang;
+    form.appendChild(langInput);
+  }
 
   document.body.appendChild(form);
   form.submit();
@@ -38,7 +46,7 @@ function submitInvoiceHandoff(accessToken: string) {
 export function AppsOverview() {
   const { isDemoMode, isLoading, session, user } = useAuthSession();
   const { loading: subLoading, status, hasAccess, trialDaysLeft, refresh: refreshSub } = useSubscription();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const a = t.apps;
   const ie = a.invoiceExtractor;
   const [launchError, setLaunchError] = useState<string | null>(null);
@@ -71,7 +79,7 @@ export function AppsOverview() {
     setIsLaunching(true);
     try {
       const token = await getAccessToken();
-      submitInvoiceHandoff(token);
+      submitInvoiceHandoff(token, lang);
     } catch (error) {
       setIsLaunching(false);
       setLaunchError(error instanceof Error ? error.message : "Unable to launch Invoice Extractor.");
