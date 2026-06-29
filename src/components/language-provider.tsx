@@ -19,19 +19,22 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Language>("en");
 
   useEffect(() => {
-    // Determine language: localStorage first, then arklang cookie
-    const stored = localStorage.getItem("arkagentic-lang") as Language | null;
-    let resolved: Language | null = (stored === "zh" || stored === "en") ? stored : null;
+    // Cookie takes priority — it's the shared signal across both subdomains.
+    // If the user changed language in invoice extractor, the cookie reflects that
+    // and should override the stale localStorage value on this site.
+    let resolved: Language | null = null;
+    try {
+      const m = document.cookie.match(/(?:^|;\s*)arklang=([^;]+)/);
+      const cookieLang = m ? m[1].trim() : null;
+      if (cookieLang === "zh" || cookieLang === "en") resolved = cookieLang as Language;
+    } catch (_) {}
     if (!resolved) {
-      try {
-        const m = document.cookie.match(/(?:^|;\s*)arklang=([^;]+)/);
-        const cookieLang = m ? m[1].trim() : null;
-        if (cookieLang === "zh" || cookieLang === "en") resolved = cookieLang as Language;
-      } catch (_) {}
+      const stored = localStorage.getItem("arkagentic-lang") as Language | null;
+      if (stored === "zh" || stored === "en") resolved = stored;
     }
     if (resolved) {
       setLangState(resolved);
-      // Always sync cookie so app.arkagentic.com picks up the current language
+      localStorage.setItem("arkagentic-lang", resolved);
       try {
         document.cookie = `arklang=${resolved}; domain=.arkagentic.com; path=/; max-age=31536000; SameSite=Lax`;
       } catch (_) {}
@@ -41,7 +44,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   function setLang(l: Language) {
     setLangState(l);
     localStorage.setItem("arkagentic-lang", l);
-    // Also write shared cookie so app.arkagentic.com picks it up
     try {
       document.cookie = `arklang=${l}; domain=.arkagentic.com; path=/; max-age=31536000; SameSite=Lax`;
     } catch (_) {}
