@@ -15,13 +15,19 @@ const LanguageContext = createContext<LanguageContextValue>({
   t: translations["en"],
 });
 
+function writeSharedLangCookie(l: string) {
+  try {
+    // Clear any subdomain-specific leftover first, then write shared parent-domain cookie
+    document.cookie = "arklang=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+    document.cookie = `arklang=${l}; domain=.arkagentic.com; path=/; max-age=31536000; SameSite=Lax`;
+  } catch (_) {}
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Language>("en");
 
   useEffect(() => {
     // Cookie takes priority — it's the shared signal across both subdomains.
-    // If the user changed language in invoice extractor, the cookie reflects that
-    // and should override the stale localStorage value on this site.
     let resolved: Language | null = null;
     try {
       const m = document.cookie.match(/(?:^|;\s*)arklang=([^;]+)/);
@@ -35,18 +41,14 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (resolved) {
       setLangState(resolved);
       localStorage.setItem("arkagentic-lang", resolved);
-      try {
-        document.cookie = `arklang=${resolved}; domain=.arkagentic.com; path=/; max-age=31536000; SameSite=Lax`;
-      } catch (_) {}
+      writeSharedLangCookie(resolved);
     }
   }, []);
 
   function setLang(l: Language) {
     setLangState(l);
     localStorage.setItem("arkagentic-lang", l);
-    try {
-      document.cookie = `arklang=${l}; domain=.arkagentic.com; path=/; max-age=31536000; SameSite=Lax`;
-    } catch (_) {}
+    writeSharedLangCookie(l);
   }
 
   return (
