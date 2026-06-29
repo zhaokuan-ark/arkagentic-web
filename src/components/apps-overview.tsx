@@ -209,13 +209,7 @@ export function AppsOverview() {
                 {isLaunching ? ie.launching : ie.launch}
               </button>
 
-              {status === "trialing" && trialDaysLeft !== null && trialDaysLeft <= 2 && (
-                <span className="text-sm text-amber-300">
-                  {trialDaysLeft === 0 ? ie.trialEndsToday
-                    : trialDaysLeft === 1 ? ie.trialEndsDay
-                    : ie.trialEndsDays.replace("{n}", String(trialDaysLeft))}
-                </span>
-              )}
+
             </>
           )}
         </div>
