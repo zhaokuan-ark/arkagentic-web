@@ -3,7 +3,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { stripe, STRIPE_WEBHOOK_SECRET } from "@/lib/stripe";
-import { upsertSubscription } from "@/lib/supabase-server";
+import { upsertSubscription, addTopupQuota, resetMonthlyQuota } from "@/lib/supabase-server";
 import type Stripe from "stripe";
 
 // Stripe v22 moved current_period_start/end to subscription items
@@ -53,13 +53,22 @@ export async function POST(request: NextRequest) {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
-        if (session.mode !== "subscription") break;
-        const subscriptionId = session.subscription as string;
         const userId = session.metadata?.supabase_user_id;
-        if (!userId || !subscriptionId) break;
-        const sub = await stripe.subscriptions.retrieve(subscriptionId, { expand: ["items"] });
-        await syncSubscription(sub);
-        console.log("[webhook] checkout.session.completed userId:", userId);
+
+        if (session.mode === "subscription") {
+          const subscriptionId = session.subscription as string;
+          if (!userId || !subscriptionId) break;
+          const sub = await stripe.subscriptions.retrieve(subscriptionId, { expand: ["items"] });
+          await syncSubscription(sub);
+          console.log("[webhook] checkout.session.completed (subscription) userId:", userId);
+        } else if (session.mode === "payment" && session.metadata?.product_type === "ai_quota_topup") {
+          // One-time top-up payment completed
+          if (!userId) break;
+          const quotaAmount = parseInt(session.metadata?.quota_amount ?? "1000", 10);
+          const amountAud = (session.amount_total ?? 2000) / 100;
+          await addTopupQuota(userId, quotaAmount, session.id, amountAud);
+          console.log("[webhook] ai_quota_topup userId:", userId, "quota:", quotaAmount);
+        }
         break;
       }
 
@@ -92,12 +101,19 @@ export async function POST(request: NextRequest) {
       case "invoice.payment_succeeded":
       case "invoice.payment_failed": {
         const invoice = event.data.object as Stripe.Invoice;
-        // Stripe v22: subscription id lives in invoice.parent.subscription_details
         const parentDetails = invoice.parent as { subscription_details?: { subscription?: string } } | null;
         const subscriptionId = parentDetails?.subscription_details?.subscription;
         if (!subscriptionId) break;
         const sub = await stripe.subscriptions.retrieve(subscriptionId, { expand: ["items"] });
         await syncSubscription(sub);
+        // On successful monthly renewal, reset AI quota
+        if (event.type === "invoice.payment_succeeded") {
+          const userId = sub.metadata?.supabase_user_id;
+          if (userId) {
+            await resetMonthlyQuota(userId);
+            console.log("[webhook] monthly quota reset for userId:", userId);
+          }
+        }
         console.log("[webhook]", event.type, "sub:", subscriptionId);
         break;
       }

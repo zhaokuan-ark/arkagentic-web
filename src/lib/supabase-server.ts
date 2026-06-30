@@ -124,3 +124,48 @@ export async function getUserFromRequest(request: Request): Promise<{ id: string
   if (error || !data.user) return null;
   return { id: data.user.id, email: data.user.email ?? "" };
 }
+
+// ─── AI Quota helpers ─────────────────────────────────────────────────────────
+
+export async function getAiQuota(userId: string): Promise<{ remaining: number; monthly: number } | null> {
+  const { data } = await getSupabaseAdmin()
+    .from("subscriptions")
+    .select("ai_quota_remaining, ai_quota_monthly")
+    .eq("user_id", userId)
+    .in("status", ["active", "trialing"])
+    .limit(1)
+    .single();
+  if (!data) return null;
+  return { remaining: data.ai_quota_remaining ?? 0, monthly: data.ai_quota_monthly ?? 200 };
+}
+
+export async function resetMonthlyQuota(userId: string): Promise<void> {
+  await getSupabaseAdmin().rpc("reset_monthly_ai_quota", { p_user_id: userId });
+}
+
+export async function addTopupQuota(userId: string, quota: number, stripePaymentId: string, amountAud: number): Promise<void> {
+  const admin = getSupabaseAdmin();
+  // Idempotent: skip if this payment was already processed
+  const { data: existing } = await admin
+    .from("ai_quota_topups")
+    .select("id")
+    .eq("stripe_payment_id", stripePaymentId)
+    .limit(1);
+  if (existing && existing.length > 0) return;
+
+  await admin.from("ai_quota_topups").insert({
+    user_id: userId,
+    stripe_payment_id: stripePaymentId,
+    amount_aud: amountAud,
+    quota_added: quota,
+  });
+  await admin.rpc("add_topup_ai_quota", { p_user_id: userId, p_quota: quota });
+}
+
+export async function deductAiQuota(userId: string, amount: number): Promise<boolean> {
+  const { data } = await getSupabaseAdmin().rpc("deduct_ai_quota", {
+    p_user_id: userId,
+    p_amount: amount,
+  });
+  return data === true;
+}

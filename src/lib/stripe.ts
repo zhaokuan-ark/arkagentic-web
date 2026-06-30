@@ -28,4 +28,5 @@ export const stripe = new Proxy({} as Stripe, {
 
 export const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET ?? "";
 export const STRIPE_PRICE_ID = process.env.STRIPE_INVOICE_EXTRACTOR_PRICE_ID ?? "";
+export const STRIPE_TOPUP_PRICE_ID = process.env.STRIPE_AI_TOPUP_PRICE_ID ?? "";
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.arkagentic.com";
