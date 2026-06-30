@@ -1,7 +1,20 @@
 "use client";
 
+import { Suspense } from "react";
 import { AccountSummary } from "@/components/account-summary";
 import { useLanguage } from "@/components/language-provider";
+import { useSearchParams } from "next/navigation";
+
+function TopupBanner() {
+  const searchParams = useSearchParams();
+  const topup = searchParams.get("topup");
+  if (topup !== "success") return null;
+  return (
+    <div className="mb-6 rounded-xl border border-emerald-700/40 bg-emerald-950/50 px-5 py-3.5 text-sm text-emerald-300">
+      ✓ Top-up successful — 1,000 AI credits have been added to your account.
+    </div>
+  );
+}
 
 export default function AccountPage() {
   const { lang } = useLanguage();
@@ -16,6 +29,9 @@ export default function AccountPage() {
         {zh ? "我的账户" : "My account"}
       </h1>
       <div className="mt-8">
+        <Suspense fallback={null}>
+          <TopupBanner />
+        </Suspense>
         <AccountSummary />
       </div>
     </div>

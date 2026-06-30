@@ -2,7 +2,7 @@
 // Creates a Stripe Checkout session for a one-time AI quota top-up ($20 AUD → +1,000 credits).
 
 import { NextRequest, NextResponse } from "next/server";
-import { stripe, STRIPE_TOPUP_PRICE_ID, APP_URL } from "@/lib/stripe";
+import { stripe, APP_URL } from "@/lib/stripe";
 import { getUserFromRequest, getStripeCustomerIdByUserId, saveStripeCustomerId, getSubscriptionByUserId } from "@/lib/supabase-server";
 
 export async function POST(request: NextRequest) {
@@ -10,7 +10,10 @@ export async function POST(request: NextRequest) {
     const user = await getUserFromRequest(request);
     if (!user) return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
 
-    if (!STRIPE_TOPUP_PRICE_ID) {
+    // Read directly from process.env at request time (not a module-level const)
+    // so Amplify/Next.js cannot inline an empty string at build time.
+    const topupPriceId = process.env.STRIPE_AI_TOPUP_PRICE_ID ?? "";
+    if (!topupPriceId) {
       return NextResponse.json({ error: "Top-up not configured" }, { status: 503 });
     }
 
@@ -35,9 +38,9 @@ export async function POST(request: NextRequest) {
       customer: stripeCustomerId,
       mode: "payment",
       payment_method_types: ["card"],
-      line_items: [{ price: STRIPE_TOPUP_PRICE_ID, quantity: 1 }],
-      success_url: `${APP_URL}/billing?topup=success`,
-      cancel_url: `${APP_URL}/billing?topup=canceled`,
+      line_items: [{ price: topupPriceId, quantity: 1 }],
+      success_url: `${APP_URL}/account?topup=success`,
+      cancel_url: `${APP_URL}/account`,
       metadata: {
         supabase_user_id: user.id,
         product_type: "ai_quota_topup",
