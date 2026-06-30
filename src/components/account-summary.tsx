@@ -102,6 +102,8 @@ export function AccountSummary() {
       await startTopupCheckout(await getToken());
     } catch (err) {
       alert((err as Error).message);
+    } finally {
+      // Always reset — checkout opens in new tab, this page stays
       setTopupLoading(false);
     }
   }
@@ -254,30 +256,63 @@ export function AccountSummary() {
                 <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
                   {zh ? "AI 处理额度" : "AI Processing Quota"}
                 </p>
-                <div className="mt-4 space-y-3">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-slate-400">{zh ? "本月剩余" : "Remaining this month"}</span>
-                    <span className={`font-semibold tabular-nums ${
-                      aiQuotaRemaining < 20 ? "text-amber-400" : "text-white"
-                    }`}>
-                      {aiQuotaRemaining.toLocaleString()}
-                      <span className="font-normal text-slate-500"> / {aiQuotaMonthly.toLocaleString()}</span>
-                    </span>
+                <div className="mt-4 space-y-4">
+
+                  {/* Monthly credits row */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-400">
+                        {zh ? "本月剩余（包含在订阅里）" : "Monthly credits remaining"}
+                      </span>
+                      <span className={`font-semibold tabular-nums ${
+                        Math.min(aiQuotaRemaining, aiQuotaMonthly) < 20 ? "text-amber-400" : "text-white"
+                      }`}>
+                        {Math.min(aiQuotaRemaining, aiQuotaMonthly).toLocaleString()}
+                        <span className="font-normal text-slate-500"> / {aiQuotaMonthly.toLocaleString()}</span>
+                      </span>
+                    </div>
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.08]">
+                      <div
+                        className={`h-full rounded-full transition-all ${
+                          Math.min(aiQuotaRemaining, aiQuotaMonthly) / aiQuotaMonthly < 0.15
+                            ? "bg-amber-400" : "bg-blue-500"
+                        }`}
+                        style={{
+                          width: `${Math.min(100, Math.round(
+                            (Math.min(aiQuotaRemaining, aiQuotaMonthly) / aiQuotaMonthly) * 100
+                          ))}%`
+                        }}
+                      />
+                    </div>
+                    {currentPeriodEnd && (
+                      <p className="text-xs text-slate-600">
+                        {zh
+                          ? `每月续费后自动补充 ${aiQuotaMonthly} 张`
+                          : `Renews +${aiQuotaMonthly} on ${formatDate(currentPeriodEnd)}`
+                        }
+                      </p>
+                    )}
                   </div>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.08]">
-                    <div
-                      className={`h-full rounded-full transition-all ${
-                        aiQuotaRemaining / aiQuotaMonthly < 0.15 ? "bg-amber-400" : "bg-blue-500"
-                      }`}
-                      style={{ width: `${Math.min(100, Math.round((aiQuotaRemaining / aiQuotaMonthly) * 100))}%` }}
-                    />
-                  </div>
-                  {aiQuotaRemaining < 20 && (
-                    <p className="text-xs text-amber-400">
-                      {zh ? "额度较低，建议充值。" : "Running low — consider topping up."}
-                    </p>
+
+                  {/* Top-up pool row — only show if user has top-up balance */}
+                  {aiQuotaRemaining > aiQuotaMonthly && (
+                    <div className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm">
+                      <div>
+                        <p className="font-medium text-white">
+                          {zh ? "Top-up 余量" : "Top-up balance"}
+                        </p>
+                        <p className="mt-0.5 text-xs text-slate-500">
+                          {zh ? "永不过期，本月用完后自动使用" : "Never expires · used automatically after monthly credits run out"}
+                        </p>
+                      </div>
+                      <span className="ml-4 font-semibold tabular-nums text-emerald-400">
+                        +{(aiQuotaRemaining - aiQuotaMonthly).toLocaleString()}
+                      </span>
+                    </div>
                   )}
-                  <div className="mt-2 flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3">
+
+                  {/* Top-up CTA */}
+                  <div className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3">
                     <div>
                       <p className="text-sm font-medium text-white">
                         {zh ? "充值 1,000 张额度" : "Top up 1,000 credits"}
@@ -292,9 +327,10 @@ export function AccountSummary() {
                       disabled={topupLoading}
                       className="ml-4 shrink-0 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-500 disabled:opacity-50"
                     >
-                      {topupLoading ? (zh ? "跳转中…" : "Redirecting…") : (zh ? "充值" : "Top up")}
+                      {topupLoading ? (zh ? "请在新标签页完成支付…" : "Complete in new tab…") : (zh ? "充值" : "Top up")}
                     </button>
                   </div>
+
                 </div>
               </div>
             )}

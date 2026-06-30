@@ -94,7 +94,7 @@ export async function openBillingPortal(accessToken: string): Promise<void> {
   if (data.url) window.location.href = data.url;
 }
 
-// Helper: start AI quota top-up checkout
+// Helper: start AI quota top-up checkout — opens in new tab so page stays active
 export async function startTopupCheckout(accessToken: string): Promise<void> {
   const res = await fetch("/api/billing/topup-checkout", {
     method: "POST",
@@ -102,5 +102,5 @@ export async function startTopupCheckout(accessToken: string): Promise<void> {
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || "Failed to start top-up checkout");
-  if (data.url) window.location.href = data.url;
+  if (data.url) window.open(data.url, "_blank");
 }
