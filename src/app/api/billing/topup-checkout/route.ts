@@ -10,12 +10,11 @@ export async function POST(request: NextRequest) {
     const user = await getUserFromRequest(request);
     if (!user) return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
 
-    // Read directly from process.env at request time (not a module-level const)
-    // so Amplify/Next.js cannot inline an empty string at build time.
-    const topupPriceId = process.env.STRIPE_AI_TOPUP_PRICE_ID ?? "";
-    if (!topupPriceId) {
-      return NextResponse.json({ error: "Top-up not configured" }, { status: 503 });
-    }
+    // Read at request time. Fallback to known prod price ID in case
+    // the env var isn't injected by the hosting layer.
+    const topupPriceId =
+      process.env.STRIPE_AI_TOPUP_PRICE_ID ||
+      "price_1Tnuv4Bx6NnRozSg4pwXA0wP"; // $20 AUD · 1,000 AI credits
 
     // Must have an active/trialing subscription to top up
     const sub = await getSubscriptionByUserId(user.id);
