@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useAuthSession } from "@/components/auth-session-provider";
 import { useLanguage } from "@/components/language-provider";
-import { useSubscription, openBillingPortal } from "@/hooks/useSubscription";
+import { useSubscription, openBillingPortal, startTopupCheckout } from "@/hooks/useSubscription";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import { useState } from "react";
 
@@ -63,29 +63,46 @@ export function AccountSummary() {
     trialDaysLeft,
     currentPeriodEnd,
     cancelAtPeriodEnd,
+    aiQuotaRemaining,
+    aiQuotaMonthly,
   } = useSubscription();
 
   const [portalLoading, setPortalLoading] = useState(false);
   const [portalError, setPortalError] = useState<string | null>(null);
+  const [topupLoading, setTopupLoading] = useState(false);
 
   const zh = lang === "zh";
+
+  async function getToken(): Promise<string> {
+    let token = session?.access_token;
+    if (!token) {
+      const sb = getSupabaseBrowserClient();
+      if (!sb) throw new Error("Auth not available");
+      const { data } = await sb.auth.getSession();
+      token = data.session?.access_token;
+    }
+    if (!token) throw new Error("Please sign in again.");
+    return token;
+  }
 
   async function handleManageBilling() {
     setPortalError(null);
     setPortalLoading(true);
     try {
-      let token = session?.access_token;
-      if (!token) {
-        const sb = getSupabaseBrowserClient();
-        if (!sb) throw new Error("Auth not available");
-        const { data } = await sb.auth.getSession();
-        token = data.session?.access_token;
-      }
-      if (!token) throw new Error("Please sign in again.");
-      await openBillingPortal(token);
+      await openBillingPortal(await getToken());
     } catch (err) {
       setPortalError((err as Error).message);
       setPortalLoading(false);
+    }
+  }
+
+  async function handleTopup() {
+    setTopupLoading(true);
+    try {
+      await startTopupCheckout(await getToken());
+    } catch (err) {
+      alert((err as Error).message);
+      setTopupLoading(false);
     }
   }
 
@@ -161,7 +178,7 @@ export function AccountSummary() {
                 <p className="text-xs text-slate-500">{zh ? "价格" : "Price"}</p>
                 <p className="mt-1.5 font-semibold text-white">
                   {hasAccess ? (
-                    <><span className="text-2xl">$19</span><span className="text-sm text-slate-400"> AUD / month</span></>
+                    <><span className="text-2xl">$15</span><span className="text-sm text-slate-400"> AUD / month</span></>
                   ) : (
                     <span className="text-slate-400">—</span>
                   )}
@@ -230,6 +247,57 @@ export function AccountSummary() {
                 {zh ? "前往应用" : "Go to apps"}
               </Link>
             </div>
+
+            {/* AI Quota section */}
+            {hasAccess && aiQuotaRemaining !== null && aiQuotaMonthly !== null && (
+              <div className="mt-6 border-t border-white/[0.08] pt-6">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                  {zh ? "AI 处理额度" : "AI Processing Quota"}
+                </p>
+                <div className="mt-4 space-y-3">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-slate-400">{zh ? "本月剩余" : "Remaining this month"}</span>
+                    <span className={`font-semibold tabular-nums ${
+                      aiQuotaRemaining < 20 ? "text-amber-400" : "text-white"
+                    }`}>
+                      {aiQuotaRemaining.toLocaleString()}
+                      <span className="font-normal text-slate-500"> / {aiQuotaMonthly.toLocaleString()}</span>
+                    </span>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.08]">
+                    <div
+                      className={`h-full rounded-full transition-all ${
+                        aiQuotaRemaining / aiQuotaMonthly < 0.15 ? "bg-amber-400" : "bg-blue-500"
+                      }`}
+                      style={{ width: `${Math.min(100, Math.round((aiQuotaRemaining / aiQuotaMonthly) * 100))}%` }}
+                    />
+                  </div>
+                  {aiQuotaRemaining < 20 && (
+                    <p className="text-xs text-amber-400">
+                      {zh ? "额度较低，建议充值。" : "Running low — consider topping up."}
+                    </p>
+                  )}
+                  <div className="mt-2 flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3">
+                    <div>
+                      <p className="text-sm font-medium text-white">
+                        {zh ? "充值 1,000 张额度" : "Top up 1,000 credits"}
+                      </p>
+                      <p className="mt-0.5 text-xs text-slate-500">
+                        {zh ? "$20 AUD · 一次性 · 永不过期" : "$20 AUD · one-time · never expires"}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleTopup}
+                      disabled={topupLoading}
+                      className="ml-4 shrink-0 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-500 disabled:opacity-50"
+                    >
+                      {topupLoading ? (zh ? "跳转中…" : "Redirecting…") : (zh ? "充值" : "Top up")}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>

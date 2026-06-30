@@ -103,7 +103,7 @@ export const translations = {
       plans: [
         {
           name: "Invoice Extractor",
-          price: "$19/mo",
+          price: "$15/mo",
           description:
             "A simple starting point for individual operators and small teams.",
           features: [
@@ -227,8 +227,8 @@ export const translations = {
         title: "Extract invoices faster",
         description: "Connect your cloud drive, choose an invoice folder, and turn invoices into structured outputs ready for review and export.",
         startTrial: "Start free trial",
-        trialHint: "7 days free — then AUD $19/month, cancel anytime",
-        subscribe: "Subscribe — AUD $19/month",
+        trialHint: "7 days free — then AUD $15/month, cancel anytime",
+        subscribe: "Subscribe — AUD $15/month",
         launch: "Launch app",
         launching: "Launching...",
         starting: "Starting...",
@@ -353,7 +353,7 @@ export const translations = {
       plans: [
         {
           name: "发票提取器",
-          price: "$19/月",
+          price: "$15/月",
           description: "适合个人运营者和小型团队的轻量起点。",
           features: [
             "7 天免费试用",
@@ -475,8 +475,8 @@ export const translations = {
         title: "更快速地提取发票",
         description: "连接你的云端网盘，选择发票文件夹，将发票转化为可审核和导出的结构化数据。",
         startTrial: "开始免费试用",
-        trialHint: "7 天免费 — 之后每月 AUD $19，随时取消",
-        subscribe: "订阅 — 每月 AUD $19",
+        trialHint: "7 天免费 — 之后每月 AUD $15，随时取消",
+        subscribe: "订阅 — 每月 AUD $15",
         launch: "进入应用",
         launching: "正在启动...",
         starting: "正在开始...",
