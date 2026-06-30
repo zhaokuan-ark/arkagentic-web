@@ -135,11 +135,25 @@ export async function getAiQuota(userId: string): Promise<{ remaining: number; m
     .in("status", ["active", "trialing"])
     .limit(1)
     .single();
-  if (!data) return null;
+  if (!data) {
+    // Fallback: try without the topup_total column (migration may not have run yet)
+    const { data: d2 } = await getSupabaseAdmin()
+      .from("subscriptions")
+      .select("ai_quota_remaining, ai_quota_monthly")
+      .eq("user_id", userId)
+      .in("status", ["active", "trialing"])
+      .limit(1)
+      .single();
+    if (!d2) return null;
+    const remaining = d2.ai_quota_remaining ?? 0;
+    const monthly = d2.ai_quota_monthly ?? 200;
+    // topupTotal = whatever is above the monthly cap
+    return { remaining, monthly, topupTotal: Math.max(0, remaining - monthly) };
+  }
   return {
     remaining: data.ai_quota_remaining ?? 0,
     monthly: data.ai_quota_monthly ?? 200,
-    topupTotal: data.ai_quota_topup_total ?? 0,
+    topupTotal: (data as Record<string, unknown>).ai_quota_topup_total as number ?? Math.max(0, (data.ai_quota_remaining ?? 0) - (data.ai_quota_monthly ?? 200)),
   };
 }
 
