@@ -32,6 +32,7 @@ export async function GET(request: NextRequest) {
       planId: sub.plan_id,
       aiQuotaRemaining: quota?.remaining ?? null,
       aiQuotaMonthly: quota?.monthly ?? null,
+      aiQuotaTopupTotal: quota?.topupTotal ?? null,
     });
   } catch (err) {
     console.error("[billing/status] error:", err);

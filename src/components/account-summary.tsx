@@ -65,6 +65,7 @@ export function AccountSummary() {
     cancelAtPeriodEnd,
     aiQuotaRemaining,
     aiQuotaMonthly,
+    aiQuotaTopupTotal,
   } = useSubscription();
 
   const [portalLoading, setPortalLoading] = useState(false);
@@ -258,58 +259,55 @@ export function AccountSummary() {
                 </p>
                 <div className="mt-4 space-y-4">
 
-                  {/* Monthly credits row */}
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-400">
-                        {zh ? "本月剩余（包含在订阅里）" : "Monthly credits remaining"}
-                      </span>
-                      <span className={`font-semibold tabular-nums ${
-                        Math.min(aiQuotaRemaining, aiQuotaMonthly) < 20 ? "text-amber-400" : "text-white"
-                      }`}>
-                        {Math.min(aiQuotaRemaining, aiQuotaMonthly).toLocaleString()}
-                        <span className="font-normal text-slate-500"> / {aiQuotaMonthly.toLocaleString()}</span>
-                      </span>
-                    </div>
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.08]">
-                      <div
-                        className={`h-full rounded-full transition-all ${
-                          Math.min(aiQuotaRemaining, aiQuotaMonthly) / aiQuotaMonthly < 0.15
-                            ? "bg-amber-400" : "bg-blue-500"
-                        }`}
-                        style={{
-                          width: `${Math.min(100, Math.round(
-                            (Math.min(aiQuotaRemaining, aiQuotaMonthly) / aiQuotaMonthly) * 100
-                          ))}%`
-                        }}
-                      />
-                    </div>
-                    {currentPeriodEnd && (
-                      <p className="text-xs text-slate-600">
-                        {zh
-                          ? `每月续费后自动补充 ${aiQuotaMonthly} 张`
-                          : `Renews +${aiQuotaMonthly} on ${formatDate(currentPeriodEnd)}`
-                        }
-                      </p>
-                    )}
-                  </div>
+                  {/* Monthly credits bar */}
+                  {(() => {
+                    const monthlyUsed = Math.min(aiQuotaRemaining, aiQuotaMonthly);
+                    const pct = Math.min(100, Math.round((monthlyUsed / aiQuotaMonthly) * 100));
+                    const low = monthlyUsed < 20;
+                    return (
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-slate-400">{zh ? "本月额度" : "Monthly credits"}</span>
+                          <span className={`font-semibold tabular-nums ${low ? "text-amber-400" : "text-white"}`}>
+                            {monthlyUsed.toLocaleString()}
+                            <span className="font-normal text-slate-500"> / {aiQuotaMonthly.toLocaleString()}</span>
+                          </span>
+                        </div>
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.08]">
+                          <div className={`h-full rounded-full transition-all ${low ? "bg-amber-400" : "bg-blue-500"}`}
+                            style={{ width: `${pct}%` }} />
+                        </div>
+                        {currentPeriodEnd && (
+                          <p className="text-xs text-slate-600">
+                            {zh ? `续费后自动补充 ${aiQuotaMonthly} 张` : `Renews +${aiQuotaMonthly} on ${formatDate(currentPeriodEnd)}`}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })()}
 
-                  {/* Top-up pool row — only show if user has top-up balance */}
-                  {aiQuotaRemaining > aiQuotaMonthly && (
-                    <div className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm">
-                      <div>
-                        <p className="font-medium text-white">
-                          {zh ? "Top-up 余量" : "Top-up balance"}
-                        </p>
-                        <p className="mt-0.5 text-xs text-slate-500">
-                          {zh ? "永不过期，本月用完后自动使用" : "Never expires · used automatically after monthly credits run out"}
+                  {/* Top-up credits bar — same style, only shown when top-up balance exists */}
+                  {aiQuotaTopupTotal !== null && aiQuotaTopupTotal > 0 && (() => {
+                    const topupRemaining = Math.max(0, aiQuotaRemaining - aiQuotaMonthly);
+                    const pct = Math.min(100, Math.round((topupRemaining / aiQuotaTopupTotal) * 100));
+                    return (
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-slate-400">{zh ? "充值额度" : "Top-up credits"}</span>
+                          <span className="font-semibold tabular-nums text-emerald-400">
+                            {topupRemaining.toLocaleString()}
+                          </span>
+                        </div>
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.08]">
+                          <div className="h-full rounded-full bg-emerald-500 transition-all"
+                            style={{ width: `${pct}%` }} />
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          {zh ? "永不过期 · 本月额度用完后自动使用" : "Never expires · used automatically after monthly credits run out"}
                         </p>
                       </div>
-                      <span className="ml-4 font-semibold tabular-nums text-emerald-400">
-                        +{(aiQuotaRemaining - aiQuotaMonthly).toLocaleString()}
-                      </span>
-                    </div>
-                  )}
+                    );
+                  })()}
 
                   {/* Top-up CTA */}
                   <div className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3">

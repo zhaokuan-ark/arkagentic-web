@@ -127,16 +127,20 @@ export async function getUserFromRequest(request: Request): Promise<{ id: string
 
 // ─── AI Quota helpers ─────────────────────────────────────────────────────────
 
-export async function getAiQuota(userId: string): Promise<{ remaining: number; monthly: number } | null> {
+export async function getAiQuota(userId: string): Promise<{ remaining: number; monthly: number; topupTotal: number } | null> {
   const { data } = await getSupabaseAdmin()
     .from("subscriptions")
-    .select("ai_quota_remaining, ai_quota_monthly")
+    .select("ai_quota_remaining, ai_quota_monthly, ai_quota_topup_total")
     .eq("user_id", userId)
     .in("status", ["active", "trialing"])
     .limit(1)
     .single();
   if (!data) return null;
-  return { remaining: data.ai_quota_remaining ?? 0, monthly: data.ai_quota_monthly ?? 200 };
+  return {
+    remaining: data.ai_quota_remaining ?? 0,
+    monthly: data.ai_quota_monthly ?? 200,
+    topupTotal: data.ai_quota_topup_total ?? 0,
+  };
 }
 
 export async function resetMonthlyQuota(userId: string): Promise<void> {

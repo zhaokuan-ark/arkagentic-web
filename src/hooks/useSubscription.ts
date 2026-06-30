@@ -16,6 +16,7 @@ export interface SubscriptionState {
   cancelAtPeriodEnd: boolean;
   aiQuotaRemaining: number | null;
   aiQuotaMonthly: number | null;
+  aiQuotaTopupTotal: number | null;
   error: string | null;
 }
 
@@ -29,6 +30,7 @@ export function useSubscription(): SubscriptionState & { refresh: () => void } {
     cancelAtPeriodEnd: false,
     aiQuotaRemaining: null,
     aiQuotaMonthly: null,
+    aiQuotaTopupTotal: null,
     error: null,
   });
 
@@ -37,12 +39,12 @@ export function useSubscription(): SubscriptionState & { refresh: () => void } {
     try {
       const supabase = getSupabaseBrowserClient();
       if (!supabase) {
-        setState({ loading: false, status: null, hasAccess: false, trialDaysLeft: null, currentPeriodEnd: null, cancelAtPeriodEnd: false, aiQuotaRemaining: null, aiQuotaMonthly: null, error: null });
+        setState({ loading: false, status: null, hasAccess: false, trialDaysLeft: null, currentPeriodEnd: null, cancelAtPeriodEnd: false, aiQuotaRemaining: null, aiQuotaMonthly: null, aiQuotaTopupTotal: null, error: null });
         return;
       }
       const { data: { session } } = await supabase.auth.getSession();
       if (!session?.access_token) {
-        setState({ loading: false, status: null, hasAccess: false, trialDaysLeft: null, currentPeriodEnd: null, cancelAtPeriodEnd: false, aiQuotaRemaining: null, aiQuotaMonthly: null, error: null });
+        setState({ loading: false, status: null, hasAccess: false, trialDaysLeft: null, currentPeriodEnd: null, cancelAtPeriodEnd: false, aiQuotaRemaining: null, aiQuotaMonthly: null, aiQuotaTopupTotal: null, error: null });
         return;
       }
       const res = await fetch("/api/billing/status", {
@@ -59,6 +61,7 @@ export function useSubscription(): SubscriptionState & { refresh: () => void } {
         cancelAtPeriodEnd: data.cancelAtPeriodEnd ?? false,
         aiQuotaRemaining: data.aiQuotaRemaining ?? null,
         aiQuotaMonthly: data.aiQuotaMonthly ?? null,
+        aiQuotaTopupTotal: data.aiQuotaTopupTotal ?? null,
         error: null,
       });
     } catch (err) {
