@@ -109,7 +109,8 @@ export const translations = {
           features: [
             "7-day free trial",
             "Email-based account login",
-            "AI extraction usage billed separately",
+            "200 AI credits included per month",
+            "Top up anytime — $20 AUD per 1,000 credits",
           ],
         },
         {
@@ -358,7 +359,8 @@ export const translations = {
           features: [
             "7 天免费试用",
             "邮箱账号登录",
-            "AI 提取用量单独计费",
+            "每月包含 200 张 AI 额度",
+            "随时充值 — 每 1,000 张 $20 AUD",
           ],
         },
         {
