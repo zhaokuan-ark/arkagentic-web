@@ -252,6 +252,83 @@ export const translations = {
         underDev: "Under Development",
       },
     },
+    auth: {
+      signIn: {
+        title: "Sign in",
+        subtitle: "Sign in to your ArkAgentic account.",
+        button: "Sign in",
+        buttonBusy: "Signing in...",
+        noAccount: "Need a new account?",
+        createLink: "Create one here",
+        signedOut: "You have been signed out.",
+      },
+      signUp: {
+        title: "Create account",
+        subtitle: "Set up your ArkAgentic account and tell us what you want help with.",
+        button: "Create account",
+        buttonBusy: "Creating account...",
+        hasAccount: "Already have an account?",
+        signInLink: "Sign in here",
+      },
+      fields: {
+        fullName: "Full Name",
+        fullNamePlaceholder: "Your full name",
+        email: "Email",
+        emailPlaceholder: "name@company.com",
+        phone: "Phone number",
+        phoneOptional: "(optional)",
+        phonePlaceholder: "0400 000 000",
+        password: "Password",
+        passwordPlaceholder: "Enter your password",
+        passwordNewPlaceholder: "Create a password",
+        confirmPassword: "Confirm password",
+        confirmPasswordPlaceholder: "Enter your password again",
+        signupReason: "What brings you to ArkAgentic?",
+        signupReasonPlaceholder: "Select one option",
+      },
+      signupReasons: {
+        products: "Use ArkAgentic products",
+        custom: "Discuss a custom AI system",
+        both: "Both products and custom work",
+        exploring: "Just exploring for now",
+      },
+      turnstile: "Protected by Cloudflare Turnstile. Human checks appear only when needed.",
+      passwordStrength: {
+        tooShort: "Use at least 8 characters.",
+        noUppercase: "Add at least one uppercase letter.",
+        noLowercase: "Add at least one lowercase letter.",
+        noNumber: "Add at least one number.",
+        strong: "Strong password.",
+        match: "Passwords match.",
+        noMatch: "Passwords do not match yet.",
+      },
+      errors: {
+        invalidCredentials: "That email or password looks incorrect.",
+        passwordTooShort: "Your password is too short. Please use at least 8 characters.",
+        alreadyRegistered: "An account with this email already exists. Try signing in instead.",
+        invalidEmail: "Please enter a valid email address.",
+        supabaseNotConfigured: "Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY first.",
+        emailRequired: "Please enter your email.",
+        emailTooLong: "Email address is too long.",
+        passwordRequired: "Please enter your password.",
+        passwordTooLongField: "Password must be 128 characters or fewer.",
+        passwordWeak: "Use at least 8 characters, one uppercase letter, one lowercase letter, and one number.",
+        confirmRequired: "Please confirm your password.",
+        passwordsMismatch: "Your passwords do not match.",
+        fullNameRequired: "Please enter your full name.",
+        fullNameTooLong: "Full name must be 80 characters or fewer.",
+        phoneTooLong: "Phone number must be 32 characters or fewer.",
+        phoneInvalid: "Please use numbers, spaces, +, -, or brackets only.",
+        signupReasonRequired: "Please select what brings you to ArkAgentic.",
+        signupReasonInvalid: "Please choose a valid signup reason.",
+        turnstileRequired: "Please complete the human verification before creating your account.",
+        emailNotConfirmed: "Please confirm your email before signing in. Check your inbox for the confirmation link.",
+      },
+      success: {
+        signupMessage: "Your account has been created. Please check {email} and click the confirmation link in your email before signing in.",
+        signupRedirect: "Redirecting you to sign in...",
+      },
+    },
   },
 
   zh: {
@@ -501,6 +578,83 @@ export const translations = {
         underDev: "开发中",
       },
     },
+    auth: {
+      signIn: {
+        title: "登录",
+        subtitle: "登录你的 ArkAgentic 账户。",
+        button: "登录",
+        buttonBusy: "登录中...",
+        noAccount: "还没有账户？",
+        createLink: "立即注册",
+        signedOut: "你已退出登录。",
+      },
+      signUp: {
+        title: "创建账户",
+        subtitle: "设置你的 ArkAgentic 账户，并告诉我们你需要什么帮助。",
+        button: "创建账户",
+        buttonBusy: "创建中...",
+        hasAccount: "已有账户？",
+        signInLink: "点此登录",
+      },
+      fields: {
+        fullName: "姓名",
+        fullNamePlaceholder: "你的全名",
+        email: "邮箱",
+        emailPlaceholder: "name@company.com",
+        phone: "手机号码",
+        phoneOptional: "（选填）",
+        phonePlaceholder: "0400 000 000",
+        password: "密码",
+        passwordPlaceholder: "输入密码",
+        passwordNewPlaceholder: "设置密码",
+        confirmPassword: "确认密码",
+        confirmPasswordPlaceholder: "再次输入密码",
+        signupReason: "你来 ArkAgentic 是为了什么？",
+        signupReasonPlaceholder: "请选择",
+      },
+      signupReasons: {
+        products: "使用 ArkAgentic 产品",
+        custom: "咨询定制 AI 系统",
+        both: "产品和定制都感兴趣",
+        exploring: "目前只是了解一下",
+      },
+      turnstile: "由 Cloudflare Turnstile 保护，仅在需要时进行人机验证。",
+      passwordStrength: {
+        tooShort: "请使用至少 8 个字符。",
+        noUppercase: "请添加至少一个大写字母。",
+        noLowercase: "请添加至少一个小写字母。",
+        noNumber: "请添加至少一个数字。",
+        strong: "密码强度良好。",
+        match: "两次密码一致。",
+        noMatch: "两次密码尚不一致。",
+      },
+      errors: {
+        invalidCredentials: "邮箱或密码不正确。",
+        passwordTooShort: "密码太短，请使用至少 8 个字符。",
+        alreadyRegistered: "该邮箱已注册，请直接登录。",
+        invalidEmail: "请输入有效的邮箱地址。",
+        supabaseNotConfigured: "Supabase 尚未配置，请先添加 NEXT_PUBLIC_SUPABASE_URL 和 NEXT_PUBLIC_SUPABASE_ANON_KEY。",
+        emailRequired: "请输入邮箱。",
+        emailTooLong: "邮箱地址过长。",
+        passwordRequired: "请输入密码。",
+        passwordTooLongField: "密码不能超过 128 个字符。",
+        passwordWeak: "请使用至少 8 个字符，并包含大写字母、小写字母和数字。",
+        confirmRequired: "请确认密码。",
+        passwordsMismatch: "两次输入的密码不一致。",
+        fullNameRequired: "请输入姓名。",
+        fullNameTooLong: "姓名不能超过 80 个字符。",
+        phoneTooLong: "手机号码不能超过 32 个字符。",
+        phoneInvalid: "手机号码只能包含数字、空格、+、- 或括号。",
+        signupReasonRequired: "请选择你来 ArkAgentic 的原因。",
+        signupReasonInvalid: "请选择一个有效的注册原因。",
+        turnstileRequired: "请先完成人机验证再创建账户。",
+        emailNotConfirmed: "请先确认邮箱后再登录，请查收收件箱中的确认链接。",
+      },
+      success: {
+        signupMessage: "账户已创建，请查收 {email} 的邮件并点击确认链接后再登录。",
+        signupRedirect: "正在跳转到登录页面...",
+      },
+    },
   },
 } as const;
 
@@ -609,5 +763,15 @@ export type Translations = {
     xero: {
       eyebrow: string; title: string; description: string; underDev: string;
     };
+  };
+  auth: {
+    signIn: { title: string; subtitle: string; button: string; buttonBusy: string; noAccount: string; createLink: string; signedOut: string; };
+    signUp: { title: string; subtitle: string; button: string; buttonBusy: string; hasAccount: string; signInLink: string; };
+    fields: { fullName: string; fullNamePlaceholder: string; email: string; emailPlaceholder: string; phone: string; phoneOptional: string; phonePlaceholder: string; password: string; passwordPlaceholder: string; passwordNewPlaceholder: string; confirmPassword: string; confirmPasswordPlaceholder: string; signupReason: string; signupReasonPlaceholder: string; };
+    signupReasons: { products: string; custom: string; both: string; exploring: string; };
+    turnstile: string;
+    passwordStrength: { tooShort: string; noUppercase: string; noLowercase: string; noNumber: string; strong: string; match: string; noMatch: string; };
+    errors: { invalidCredentials: string; passwordTooShort: string; alreadyRegistered: string; invalidEmail: string; supabaseNotConfigured: string; emailRequired: string; emailTooLong: string; passwordRequired: string; passwordTooLongField: string; passwordWeak: string; confirmRequired: string; passwordsMismatch: string; fullNameRequired: string; fullNameTooLong: string; phoneTooLong: string; phoneInvalid: string; signupReasonRequired: string; signupReasonInvalid: string; turnstileRequired: string; emailNotConfirmed: string; };
+    success: { signupMessage: string; signupRedirect: string; };
   };
 };
