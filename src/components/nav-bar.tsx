@@ -154,6 +154,7 @@ export function NavBar() {
     { href: "/#pricing", label: t.nav.pricing },
     { href: "/#faq", label: t.nav.faq },
     { href: "/apps", label: t.nav.apps },
+    { href: "/support", label: t.nav.support },
   ];
 
   return (

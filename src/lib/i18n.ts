@@ -7,6 +7,7 @@ export const translations = {
       pricing: "Pricing",
       faq: "FAQ",
       apps: "Apps",
+      support: "Support",
       signIn: "Sign in",
       signOut: "Sign out",
       signingOut: "Signing out...",
@@ -221,6 +222,33 @@ export const translations = {
       copy: "© 2026 ArkAgentic. ABN: 92 627 301 153",
       address: "11 Hassall Street, Parramatta NSW 2150",
     },
+    support: {
+      eyebrow: "Contact support",
+      heading: "How can we help?",
+      description:
+        "Questions about your account, billing, quota top-ups, or how the product works? Send us a message and we’ll get back to you within one business day.",
+      topics: [
+        "Account & login issues",
+        "Billing & quota top-ups",
+        "Product questions & bugs",
+        "Cancellation & refunds",
+      ],
+      form: {
+        name: "Your name",
+        namePlaceholder: "Your name",
+        email: "Email address",
+        emailPlaceholder: "name@company.com",
+        topic: "Topic",
+        topicPlaceholder: "Select a topic",
+        message: "Message",
+        messagePlaceholder: "Describe your issue or question in as much detail as possible.",
+        submit: "Send message",
+        sending: "Sending…",
+        successHeading: "Message sent!",
+        successBody: "Thanks for reaching out. We’ll reply to your email within one business day.",
+        errorBody: "Something went wrong. Please try again or email us directly at support@arkagentic.com.",
+      },
+    },
     apps: {
       heading: "All apps",
       invoiceExtractor: {
@@ -337,6 +365,7 @@ export const translations = {
       pricing: "价格",
       faq: "常见问题",
       apps: "应用",
+      support: "联系支持",
       signIn: "登录",
       signOut: "退出登录",
       signingOut: "退出中...",
@@ -547,6 +576,33 @@ export const translations = {
       copy: "© 2026 ArkAgentic. ABN: 92 627 301 153",
       address: "11 Hassall Street, Parramatta NSW 2150",
     },
+    support: {
+      eyebrow: "联系支持",
+      heading: "我们能提供什么帮助？",
+      description:
+        "关于账户、账单、额度充値或产品使用的问题？发送消息给我们，我们会在一个工作日内回复你。",
+      topics: [
+        "账户与登录问题",
+        "账单与额度充値",
+        "产品和功能咨询、Bug 反馈",
+        "取消带动与退款",
+      ],
+      form: {
+        name: "姓名",
+        namePlaceholder: "你的姓名",
+        email: "邮箱地址",
+        emailPlaceholder: "name@company.com",
+        topic: "问题类型",
+        topicPlaceholder: "请选择",
+        message: "详细描述",
+        messagePlaceholder: "请尽量详细地描述你的问题或需求。",
+        submit: "发送消息",
+        sending: "发送中…",
+        successHeading: "已成功发送！",
+        successBody: "感谢你的反馈，我们会在一个工作日内回复你的邮件。",
+        errorBody: "发送失败，请稍后再试，或直接发送邮件至 support@arkagentic.com。",
+      },
+    },
     apps: {
       heading: "全部应用",
       invoiceExtractor: {
@@ -664,6 +720,7 @@ export type Translations = {
     pricing: string;
     faq: string;
     apps: string;
+    support: string;
     signIn: string;
     signOut: string;
     signingOut: string;
@@ -749,6 +806,20 @@ export type Translations = {
     };
   };
   footer: { copy: string; address: string };
+  support: {
+    eyebrow: string;
+    heading: string;
+    description: string;
+    topics: readonly string[];
+    form: {
+      name: string; namePlaceholder: string;
+      email: string; emailPlaceholder: string;
+      topic: string; topicPlaceholder: string;
+      message: string; messagePlaceholder: string;
+      submit: string; sending: string;
+      successHeading: string; successBody: string; errorBody: string;
+    };
+  };
   apps: {
     heading: string;
     invoiceExtractor: {
