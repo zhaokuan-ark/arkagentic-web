@@ -111,7 +111,7 @@ export const translations = {
             "7-day free trial",
             "Email-based account login",
             "200 AI credits included per month",
-            "Top up anytime — $20 AUD per 1,000 credits",
+            "Top up anytime - $20 AUD per 1,000 credits",
           ],
         },
         {
@@ -133,7 +133,7 @@ export const translations = {
       eyebrow: "Product roadmap",
       heading: "The first product is live. More focused tools can follow.",
       subheading:
-        "Invoice Extractor is live now. We're building more focused tools for the workflows that cost small businesses the most time — document handling, inbox triage, and sales admin.",
+        "Invoice Extractor is live now. We're building more focused tools for the workflows that cost small businesses the most time - document handling, inbox triage, and sales admin.",
       products: [
         {
           name: "Invoice Extractor",
@@ -162,12 +162,12 @@ export const translations = {
         {
           question: "How does Invoice Extractor connect to my OneDrive?",
           answer:
-            "You connect through Microsoft's official OAuth screen — we never see your password or get access to anything outside the folder you choose. You can disconnect at any time from the account settings page.",
+            "You connect through Microsoft's official OAuth screen - we never see your password or get access to anything outside the folder you choose. You can disconnect at any time from the account settings page.",
         },
         {
           question: "What does the 7-day free trial include?",
           answer:
-            "Full access to all extraction features — no credit card required to start. After 7 days, you can continue with a paid subscription. Trial accounts are one per person.",
+            "Full access to all extraction features - no credit card required to start. After 7 days, you can continue with a paid subscription. Trial accounts are one per person.",
         },
         {
           question: "What file formats are supported?",
@@ -177,12 +177,12 @@ export const translations = {
         {
           question: "Where do the results go?",
           answer:
-            "Results are written back to the OneDrive output folder you chose — an Excel workbook ready for Xero review, plus a full CSV with per-invoice field detail. Nothing is stored on our servers beyond what's needed to run the job.",
+            "Results are written back to the OneDrive output folder you chose - an Excel workbook ready for Xero review, plus a full CSV with per-invoice field detail. Nothing is stored on our servers beyond what's needed to run the job.",
         },
         {
           question: "Can you build something custom for my business?",
           answer:
-            "Yes. Alongside the SaaS products, we also design and build tailored AI workflows and internal tools for businesses that need something specific — contact us to discuss your requirements.",
+            "Yes. Alongside the SaaS products, we also design and build tailored AI workflows and internal tools for businesses that need something specific - contact us to discuss your requirements.",
         },
         {
           question: "Is my data secure?",
@@ -194,7 +194,7 @@ export const translations = {
     contact: {
       eyebrow: "Request a demo",
       heading:
-        "Need software you can use now — or a private AI workflow built for you?",
+        "Need software you can use now - or a private AI workflow built for you?",
       description:
         "We can help in both directions: launch a product like Invoice Extractor today, or work with you on a custom AI system tailored to your business process.",
       goodFit: "Good fit for teams exploring:",
@@ -226,7 +226,7 @@ export const translations = {
       eyebrow: "Contact support",
       heading: "How can we help?",
       description:
-        "Questions about your account, billing, quota top-ups, or how the product works? Send us a message and we’ll get back to you within one business day.",
+        "Questions about your account, billing, quota top-ups, or how the product works? Send us a message and we'll get back to you within one business day.",
       topics: [
         "Account & login issues",
         "Billing & quota top-ups",
@@ -242,10 +242,10 @@ export const translations = {
         topicPlaceholder: "Select a topic",
         message: "Message",
         messagePlaceholder: "Describe your issue or question in as much detail as possible.",
-        submit: "Send message",
+        submit: "Send email",
         sending: "Sending…",
-        successHeading: "Message sent!",
-        successBody: "Thanks for reaching out. We’ll reply to your email within one business day.",
+        successHeading: "Email sent!",
+        successBody: "Thanks for reaching out. We'll reply to your email within one business day.",
         errorBody: "Something went wrong. Please try again or email us directly at support@arkagentic.com.",
       },
     },
@@ -256,8 +256,8 @@ export const translations = {
         title: "Extract invoices faster",
         description: "Connect your cloud drive, choose an invoice folder, and turn invoices into structured outputs ready for review and export.",
         startTrial: "Start free trial",
-        trialHint: "7 days free — then AUD $15/month, cancel anytime",
-        subscribe: "Subscribe — AUD $15/month",
+        trialHint: "7 days free - then AUD $15/month, cancel anytime",
+        subscribe: "Subscribe - AUD $15/month",
         launch: "Launch app",
         launching: "Launching...",
         starting: "Starting...",
@@ -378,11 +378,11 @@ export const translations = {
       zh: "中文",
     },
     hero: {
-      badge: "AI 智能体，驱动真实业务运营",
+      badge: "AI 智能体,驱动真实业务运营",
       heading1: "打造你的",
       heading2: "数字化员工团队",
       description:
-        "ArkAgentic 正同步推进两个方向：可立即上手的 SaaS/AaaS 产品，以及专为你的业务需求量身定制开发的 AI 产品设计与集成服务。",
+        "ArkAgentic 正同步推进两个方向:可立即上手的 SaaS/AaaS 产品,以及专为你的业务需求量身定制开发的 AI 产品设计与集成服务。",
       cta1: "探索产品",
       cta2: "定制开发咨询",
       cta3: "观看演示",
@@ -399,22 +399,22 @@ export const translations = {
       eyebrow: "核心能力",
       heading: "产品矩阵与定制 AI 系统的双轨入口",
       subheading:
-        "ArkAgentic 不只是一款工具。我们同步打造 SaaS 产品套件，并为有特殊需求的客户提供定制化工作流能力。",
+        "ArkAgentic 不只是一款工具。我们同步打造 SaaS 产品套件,并为有特殊需求的客户提供定制化工作流能力。",
       items: [
         {
           title: "自主执行",
           description:
-            "智能体不止于建议，更能跨越你现有的软件栈，自主完成复杂的多步骤任务。",
+            "智能体不止于建议,更能跨越你现有的软件栈,自主完成复杂的多步骤任务。",
         },
         {
           title: "企业级安全",
           description:
-            "以安全性和可靠性为核心构建，确保与企业数据的安全集成。",
+            "以安全性和可靠性为核心构建,确保与企业数据的安全集成。",
         },
         {
           title: "弹性扩展",
           description:
-            "秒级部署数十个专业智能体，无需额外人力即可应对业务峰值负载。",
+            "秒级部署数十个专业智能体,无需额外人力即可应对业务峰值负载。",
         },
       ],
     },
@@ -422,15 +422,15 @@ export const translations = {
       eyebrow: "产品亮点",
       title: "发票提取器",
       description:
-        "ArkAgentic 首款正式上线产品，专为财务团队打造，将混乱的发票文件夹转化为结构化业务数据。",
+        "ArkAgentic 首款正式上线产品,专为财务团队打造,将混乱的发票文件夹转化为结构化业务数据。",
       status: "已上线",
       inputLabel: "输入",
       inputTitle: "云端文件夹",
-      inputDesc: "连接云端文件夹，同时确保客户发票数据的隐私与安全。",
+      inputDesc: "连接云端文件夹,同时确保客户发票数据的隐私与安全。",
       processingLabel: "处理",
       processingTitle: "发票提取",
       processingDesc:
-        "批量识别发票文件，将关键字段提取为可审核的结构化格式。",
+        "批量识别发票文件,将关键字段提取为可审核的结构化格式。",
       outputLabel: "输出",
       outputTitle: "结构化发票数据",
       outputDesc:
@@ -443,20 +443,20 @@ export const translations = {
         {
           title: "使用 ArkAgentic 产品",
           description:
-            "从发票提取器等开箱即用的 AI 工具开始，通过一个 ArkAgentic 账户陆续解锁更多产品。",
+            "从发票提取器等开箱即用的 AI 工具开始,通过一个 ArkAgentic 账户陆续解锁更多产品。",
         },
         {
           title: "与我们共建私有 AI 工作流",
           description:
-            "我们将围绕你的内部流程、系统集成和审核规则，设计并实现专属 AI 系统。",
+            "我们将围绕你的内部流程、系统集成和审核规则,设计并实现专属 AI 系统。",
         },
       ],
     },
     pricing: {
       eyebrow: "定价",
-      heading: "产品定价简单透明，复杂需求也有定制开发路径。",
+      heading: "产品定价简单透明,复杂需求也有定制开发路径。",
       subheading:
-        "想立即使用 SaaS 产品，从发票提取器开始；有更复杂的工作流需求，欢迎联系我们定制开发。",
+        "想立即使用 SaaS 产品,从发票提取器开始;有更复杂的工作流需求,欢迎联系我们定制开发。",
       plans: [
         {
           name: "发票提取器",
@@ -466,14 +466,14 @@ export const translations = {
             "7 天免费试用",
             "邮箱账号登录",
             "每月包含 200 张 AI 额度",
-            "随时充值 — 每 1,000 张 $20 AUD",
+            "随时充值 - 每 1,000 张 $20 AUD",
           ],
         },
         {
           name: "定制开发",
           price: "按需报价",
           description:
-            "适合希望围绕实际工作方式，打造专属 AI 工作流、内部工具或私有系统的团队。",
+            "适合希望围绕实际工作方式,打造专属 AI 工作流、内部工具或私有系统的团队。",
           features: [
             "围绕你的业务流程和需求定制构建",
             "可与现有工具、流程和审批环节深度整合",
@@ -486,15 +486,15 @@ export const translations = {
     },
     roadmap: {
       eyebrow: "产品路线图",
-      heading: "第一款产品已上线，更多专注工具即将推出。",
+      heading: "第一款产品已上线,更多专注工具即将推出。",
       subheading:
-        "我们将持续扩展产品矩阵，展示已有能力，让 ArkAgentic 成为中小企业、团队和运营者更广泛的 AI 工具箱。",
+        "我们将持续扩展产品矩阵,展示已有能力,让 ArkAgentic 成为中小企业、团队和运营者更广泛的 AI 工具箱。",
       products: [
         {
           name: "发票提取器",
           status: "已上线",
           description:
-            "从云端文件夹提取发票，输出结构化数据，支持人工审核友好的工作流。",
+            "从云端文件夹提取发票,输出结构化数据,支持人工审核友好的工作流。",
         },
         {
           name: "邮箱与文档分拣",
@@ -506,7 +506,7 @@ export const translations = {
           name: "报价与提案助手",
           status: "规划中",
           description:
-            "自动生成提案草稿、汇总相关信息，帮助小型团队提升销售行政效率。",
+            "自动生成提案草稿、汇总相关信息,帮助小型团队提升销售行政效率。",
         },
       ],
     },
@@ -515,43 +515,43 @@ export const translations = {
       heading: "常见问题解答",
       items: [
         {
-          question: "发票提取器如何连接我的 OneDrive？",
+          question: "发票提取器如何连接我的 OneDrive?",
           answer:
-            "通过微软官方的 OAuth 授权页面连接，我们不会获取你的密码，也不会访问你所选文件夹以外的任何内容。你可以随时在账户设置中断开授权。",
+            "通过微软官方的 OAuth 授权页面连接,我们不会获取你的密码,也不会访问你所选文件夹以外的任何内容。你可以随时在账户设置中断开授权。",
         },
         {
-          question: "7 天免费试用包含哪些功能？",
+          question: "7 天免费试用包含哪些功能?",
           answer:
-            "免费试用期间可使用全部提取功能，无需绑定信用卡。到期后可选择订阅继续使用。每人限用一次试用。",
+            "免费试用期间可使用全部提取功能,无需绑定信用卡。到期后可选择订阅继续使用。每人限用一次试用。",
         },
         {
-          question: "支持哪些文件格式？",
+          question: "支持哪些文件格式?",
           answer:
-            "支持 PDF 发票及常见图片格式，包括 PNG、JPG 和 TIFF。系统会读取每份文件，提取结构化字段，并将需要人工核查的票据标注出来，方便导入 Xero 前审核。",
+            "支持 PDF 发票及常见图片格式,包括 PNG、JPG 和 TIFF。系统会读取每份文件,提取结构化字段,并将需要人工核查的票据标注出来,方便导入 Xero 前审核。",
         },
         {
-          question: "提取结果会存在哪里？",
+          question: "提取结果会存在哪里?",
           answer:
-            "结果会写回你在 OneDrive 中指定的输出文件夹，包含一份可直接用于 Xero 的 Excel 工作簿，以及一份包含每张发票明细的完整 CSV。我们不会在服务器上长期保留你的文档内容。",
+            "结果会写回你在 OneDrive 中指定的输出文件夹,包含一份可直接用于 Xero 的 Excel 工作簿,以及一份包含每张发票明细的完整 CSV。我们不会在服务器上长期保留你的文档内容。",
         },
         {
-          question: "可以为我的业务定制开发吗？",
+          question: "可以为我的业务定制开发吗?",
           answer:
-            "可以。我们在 SaaS 产品之外，也为有特定需求的企业设计和构建定制化 AI 工作流与内部工具。欢迎联系我们了解详情。",
+            "可以。我们在 SaaS 产品之外,也为有特定需求的企业设计和构建定制化 AI 工作流与内部工具。欢迎联系我们了解详情。",
         },
         {
-          question: "我的数据安全吗？",
+          question: "我的数据安全吗?",
           answer:
-            "安全。数据传输全程加密，OneDrive 访问仅限于你所选的文件夹，你的文档不会被用于训练任何 AI 模型。",
+            "安全。数据传输全程加密,OneDrive 访问仅限于你所选的文件夹,你的文档不会被用于训练任何 AI 模型。",
         },
       ],
     },
     contact: {
       eyebrow: "申请演示",
-      heading: "需要立即可用的产品，还是量身定制的私有 AI 工作流？",
+      heading: "需要立即可用的产品,还是量身定制的私有 AI 工作流?",
       description:
-        "我们可以同时提供两种帮助：立即启用发票提取器等产品，或与你共同打造贴合业务流程的定制 AI 系统。",
-      goodFit: "适合以下方向的团队：",
+        "我们可以同时提供两种帮助:立即启用发票提取器等产品,或与你共同打造贴合业务流程的定制 AI 系统。",
+      goodFit: "适合以下方向的团队:",
       goodFitItems: [
         "财务与发票处理",
         "邮件、文档及内部运营工作流",
@@ -566,9 +566,9 @@ export const translations = {
         phonePlaceholder: "+61 400 000 000",
         company: "公司名称",
         companyPlaceholder: "你的企业名称",
-        message: "你需要什么帮助？",
+        message: "你需要什么帮助?",
         messagePlaceholder:
-          "请描述你希望使用 ArkAgentic 产品、探索定制工作流，或两者兼有。",
+          "请描述你希望使用 ArkAgentic 产品、探索定制工作流,或两者兼有。",
         submit: "提交申请",
       },
     },
@@ -578,9 +578,9 @@ export const translations = {
     },
     support: {
       eyebrow: "联系支持",
-      heading: "我们能提供什么帮助？",
+      heading: "我们能提供什么帮助?",
       description:
-        "关于账户、账单、额度充値或产品使用的问题？发送消息给我们，我们会在一个工作日内回复你。",
+        "关于账户、账单、额度充値或产品使用的问题?发送消息给我们,我们会在一个工作日内回复你。",
       topics: [
         "账户与登录问题",
         "账单与额度充値",
@@ -596,11 +596,11 @@ export const translations = {
         topicPlaceholder: "请选择",
         message: "详细描述",
         messagePlaceholder: "请尽量详细地描述你的问题或需求。",
-        submit: "发送消息",
+        submit: "发送邮件",
         sending: "发送中…",
-        successHeading: "已成功发送！",
+        successHeading: "邮件已发送！",
         successBody: "感谢你的反馈，我们会在一个工作日内回复你的邮件。",
-        errorBody: "发送失败，请稍后再试，或直接发送邮件至 support@arkagentic.com。",
+        errorBody: "发送失败,请稍后再试,或直接发送邮件至 support@arkagentic.com。",
       },
     },
     apps: {
@@ -608,10 +608,10 @@ export const translations = {
       invoiceExtractor: {
         eyebrow: "发票提取器",
         title: "更快速地提取发票",
-        description: "连接你的云端网盘，选择发票文件夹，将发票转化为可审核和导出的结构化数据。",
+        description: "连接你的云端网盘,选择发票文件夹,将发票转化为可审核和导出的结构化数据。",
         startTrial: "开始免费试用",
-        trialHint: "7 天免费 — 之后每月 AUD $15，随时取消",
-        subscribe: "订阅 — 每月 AUD $15",
+        trialHint: "7 天免费 - 之后每月 AUD $15,随时取消",
+        subscribe: "订阅 - 每月 AUD $15",
         launch: "进入应用",
         launching: "正在启动...",
         starting: "正在开始...",
@@ -622,7 +622,7 @@ export const translations = {
         signInToLaunch: "登录后启动",
         confirmEmail: "请先确认邮箱",
         updatePayment: "更新付款方式",
-        paymentPaused: "由于付款失败，您的订阅已暂停",
+        paymentPaused: "由于付款失败,您的订阅已暂停",
         trialEndsToday: "试用今日到期",
         trialEndsDays: "试用还剩 {n} 天",
         trialEndsDay: "试用还剩 1 天",
@@ -630,7 +630,7 @@ export const translations = {
       xero: {
         eyebrow: "Xero 发票上传工具",
         title: "将发票数据发送至 Xero",
-        description: "将审核后的发票导出至 Xero，完成供应商与税务信息映射，并将已审批账单上传至你的会计工作流。",
+        description: "将审核后的发票导出至 Xero,完成供应商与税务信息映射,并将已审批账单上传至你的会计工作流。",
         underDev: "开发中",
       },
     },
@@ -640,16 +640,16 @@ export const translations = {
         subtitle: "登录你的 ArkAgentic 账户。",
         button: "登录",
         buttonBusy: "登录中...",
-        noAccount: "还没有账户？",
+        noAccount: "还没有账户?",
         createLink: "立即注册",
         signedOut: "你已退出登录。",
       },
       signUp: {
         title: "创建账户",
-        subtitle: "设置你的 ArkAgentic 账户，并告诉我们你需要什么帮助。",
+        subtitle: "设置你的 ArkAgentic 账户,并告诉我们你需要什么帮助。",
         button: "创建账户",
         buttonBusy: "创建中...",
-        hasAccount: "已有账户？",
+        hasAccount: "已有账户?",
         signInLink: "点此登录",
       },
       fields: {
@@ -658,14 +658,14 @@ export const translations = {
         email: "邮箱",
         emailPlaceholder: "name@company.com",
         phone: "手机号码",
-        phoneOptional: "（选填）",
+        phoneOptional: "(选填)",
         phonePlaceholder: "0400 000 000",
         password: "密码",
         passwordPlaceholder: "输入密码",
         passwordNewPlaceholder: "设置密码",
         confirmPassword: "确认密码",
         confirmPasswordPlaceholder: "再次输入密码",
-        signupReason: "你来 ArkAgentic 是为了什么？",
+        signupReason: "你来 ArkAgentic 是为了什么?",
         signupReasonPlaceholder: "请选择",
       },
       signupReasons: {
@@ -674,7 +674,7 @@ export const translations = {
         both: "产品和定制都感兴趣",
         exploring: "目前只是了解一下",
       },
-      turnstile: "由 Cloudflare Turnstile 保护，仅在需要时进行人机验证。",
+      turnstile: "由 Cloudflare Turnstile 保护,仅在需要时进行人机验证。",
       passwordStrength: {
         tooShort: "请使用至少 8 个字符。",
         noUppercase: "请添加至少一个大写字母。",
@@ -686,15 +686,15 @@ export const translations = {
       },
       errors: {
         invalidCredentials: "邮箱或密码不正确。",
-        passwordTooShort: "密码太短，请使用至少 8 个字符。",
-        alreadyRegistered: "该邮箱已注册，请直接登录。",
+        passwordTooShort: "密码太短,请使用至少 8 个字符。",
+        alreadyRegistered: "该邮箱已注册,请直接登录。",
         invalidEmail: "请输入有效的邮箱地址。",
-        supabaseNotConfigured: "Supabase 尚未配置，请先添加 NEXT_PUBLIC_SUPABASE_URL 和 NEXT_PUBLIC_SUPABASE_ANON_KEY。",
+        supabaseNotConfigured: "Supabase 尚未配置,请先添加 NEXT_PUBLIC_SUPABASE_URL 和 NEXT_PUBLIC_SUPABASE_ANON_KEY。",
         emailRequired: "请输入邮箱。",
         emailTooLong: "邮箱地址过长。",
         passwordRequired: "请输入密码。",
         passwordTooLongField: "密码不能超过 128 个字符。",
-        passwordWeak: "请使用至少 8 个字符，并包含大写字母、小写字母和数字。",
+        passwordWeak: "请使用至少 8 个字符,并包含大写字母、小写字母和数字。",
         confirmRequired: "请确认密码。",
         passwordsMismatch: "两次输入的密码不一致。",
         fullNameRequired: "请输入姓名。",
@@ -704,10 +704,10 @@ export const translations = {
         signupReasonRequired: "请选择你来 ArkAgentic 的原因。",
         signupReasonInvalid: "请选择一个有效的注册原因。",
         turnstileRequired: "请先完成人机验证再创建账户。",
-        emailNotConfirmed: "请先确认邮箱后再登录，请查收收件箱中的确认链接。",
+        emailNotConfirmed: "请先确认邮箱后再登录,请查收收件箱中的确认链接。",
       },
       success: {
-        signupMessage: "账户已创建，请查收 {email} 的邮件并点击确认链接后再登录。",
+        signupMessage: "账户已创建,请查收 {email} 的邮件并点击确认链接后再登录。",
         signupRedirect: "正在跳转到登录页面...",
       },
     },
