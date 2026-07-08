@@ -65,6 +65,8 @@ export function AccountSummary() {
     cancelAtPeriodEnd,
     aiQuotaRemaining,
     aiQuotaMonthly,
+    aiQuotaMonthlyRemaining,
+    aiQuotaTopupRemaining,
     aiQuotaTopupTotal,
   } = useSubscription();
 
@@ -259,10 +261,10 @@ export function AccountSummary() {
                 </p>
                 <div className="mt-4 space-y-4">
 
-                  {/* Monthly credits bar */}
+                  {/* Monthly credits bar: uses actual monthly_remaining field */}
                   {(() => {
-                    const monthlyUsed = Math.min(aiQuotaRemaining, aiQuotaMonthly);
-                    const pct = Math.min(100, Math.round((monthlyUsed / aiQuotaMonthly) * 100));
+                    const monthlyUsed = aiQuotaMonthlyRemaining ?? Math.min(aiQuotaRemaining ?? 0, aiQuotaMonthly ?? 200);
+                    const pct = Math.min(100, Math.round((monthlyUsed / (aiQuotaMonthly ?? 200)) * 100));
                     const low = monthlyUsed < 20;
                     return (
                       <div className="space-y-2">
@@ -286,9 +288,9 @@ export function AccountSummary() {
                     );
                   })()}
 
-                  {/* Top-up credits bar — same style, only shown when top-up balance exists */}
+                  {/* Top-up credits bar: uses actual topup_remaining field */}
                   {aiQuotaTopupTotal !== null && aiQuotaTopupTotal > 0 && (() => {
-                    const topupRemaining = Math.max(0, aiQuotaRemaining - aiQuotaMonthly);
+                    const topupRemaining = aiQuotaTopupRemaining ?? Math.max(0, (aiQuotaRemaining ?? 0) - (aiQuotaMonthly ?? 200));
                     const pct = Math.min(100, Math.round((topupRemaining / aiQuotaTopupTotal) * 100));
                     return (
                       <div className="space-y-2">

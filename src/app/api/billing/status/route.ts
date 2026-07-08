@@ -32,6 +32,8 @@ export async function GET(request: NextRequest) {
       planId: sub.plan_id,
       aiQuotaRemaining: quota?.remaining ?? null,
       aiQuotaMonthly: quota?.monthly ?? null,
+      aiQuotaMonthlyRemaining: quota?.monthlyRemaining ?? null,
+      aiQuotaTopupRemaining: quota?.topupRemaining ?? null,
       aiQuotaTopupTotal: quota?.topupTotal ?? null,
     });
   } catch (err) {

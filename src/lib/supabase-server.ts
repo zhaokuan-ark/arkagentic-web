@@ -127,33 +127,35 @@ export async function getUserFromRequest(request: Request): Promise<{ id: string
 
 // ─── AI Quota helpers ─────────────────────────────────────────────────────────
 
-export async function getAiQuota(userId: string): Promise<{ remaining: number; monthly: number; topupTotal: number } | null> {
+export async function getAiQuota(userId: string): Promise<{
+  remaining: number;
+  monthly: number;
+  monthlyRemaining: number;
+  topupRemaining: number;
+  topupTotal: number;
+} | null> {
   const { data } = await getSupabaseAdmin()
     .from("subscriptions")
-    .select("ai_quota_remaining, ai_quota_monthly, ai_quota_topup_total")
+    .select("ai_quota_remaining, ai_quota_monthly, ai_quota_monthly_remaining, ai_quota_topup_remaining, ai_quota_topup_total")
     .eq("user_id", userId)
     .in("status", ["active", "trialing"])
     .limit(1)
     .single();
-  if (!data) {
-    // Fallback: try without the topup_total column (migration may not have run yet)
-    const { data: d2 } = await getSupabaseAdmin()
-      .from("subscriptions")
-      .select("ai_quota_remaining, ai_quota_monthly")
-      .eq("user_id", userId)
-      .in("status", ["active", "trialing"])
-      .limit(1)
-      .single();
-    if (!d2) return null;
-    const remaining = d2.ai_quota_remaining ?? 0;
-    const monthly = d2.ai_quota_monthly ?? 200;
-    // topupTotal = whatever is above the monthly cap
-    return { remaining, monthly, topupTotal: Math.max(0, remaining - monthly) };
-  }
+  if (!data) return null;
+
+  const d = data as Record<string, unknown>;
+  const remaining    = (d.ai_quota_remaining    as number) ?? 0;
+  const monthly      = (d.ai_quota_monthly      as number) ?? 200;
+  // Use new split columns when available; fall back to legacy formula
+  const monthlyRem   = (d.ai_quota_monthly_remaining as number) ?? Math.min(remaining, monthly);
+  const topupRem     = (d.ai_quota_topup_remaining   as number) ?? Math.max(0, remaining - monthly);
+  const topupTotal   = (d.ai_quota_topup_total       as number) ?? topupRem;
   return {
-    remaining: data.ai_quota_remaining ?? 0,
-    monthly: data.ai_quota_monthly ?? 200,
-    topupTotal: (data as Record<string, unknown>).ai_quota_topup_total as number ?? Math.max(0, (data.ai_quota_remaining ?? 0) - (data.ai_quota_monthly ?? 200)),
+    remaining: monthlyRem + topupRem,   // canonical total
+    monthly,
+    monthlyRemaining: monthlyRem,
+    topupRemaining: topupRem,
+    topupTotal,
   };
 }
 
