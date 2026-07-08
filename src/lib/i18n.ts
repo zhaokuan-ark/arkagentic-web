@@ -226,7 +226,7 @@ export const translations = {
       eyebrow: "Contact support",
       heading: "How can we help?",
       description:
-        "Questions about your account, billing, quota top-ups, or how the product works? Send us a message and we'll get back to you within one business day.",
+        "Questions about your account, billing, quota top-ups, or how the product works? Send us a message and we'll get back to you within 48 hours.",
       topics: [
         "Account & login issues",
         "Billing & quota top-ups",
@@ -243,9 +243,9 @@ export const translations = {
         message: "Message",
         messagePlaceholder: "Describe your issue or question in as much detail as possible.",
         submit: "Send email",
-        sending: "Sending…",
+        sending: "Sending...",
         successHeading: "Email sent!",
-        successBody: "Thanks for reaching out. We'll reply to your email within one business day.",
+        successBody: "Thanks for reaching out. We'll reply to your email within 48 hours.",
         errorBody: "Something went wrong. Please try again or email us directly at support@arkagentic.com.",
       },
     },
@@ -580,7 +580,7 @@ export const translations = {
       eyebrow: "联系支持",
       heading: "我们能提供什么帮助?",
       description:
-        "关于账户、账单、额度充値或产品使用的问题?发送消息给我们,我们会在一个工作日内回复你。",
+        "关于账户、账单、额度充値或产品使用的问题？发送邮件给我们，我们会在 48 小时内回复你。",
       topics: [
         "账户与登录问题",
         "账单与额度充値",
@@ -597,9 +597,9 @@ export const translations = {
         message: "详细描述",
         messagePlaceholder: "请尽量详细地描述你的问题或需求。",
         submit: "发送邮件",
-        sending: "发送中…",
-        successHeading: "邮件已发送！",
-        successBody: "感谢你的反馈，我们会在一个工作日内回复你的邮件。",
+        sending: "发送中...",
+        successHeading: "邮件已发送!",
+        successBody: "感谢你的反馈，我们会在 48 小时内回复你的邮件。",
         errorBody: "发送失败,请稍后再试,或直接发送邮件至 support@arkagentic.com。",
       },
     },
