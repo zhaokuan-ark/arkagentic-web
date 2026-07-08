@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY ?? "",
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET ?? "",
     STRIPE_INVOICE_EXTRACTOR_PRICE_ID: process.env.STRIPE_INVOICE_EXTRACTOR_PRICE_ID ?? "",
+    RESEND_API_KEY: process.env.RESEND_API_KEY ?? "",
   },
 };
 
