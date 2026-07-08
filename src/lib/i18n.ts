@@ -24,24 +24,24 @@ export const translations = {
       heading1: "Building your",
       heading2: "digital workforce",
       description:
-        "ArkAgentic is growing in two directions - SaaS/AaaS products your team can launch immediately, and custom AI product design and integration that can be developed specifically for your business needs.",
+        "ArkAgentic is growing in two directions — ready-to-use SaaS products your team can launch immediately, and custom AI product design and integration built specifically for your business needs.",
       cta1: "Explore products",
       cta2: "Custom build enquiry",
       cta3: "Watch demo",
     },
     proofPoints: [
       "Invoice Extractor is live as our first customer product",
-      "More AI workflow tools are already being shaped behind it",
-      "Custom AI systems and private workflow design are also part of the offer",
+      "More AI workflow tools are in development and coming soon",
+      "Custom AI systems and private workflow builds are also available",
     ],
     partners: {
       heading: "Orchestrating the best models",
     },
     features: {
       eyebrow: "Capabilities",
-      heading: "A sharper front door for products and bespoke AI systems",
+      heading: "AI products you can use today \u2014 and custom AI built for your needs",
       subheading:
-        "ArkAgentic is not just one tool. The homepage now needs to show both the product suite we are building and the custom workflow capability we bring to clients with unique needs.",
+        "ArkAgentic delivers both: a growing suite of ready-to-use SaaS tools for finance and operations teams, and bespoke AI workflow design for businesses with more complex or specialised requirements.",
       items: [
         {
           title: "Autonomous Execution",
@@ -100,18 +100,18 @@ export const translations = {
       heading:
         "Simple product pricing, plus custom build pathways when you need something more tailored.",
       subheading:
-        "Start with Invoice Extractor if you want a live SaaS product today, or talk to us about a custom build if your workflow needs something more specific.",
+        "Start with the Invoice Extractor for a live SaaS product today, or talk to us about a custom build if your workflow needs something more specific.",
       plans: [
         {
           name: "Invoice Extractor",
-          price: "$15/mo",
+          price: "$15 AUD/mo",
           description:
             "A simple starting point for individual operators and small teams.",
           features: [
             "7-day free trial",
             "Email-based account login",
             "200 AI credits included per month",
-            "Top up anytime - $20 AUD per 1,000 credits",
+            "Top up anytime \u2014 $20 AUD per 1,000 credits",
           ],
         },
         {
@@ -382,7 +382,7 @@ export const translations = {
       heading1: "打造你的",
       heading2: "数字化员工团队",
       description:
-        "ArkAgentic 正同步推进两个方向:可立即上手的 SaaS/AaaS 产品,以及专为你的业务需求量身定制开发的 AI 产品设计与集成服务。",
+        "ArkAgentic 正同步推进两个方向:可立即上手的 SaaS 产品,以及专为你的业务需求量身定制开发的 AI 产品设计与集成服务。",
       cta1: "探索产品",
       cta2: "定制开发咨询",
       cta3: "观看演示",
@@ -460,13 +460,13 @@ export const translations = {
       plans: [
         {
           name: "发票提取器",
-          price: "$15/月",
+          price: "$15 AUD/月",
           description: "适合个人运营者和小型团队的轻量起点。",
           features: [
             "7 天免费试用",
             "邮箱账号登录",
             "每月包含 200 张 AI 额度",
-            "随时充值 - 每 1,000 张 $20 AUD",
+            "随时充值 — 每 1,000 张 $20 AUD",
           ],
         },
         {
