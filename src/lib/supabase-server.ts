@@ -136,26 +136,23 @@ export async function getAiQuota(userId: string): Promise<{
 } | null> {
   const { data } = await getSupabaseAdmin()
     .from("subscriptions")
-    .select("ai_quota_remaining, ai_quota_monthly, ai_quota_monthly_remaining, ai_quota_topup_remaining, ai_quota_topup_total")
+    .select("ai_quota_remaining, ai_quota_monthly")
     .eq("user_id", userId)
     .in("status", ["active", "trialing"])
+    .order("created_at", { ascending: false })
     .limit(1)
     .single();
   if (!data) return null;
 
   const d = data as Record<string, unknown>;
-  const remaining    = (d.ai_quota_remaining    as number) ?? 0;
-  const monthly      = (d.ai_quota_monthly      as number) ?? 200;
-  // Use new split columns when available; fall back to legacy formula
-  const monthlyRem   = (d.ai_quota_monthly_remaining as number) ?? Math.min(remaining, monthly);
-  const topupRem     = (d.ai_quota_topup_remaining   as number) ?? Math.max(0, remaining - monthly);
-  const topupTotal   = (d.ai_quota_topup_total       as number) ?? topupRem;
+  const remaining = (d.ai_quota_remaining as number) ?? 0;
+  const monthly   = (d.ai_quota_monthly   as number) ?? 200;
   return {
-    remaining: monthlyRem + topupRem,   // canonical total
+    remaining,
     monthly,
-    monthlyRemaining: monthlyRem,
-    topupRemaining: topupRem,
-    topupTotal,
+    monthlyRemaining: Math.min(remaining, monthly),
+    topupRemaining: Math.max(0, remaining - monthly),
+    topupTotal: Math.max(0, remaining - monthly),
   };
 }
 
