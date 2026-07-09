@@ -136,7 +136,7 @@ export async function getAiQuota(userId: string): Promise<{
 } | null> {
   const { data } = await getSupabaseAdmin()
     .from("subscriptions")
-    .select("ai_quota_remaining, ai_quota_monthly")
+    .select("ai_quota_remaining, ai_quota_monthly, ai_quota_monthly_remaining, ai_quota_topup_remaining")
     .eq("user_id", userId)
     .in("status", ["active", "trialing"])
     .order("created_at", { ascending: false })
@@ -145,14 +145,18 @@ export async function getAiQuota(userId: string): Promise<{
   if (!data) return null;
 
   const d = data as Record<string, unknown>;
-  const remaining = (d.ai_quota_remaining as number) ?? 0;
-  const monthly   = (d.ai_quota_monthly   as number) ?? 200;
+  const monthlyRem = (d.ai_quota_monthly_remaining as number) ?? null;
+  const topupRem   = (d.ai_quota_topup_remaining   as number) ?? null;
+  const monthly    = (d.ai_quota_monthly            as number) ?? 200;
+  const remaining  = monthlyRem !== null && topupRem !== null
+    ? monthlyRem + topupRem
+    : (d.ai_quota_remaining as number) ?? 0;
   return {
     remaining,
     monthly,
-    monthlyRemaining: Math.min(remaining, monthly),
-    topupRemaining: Math.max(0, remaining - monthly),
-    topupTotal: Math.max(0, remaining - monthly),
+    monthlyRemaining: monthlyRem ?? Math.min(remaining, monthly),
+    topupRemaining:   topupRem   ?? Math.max(0, remaining - monthly),
+    topupTotal:       (d.ai_quota_remaining as number) ?? remaining,
   };
 }
 
