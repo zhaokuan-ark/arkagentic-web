@@ -460,7 +460,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
             {turnstileSiteKey ? (
               <div>
                 <div ref={turnstileContainerRef} />
-                <p className="text-xs leading-5 text-slate-600">{a.turnstile}</p>
+                {/* turnstile note hidden */}
               </div>
             ) : null}
           </div>
@@ -501,7 +501,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
             {turnstileSiteKey ? (
               <div>
                 <div ref={turnstileContainerRef} />
-                <p className="text-xs leading-5 text-slate-600">{a.turnstile}</p>
+                {/* turnstile note hidden */}
               </div>
             ) : null}
           </div>
@@ -526,7 +526,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         {isSignup ? (
           <p>
             {a.signUp.hasAccount}{" "}
-            <Link href={`/signin?next=${encodeURIComponent(nextPath)}`} className="font-bold text-cyan-200 underline decoration-cyan-200 underline-offset-4 transition hover:text-white hover:decoration-white">
+            <Link href={`/signin?next=${encodeURIComponent(nextPath)}`} className="font-bold text-white underline decoration-white underline-offset-4 transition hover:text-blue-300 hover:decoration-blue-300">
               {a.signUp.signInLink}
             </Link>
             .
@@ -534,7 +534,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         ) : (
           <p>
             {a.signIn.noAccount}{" "}
-            <Link href={`/signup?next=${encodeURIComponent(nextPath)}`} className="font-bold text-cyan-200 underline decoration-cyan-200 underline-offset-4 transition hover:text-white hover:decoration-white">
+            <Link href={`/signup?next=${encodeURIComponent(nextPath)}`} className="font-bold text-white underline decoration-white underline-offset-4 transition hover:text-blue-300 hover:decoration-blue-300">
               {a.signIn.createLink}
             </Link>
             .
