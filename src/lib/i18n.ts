@@ -646,7 +646,7 @@ export const translations = {
       },
       signUp: {
         title: "创建账户",
-        subtitle: "设置你的 ArkAgentic 账户。",,
+        subtitle: "设置你的 ArkAgentic 账户。",
         button: "创建账户",
         buttonBusy: "创建中...",
         hasAccount: "已有账户?",
