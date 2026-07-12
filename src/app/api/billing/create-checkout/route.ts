@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
       ? { metadata: { supabase_user_id: user.id } }
       : {
           trial_period_days: 7,
-          trial_settings: { end_behavior: { missing_payment_method: "cancel" } },
+          trial_settings: { end_behavior: { missing_payment_method: "cancel" as const } },
           metadata: { supabase_user_id: user.id },
         };
 
