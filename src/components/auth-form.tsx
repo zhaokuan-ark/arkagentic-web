@@ -522,11 +522,11 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
       {formError ? <p className="mt-4 rounded-xl border border-red-400/20 bg-red-500/10 p-4 text-sm text-red-100">{formError}</p> : null}
       {!formError && authNotice ? <p className="mt-4 rounded-xl border border-blue-400/20 bg-blue-500/10 p-4 text-sm text-blue-100">{authNotice}</p> : null}
 
-      <div className="mt-6 text-sm text-slate-400">
+      <div className="mt-6 text-sm text-slate-300">
         {isSignup ? (
           <p>
             {a.signUp.hasAccount}{" "}
-            <Link href={`/signin?next=${encodeURIComponent(nextPath)}`} className="font-bold text-blue-400 underline decoration-blue-400 underline-offset-4 transition hover:text-white hover:decoration-white">
+            <Link href={`/signin?next=${encodeURIComponent(nextPath)}`} className="font-bold text-white underline decoration-white underline-offset-4 transition hover:opacity-70">
               {a.signUp.signInLink}
             </Link>
             .
@@ -534,7 +534,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         ) : (
           <p>
             {a.signIn.noAccount}{" "}
-            <Link href={`/signup?next=${encodeURIComponent(nextPath)}`} className="font-bold text-blue-400 underline decoration-blue-400 underline-offset-4 transition hover:text-white hover:decoration-white">
+            <Link href={`/signup?next=${encodeURIComponent(nextPath)}`} className="font-bold text-white underline decoration-white underline-offset-4 transition hover:opacity-70">
               {a.signIn.createLink}
             </Link>
             .
