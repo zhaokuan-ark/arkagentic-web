@@ -110,8 +110,8 @@ export const translations = {
           features: [
             "7-day free trial",
             "Email-based account login",
-            "1,000 AI credits included per month",
-            "Top up anytime \u2014 $20 AUD per 1,000 credits",
+            "200 AI credits included per month (40 AI invoices)",
+            "Top up anytime \u2014 $20 AUD per 1,000 credits (200 AI invoices)",
           ],
         },
         {
@@ -465,8 +465,8 @@ export const translations = {
           features: [
             "7 天免费试用",
             "邮箱账号登录",
-            "每月包含 1,000 张 AI 额度",
-            "随时充值 — 每 1,000 张 $20 AUD",
+            "每月包含 200 AI 额度（可处理 40 张 AI 发票）",
+            "随时充值 — $20 AUD 包含 1,000 AI 额度（可处理 200 张）",
           ],
         },
         {
