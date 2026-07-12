@@ -292,7 +292,7 @@ export const translations = {
       },
       signUp: {
         title: "Create account",
-        subtitle: "Set up your ArkAgentic account and tell us what you want help with.",
+        subtitle: "Set up your ArkAgentic account.",
         button: "Create account",
         buttonBusy: "Creating account...",
         hasAccount: "Already have an account?",
@@ -646,7 +646,7 @@ export const translations = {
       },
       signUp: {
         title: "创建账户",
-        subtitle: "设置你的 ArkAgentic 账户,并告诉我们你需要什么帮助。",
+        subtitle: "设置你的 ArkAgentic 账户。",,
         button: "创建账户",
         buttonBusy: "创建中...",
         hasAccount: "已有账户?",
