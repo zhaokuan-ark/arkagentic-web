@@ -526,7 +526,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         {isSignup ? (
           <p>
             {a.signUp.hasAccount}{" "}
-            <Link href={`/signin?next=${encodeURIComponent(nextPath)}`} className="font-bold text-white underline decoration-white underline-offset-4 transition hover:opacity-70">
+            <Link href={`/signin?next=${encodeURIComponent(nextPath)}`} className="font-bold transition hover:opacity-70" style={{color: '#ffffff'}}>
               {a.signUp.signInLink}
             </Link>
             .
@@ -534,7 +534,7 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
         ) : (
           <p>
             {a.signIn.noAccount}{" "}
-            <Link href={`/signup?next=${encodeURIComponent(nextPath)}`} className="font-bold text-white underline decoration-white underline-offset-4 transition hover:opacity-70">
+            <Link href={`/signup?next=${encodeURIComponent(nextPath)}`} className="font-bold transition hover:opacity-70" style={{color: '#ffffff'}}>
               {a.signIn.createLink}
             </Link>
             .
