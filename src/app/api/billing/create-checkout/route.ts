@@ -78,7 +78,11 @@ export async function POST(request: NextRequest) {
     // Create Stripe Checkout session — with or without trial
     const subscriptionData = noTrial
       ? { metadata: { supabase_user_id: user.id } }
-      : { trial_period_days: 7, metadata: { supabase_user_id: user.id } };
+      : {
+          trial_period_days: 7,
+          trial_settings: { end_behavior: { missing_payment_method: "cancel" } },
+          metadata: { supabase_user_id: user.id },
+        };
 
     const session = await stripe.checkout.sessions.create({
       customer: stripeCustomerId,
@@ -86,12 +90,22 @@ export async function POST(request: NextRequest) {
       payment_method_types: ["card"],
       line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
       subscription_data: subscriptionData,
+      // For trial: collect card now but charge $0 today; first charge after trial ends
+      ...(noTrial ? {} : { payment_method_collection: "always" }),
       success_url: `${APP_URL}/apps?subscription=${noTrial ? "success" : "trial"}`,
       cancel_url: `${APP_URL}/pricing?subscription=canceled`,
       allow_promotion_codes: true,
       billing_address_collection: "auto",
       customer_update: { address: "auto" },
       metadata: { supabase_user_id: user.id },
+      custom_text: noTrial ? undefined : {
+        submit: {
+          message: "Your 7-day free trial starts today — $0 due now. Cancel anytime before the trial ends and you won't be charged.",
+        },
+        after_submit: {
+          message: "After your free trial, you'll be billed $19/month. You can cancel anytime from your account.",
+        },
+      },
     });
 
     // Record fingerprint only for trial checkouts
