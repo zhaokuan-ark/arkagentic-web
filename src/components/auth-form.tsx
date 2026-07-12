@@ -90,6 +90,9 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [turnstileToken, setTurnstileToken] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showResend, setShowResend] = useState(false);
+  const [isResending, setIsResending] = useState(false);
+  const [resendStatus, setResendStatus] = useState<string>("");
   const turnstileContainerRef = useRef<HTMLDivElement | null>(null);
   const turnstileWidgetIdRef = useRef<string | null>(null);
   const signupRedirectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -119,6 +122,29 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
     if (normalized.includes("user already registered")) return a.errors.alreadyRegistered;
     if (normalized.includes("unable to validate email address") || normalized.includes("invalid email")) return a.errors.invalidEmail;
     return message;
+  }
+
+  async function handleResendConfirmation() {
+    if (!supabase) return;
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail) return;
+    setIsResending(true);
+    setResendStatus("");
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email: normalizedEmail,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
+      },
+    });
+    if (error) {
+      setResendStatus(a.errors.resendError);
+    } else {
+      setResendStatus(a.errors.resendSuccess.replace("{email}", normalizedEmail));
+      setShowResend(false);
+      setFormError("");
+    }
+    setIsResending(false);
   }
 
   function validateAuthForm() {
@@ -263,17 +289,25 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
 
       if (signUpError) {
         const friendly = getFriendlyAuthError(signUpError.message);
+        const isAlreadyRegistered = signUpError.message.toLowerCase().includes("user already registered");
         setFormError(friendly);
-        resetTurnstile();
-        if (friendly.includes("email") || friendly.includes("邮箱")) {
-          setFieldErrors((current) => ({ ...current, email: friendly }));
+        if (isAlreadyRegistered) {
+          setShowResend(true);
+        } else {
+          setShowResend(false);
+          if (friendly.includes("email") || friendly.includes("邮箱")) {
+            setFieldErrors((current) => ({ ...current, email: friendly }));
+          }
         }
+        resetTurnstile();
         setIsSubmitting(false);
         return;
       }
 
       const successMessage = a.success.signupMessage.replace("{email}", normalizedEmail);
       setStatus(`${successMessage} ${a.success.signupRedirect}`);
+      setShowResend(false);
+      setResendStatus("");
       setPassword("");
       setConfirmPassword("");
       resetTurnstile();
@@ -519,7 +553,22 @@ export function AuthForm({ mode, nextPath = "/apps", initialError, initialMessag
       </form>
 
       {status ? <p className="mt-4 rounded-xl border border-emerald-400/20 bg-emerald-500/10 p-4 text-sm text-emerald-100">{status}</p> : null}
-      {formError ? <p className="mt-4 rounded-xl border border-red-400/20 bg-red-500/10 p-4 text-sm text-red-100">{formError}</p> : null}
+      {formError ? (
+        <div className="mt-4 rounded-xl border border-red-400/20 bg-red-500/10 p-4">
+          <p className="text-sm text-red-100">{formError}</p>
+          {showResend ? (
+            <button
+              type="button"
+              disabled={isResending}
+              onClick={handleResendConfirmation}
+              className="mt-3 rounded-lg bg-blue-600/80 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isResending ? "...发送中" : a.errors.resendConfirmation}
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+      {resendStatus ? <p className="mt-4 rounded-xl border border-emerald-400/20 bg-emerald-500/10 p-4 text-sm text-emerald-100">{resendStatus}</p> : null}
       {!formError && authNotice ? <p className="mt-4 rounded-xl border border-blue-400/20 bg-blue-500/10 p-4 text-sm text-blue-100">{authNotice}</p> : null}
 
       <div className="mt-6 text-sm text-slate-300">

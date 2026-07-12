@@ -333,7 +333,7 @@ export const translations = {
       errors: {
         invalidCredentials: "That email or password looks incorrect.",
         passwordTooShort: "Your password is too short. Please use at least 8 characters.",
-        alreadyRegistered: "An account with this email already exists. Try signing in instead.",
+        alreadyRegistered: "An account with this email already exists. If you haven't confirmed your email yet, you can resend the confirmation link.",
         invalidEmail: "Please enter a valid email address.",
         supabaseNotConfigured: "Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY first.",
         emailRequired: "Please enter your email.",
@@ -351,6 +351,9 @@ export const translations = {
         signupReasonInvalid: "Please choose a valid signup reason.",
         turnstileRequired: "Please complete the human verification before creating your account.",
         emailNotConfirmed: "Please confirm your email before signing in. Check your inbox for the confirmation link.",
+        resendConfirmation: "Resend confirmation email",
+        resendSuccess: "Confirmation email resent! Please check {email} and click the link.",
+        resendError: "Failed to resend confirmation email. Please try again.",
       },
       success: {
         signupMessage: "Your account has been created. Please check {email} and click the confirmation link in your email before signing in.",
@@ -687,7 +690,7 @@ export const translations = {
       errors: {
         invalidCredentials: "邮箱或密码不正确。",
         passwordTooShort: "密码太短,请使用至少 8 个字符。",
-        alreadyRegistered: "该邮箱已注册,请直接登录。",
+        alreadyRegistered: "该邮箱已注册。若尚未确认邮箱,可重新发送确认邮件。",
         invalidEmail: "请输入有效的邮箱地址。",
         supabaseNotConfigured: "Supabase 尚未配置,请先添加 NEXT_PUBLIC_SUPABASE_URL 和 NEXT_PUBLIC_SUPABASE_ANON_KEY。",
         emailRequired: "请输入邮箱。",
@@ -705,6 +708,9 @@ export const translations = {
         signupReasonInvalid: "请选择一个有效的注册原因。",
         turnstileRequired: "请先完成人机验证再创建账户。",
         emailNotConfirmed: "请先确认邮箱后再登录,请查收收件箱中的确认链接。",
+        resendConfirmation: "重新发送确认邮件",
+        resendSuccess: "确认邮件已重新发送!请查收 {email} 并点击确认链接。",
+        resendError: "发送失败,请稍后重试。",
       },
       success: {
         signupMessage: "账户已创建,请查收 {email} 的邮件并点击确认链接后再登录。",
@@ -842,7 +848,7 @@ export type Translations = {
     signupReasons: { products: string; custom: string; both: string; exploring: string; };
     turnstile: string;
     passwordStrength: { tooShort: string; noUppercase: string; noLowercase: string; noNumber: string; strong: string; match: string; noMatch: string; };
-    errors: { invalidCredentials: string; passwordTooShort: string; alreadyRegistered: string; invalidEmail: string; supabaseNotConfigured: string; emailRequired: string; emailTooLong: string; passwordRequired: string; passwordTooLongField: string; passwordWeak: string; confirmRequired: string; passwordsMismatch: string; fullNameRequired: string; fullNameTooLong: string; phoneTooLong: string; phoneInvalid: string; signupReasonRequired: string; signupReasonInvalid: string; turnstileRequired: string; emailNotConfirmed: string; };
+    errors: { invalidCredentials: string; passwordTooShort: string; alreadyRegistered: string; invalidEmail: string; supabaseNotConfigured: string; emailRequired: string; emailTooLong: string; passwordRequired: string; passwordTooLongField: string; passwordWeak: string; confirmRequired: string; passwordsMismatch: string; fullNameRequired: string; fullNameTooLong: string; phoneTooLong: string; phoneInvalid: string; signupReasonRequired: string; signupReasonInvalid: string; turnstileRequired: string; emailNotConfirmed: string; resendConfirmation: string; resendSuccess: string; resendError: string; };
     success: { signupMessage: string; signupRedirect: string; };
   };
 };
